@@ -2,10 +2,679 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Antik Türkiye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antik Türkiye — Antik Kentleri Keşfet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C8973A;
+      --gold-light: #E8C27A;
+      --gold-pale: #F5E6C8;
+      --stone: #1C1810;
+      --stone-mid: #2E2618;
+      --stone-light: #4A3E28;
+      --cream: #FAF6EE;
+      --cream-dark: #F0E8D8;
+      --text: #2E2618;
+      --text-muted: #7A6A4A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(28, 24, 16, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid rgba(200, 151, 58, 0.2);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold-light);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(232, 194, 122, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--stone);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(200,151,58,0.04) 60px, rgba(200,151,58,0.04) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(200,151,58,0.04) 60px, rgba(200,151,58,0.04) 61px);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent, var(--cream));
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 0.5px solid rgba(200, 151, 58, 0.4);
+      padding: 6px 20px;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 10vw, 96px);
+      font-weight: 600;
+      line-height: 1;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-pale);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(232, 194, 122, 0.55);
+      line-height: 1.8;
+      max-width: 500px;
+      margin: 1.5rem auto 2.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-stat { text-align: center; }
+
+    .hero-stat .n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+
+    .hero-stat .l {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(200, 151, 58, 0.5);
+      margin-top: 4px;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 220px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(200, 151, 58, 0.4);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: fadeUp 1s 0.6s ease both;
+    }
+
+    .scroll-line {
+      width: 0.5px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(200,151,58,0.5), transparent);
+      animation: scrollAnim 2s 1s ease infinite;
+    }
+
+    /* SECTION COMMON */
+    section { padding: 6rem 2rem; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* FILTERS */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 2px;
+      border: 0.5px solid rgba(74, 62, 40, 0.3);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .filter-btn.active {
+      background: var(--stone);
+      border-color: var(--stone);
+      color: var(--gold-light);
+    }
+
+    /* CARDS */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5px;
+      background: rgba(74, 62, 40, 0.15);
+      border: 0.5px solid rgba(74, 62, 40, 0.15);
+    }
+
+    .kent-card {
+      background: var(--cream);
+      padding: 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .kent-card:hover { background: var(--cream-dark); }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card-icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .card-era-badge {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 0.5px solid rgba(200, 151, 58, 0.4);
+      padding: 3px 10px;
+      border-radius: 1px;
+      white-space: nowrap;
+    }
+
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .card-location {
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .card-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .card-arrow {
+      font-size: 18px;
+      color: rgba(200, 151, 58, 0.3);
+      align-self: flex-end;
+      transition: all 0.2s;
+    }
+
+    .kent-card:hover .card-arrow {
+      color: var(--gold);
+      transform: translate(3px, -3px);
+    }
+
+    /* DÖNEMLER */
+    .donemler-section { background: var(--stone); }
+
+    .donemler-section .section-title { color: var(--gold-light); }
+    .donemler-section .section-label { color: var(--gold); opacity: 0.7; }
+    .donemler-section .section-desc { color: rgba(232,194,122,0.45); }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5px;
+      background: rgba(200,151,58,0.1);
+      border: 0.5px solid rgba(200,151,58,0.1);
+    }
+
+    .timeline-item {
+      background: var(--stone);
+      padding: 1.75rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: default;
+    }
+
+    .timeline-item:hover {
+      background: var(--stone-mid);
+      border-color: var(--gold);
+    }
+
+    .timeline-period {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+
+    .timeline-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(232,194,122,0.4);
+      line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--cream-dark);
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+
+    .cta-section .section-title { margin: 0 auto 1rem; }
+    .cta-section .section-desc { margin: 0 auto 2rem; }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--stone);
+      border: none;
+      padding: 14px 36px;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .cta-btn:hover {
+      background: var(--stone-light);
+      transform: translateY(-1px);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--stone);
+      padding: 2rem;
+      text-align: center;
+      border-top: 0.5px solid rgba(200,151,58,0.15);
+    }
+
+    footer p {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: rgba(200,151,58,0.3);
+    }
+
+    footer a {
+      color: rgba(200,151,58,0.5);
+      text-decoration: none;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollAnim {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.3); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .hero-stat .n { font-size: 28px; }
+      section { padding: 4rem 1rem; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Antik Türkiye</h1>
-  <p>Türkiye'deki antik kentleri keşfet.</p>
+
+  <nav>
+    <a href="#" class="nav-logo">Antik Türkiye</a>
+    <ul class="nav-links">
+      <li><a href="#kentler">Kentler</a></li>
+      <li><a href="#donemler">Dönemler</a></li>
+      <li><a href="#hakkinda">Hakkında</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Türkiye'nin Kadim Mirası</div>
+      <h1>Antik <em>Türkiye</em></h1>
+      <p class="hero-sub">300'den fazla antik kentin tarihi, medeniyetleri ve mitolojik hikayeleri tek bir yerde.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="n">300+</div><div class="l">Antik Kent</div></div>
+        <div class="hero-stat"><div class="n">12+</div><div class="l">Medeniyet</div></div>
+        <div class="hero-stat"><div class="n">10.000+</div><div class="l">Yıllık Tarih</div></div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Keşfet
+    </div>
+  </section>
+
+  <!-- KENTLER -->
+  <section id="kentler">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Antik Kentler</div>
+        <h2 class="section-title">Tarihin izini sür</h2>
+        <p class="section-desc">Her biri binlerce yıllık hikaye barındıran antik kentleri keşfet. Döneme ve bölgeye göre filtrele.</p>
+      </div>
+
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="all">Tümü</button>
+        <button class="filter-btn" data-filter="hitit">Hitit</button>
+        <button class="filter-btn" data-filter="helen">Helen</button>
+        <button class="filter-btn" data-filter="roma">Roma</button>
+        <button class="filter-btn" data-filter="bizans">Bizans</button>
+        <button class="filter-btn" data-filter="likya">Likya</button>
+      </div>
+
+      <div class="cards-grid reveal" id="cardsGrid">
+        <a class="kent-card" href="efes.html" data-era="helen roma">
+          <div class="card-top">
+            <div class="card-icon">🏛️</div>
+            <div class="card-era-badge">Helen · Roma</div>
+          </div>
+          <div class="card-name">Efes</div>
+          <div class="card-location">📍 İzmir</div>
+          <div class="card-desc">Artemis Tapınağı'na ev sahipliği yapan, dünyanın en iyi korunmuş antik kentlerinden biri. 250.000 nüfusuyla Roma döneminin en büyük şehirlerinden biriydi.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="troya.html" data-era="helen">
+          <div class="card-top">
+            <div class="card-icon">⚔️</div>
+            <div class="card-era-badge">Tunç Çağı · Helen</div>
+          </div>
+          <div class="card-name">Troya</div>
+          <div class="card-location">📍 Çanakkale</div>
+          <div class="card-desc">Homeros'un İlyada destanına konu olan efsanevi şehir. Truva Savaşı'nın yaşandığı ve Truva Atı'nın efsanesinin doğduğu kadim kent.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="gobeklitepe.html" data-era="">
+          <div class="card-top">
+            <div class="card-icon">🗿</div>
+            <div class="card-era-badge">Neolitik · M.Ö. 10.000</div>
+          </div>
+          <div class="card-name">Göbeklitepe</div>
+          <div class="card-location">📍 Şanlıurfa</div>
+          <div class="card-desc">Dünyanın bilinen en eski tapınak kompleksi. İnsanlık tarihini yeniden yazan bu alan, yerleşik uygarlıkların tarihini 6.000 yıl geriye taşıdı.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="hattusa.html" data-era="hitit">
+          <div class="card-top">
+            <div class="card-icon">🦁</div>
+            <div class="card-era-badge">Hitit</div>
+          </div>
+          <div class="card-name">Hattuşa</div>
+          <div class="card-location">📍 Çorum</div>
+          <div class="card-desc">Hitit İmparatorluğu'nun görkemli başkenti. Aslan Kapısı ve Sfenks Kapısı ile ünlü bu UNESCO mirası, M.Ö. 1700'lerde kurulmuştur.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="perge.html" data-era="helen roma">
+          <div class="card-top">
+            <div class="card-icon">🏺</div>
+            <div class="card-era-badge">Helen · Roma</div>
+          </div>
+          <div class="card-name">Perge</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-desc">Artemis kültünün önemli merkezlerinden biri. Görkemli sütunlu caddeler, bir stadyum ve devasa tiyatrosuyla Pamfilya bölgesinin incisi.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="nemrut.html" data-era="">
+          <div class="card-top">
+            <div class="card-icon">👑</div>
+            <div class="card-era-badge">Kommagene</div>
+          </div>
+          <div class="card-name">Nemrut Dağı</div>
+          <div class="card-location">📍 Adıyaman</div>
+          <div class="card-desc">2.150 metre yükseklikte, Kral I. Antiokhos'un devasa tanrı heykellerinin taçlandırdığı UNESCO Dünya Mirası. Gündoğumu ile eşsiz bir deneyim sunar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÖNEMLER -->
+  <section class="donemler-section" id="donemler">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Tarih Boyunca</div>
+        <h2 class="section-title">Medeniyetler</h2>
+        <p class="section-desc">Anadolu, binlerce yıl boyunca dünyanın en önemli medeniyetlerine ev sahipliği yaptı.</p>
+      </div>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-period">M.Ö. 10.000 — 3.000</div>
+          <div class="timeline-name">Neolitik</div>
+          <div class="timeline-desc">Göbeklitepe ve Çatalhöyük ile insanlık tarihinin en eski yerleşim izleri.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">M.Ö. 2.000 — 1.200</div>
+          <div class="timeline-name">Hitit</div>
+          <div class="timeline-desc">Anadolu'nun güçlü imparatorluğu. Mısır ile ilk barış antlaşmasını imzaladılar.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">M.Ö. 1.200 — 300</div>
+          <div class="timeline-name">Helen</div>
+          <div class="timeline-desc">İon, Dor ve Aiol kolonileriyle Ege kıyıları Yunan medeniyetiyle doldu.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">M.Ö. 700 — 546</div>
+          <div class="timeline-name">Lidya</div>
+          <div class="timeline-desc">Dünyanın ilk madeni parasını basan, Kral Kroisos'un zengin krallığı.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">M.Ö. 300 — M.S. 400</div>
+          <div class="timeline-name">Roma</div>
+          <div class="timeline-desc">Anadolu'nun en parlak dönemi. Büyük şehirler, yollar ve tapınaklar inşa edildi.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">M.S. 400 — 1453</div>
+          <div class="timeline-name">Bizans</div>
+          <div class="timeline-desc">Hristiyanlığın kalbi. Konstantinopolis dünyanın en büyük şehri haline geldi.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="hakkinda">
+    <div class="container">
+      <div class="section-label reveal">Proje Hakkında</div>
+      <h2 class="section-title reveal">Bu proje büyüyor</h2>
+      <p class="section-desc reveal">300'den fazla antik kent tek tek belgeleniyor. Her kent için tarihçe, mitoloji, hangi medeniyetlerin yaşadığı ve sesli anlatım eklenecek.</p>
+      <a href="mailto:iletisim@example.com" class="cta-btn reveal">Katkı Sağla</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.dataset.filter;
+        document.querySelectorAll('.kent-card').forEach(card => {
+          if (filter === 'all' || card.dataset.era.includes(filter)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
