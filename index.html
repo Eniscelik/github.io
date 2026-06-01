@@ -240,66 +240,97 @@
 
     .turkey-map {
       position: relative;
-      min-height: 430px;
+      min-height: 500px;
       padding: 1.5rem;
       overflow: hidden;
       background:
-        radial-gradient(circle at 20% 25%, rgba(200,151,58,0.13), transparent 18rem),
-        linear-gradient(135deg, rgba(255,253,248,0.92), rgba(240,232,216,0.82));
+        radial-gradient(circle at 18% 22%, rgba(200,151,58,0.13), transparent 18rem),
+        linear-gradient(135deg, rgba(255,253,248,0.94), rgba(240,232,216,0.86));
       border: 0.5px solid rgba(74, 62, 40, 0.18);
+    }
+
+    .map-image {
+      position: absolute;
+      inset: 8% 4% 9% 3%;
+      width: 93%;
+      height: 83%;
+      object-fit: contain;
+      opacity: 0.9;
+      filter: sepia(0.22) saturate(0.82) contrast(0.96) drop-shadow(0 24px 40px rgba(46,38,24,0.13));
+      z-index: 1;
     }
 
     .turkey-map svg {
       position: absolute;
-      inset: 7% 5% 9% 4%;
-      width: 91%;
-      height: 84%;
-      filter: drop-shadow(0 24px 40px rgba(46,38,24,0.12));
+      inset: 8% 4% 9% 3%;
+      width: 93%;
+      height: 83%;
+      opacity: 0.22;
+      filter: drop-shadow(0 24px 40px rgba(46,38,24,0.13));
+      z-index: 0;
     }
 
     .map-pin {
       position: absolute;
       left: var(--x);
       top: var(--y);
+      width: 18px;
+      height: 18px;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
       transform: translate(-50%, -50%);
-      padding: 7px 10px 7px 8px;
-      border: 0.5px solid rgba(200,151,58,0.48);
-      border-radius: 999px;
-      color: var(--stone);
-      background: rgba(255,253,248,0.94);
-      box-shadow: 0 10px 24px rgba(46,38,24,0.10);
+      border: 2px solid rgba(255,253,248,0.96);
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 7px rgba(200,151,58,0.18), 0 10px 22px rgba(46,38,24,0.18);
       text-decoration: none;
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-      z-index: 2;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      z-index: 3;
     }
 
     .map-pin::before {
       content: '';
-      width: 10px;
-      height: 10px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 0 5px rgba(200,151,58,0.18);
-      flex: 0 0 auto;
+      background: rgba(255,253,248,0.94);
     }
 
     .map-pin span {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 12px);
+      transform: translateX(-50%);
+      padding: 7px 10px;
+      border: 0.5px solid rgba(200,151,58,0.48);
+      border-radius: 999px;
+      color: var(--stone);
+      background: rgba(255,253,248,0.97);
+      box-shadow: 0 12px 26px rgba(46,38,24,0.16);
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
       white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
     }
 
     .map-pin:hover,
     .map-pin:focus {
-      transform: translate(-50%, -58%);
+      transform: translate(-50%, -62%) scale(1.12);
       background: var(--stone);
-      color: var(--gold-light);
-      box-shadow: 0 18px 34px rgba(46,38,24,0.22);
+      box-shadow: 0 0 0 8px rgba(200,151,58,0.24), 0 18px 34px rgba(46,38,24,0.24);
+      outline: none;
+      z-index: 5;
+    }
+
+    .map-pin:hover span,
+    .map-pin:focus span {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
     }
 
     .map-panel {
@@ -322,6 +353,13 @@
       font-size: 14px;
       font-weight: 300;
       line-height: 1.8;
+    }
+
+    .map-credit {
+      margin-top: -0.5rem;
+      color: rgba(232,194,122,0.36);
+      font-size: 11px !important;
+      letter-spacing: 0.5px;
     }
 
     .map-list {
@@ -641,7 +679,7 @@
       .nav-links { display: none; }
 
       .map-layout { grid-template-columns: 1fr; }
-      .turkey-map { min-height: 360px; }
+      .turkey-map { min-height: 390px; }
       .map-list { grid-template-columns: 1fr; }
 
       .hero-stats { gap: 1.5rem; }
@@ -692,30 +730,48 @@
 
       <div class="map-layout reveal">
         <div class="turkey-map" aria-label="Türkiye haritası üzerinde antik kent bağlantıları">
-          <svg viewBox="0 0 900 420" role="img" aria-label="Sadeleştirilmiş Türkiye haritası">
-            <path d="M78 193 L123 155 L201 143 L268 121 L345 126 L430 106 L514 119 L595 103 L681 129 L782 119 L850 164 L819 214 L741 229 L679 264 L594 252 L520 282 L436 270 L356 293 L282 260 L205 274 L146 238 L91 242 Z" fill="rgba(200,151,58,0.16)" stroke="rgba(74,62,40,0.42)" stroke-width="3" />
-            <path d="M115 232 C212 210 281 214 353 234 C448 260 548 224 646 218 C731 213 790 184 829 165" fill="none" stroke="rgba(200,151,58,0.18)" stroke-width="10" stroke-linecap="round" />
+          <img class="map-image" src="https://commons.wikimedia.org/wiki/Special:FilePath/Turkey%20location%20map.svg" alt="Türkiye haritası" loading="lazy">
+          <svg viewBox="0 0 1000 520" role="img" aria-label="Sadeleştirilmiş Türkiye haritası">
+            <defs>
+              <linearGradient id="mapLand" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="rgba(245,230,200,0.95)"/>
+                <stop offset="1" stop-color="rgba(200,151,58,0.18)"/>
+              </linearGradient>
+              <linearGradient id="mapCoast" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="rgba(122,106,74,0.54)"/>
+                <stop offset="1" stop-color="rgba(74,62,40,0.44)"/>
+              </linearGradient>
+            </defs>
+            <path d="M62 238 L92 190 L151 170 L206 157 L263 132 L344 139 L414 117 L500 136 L585 116 L665 143 L748 134 L823 154 L902 145 L958 188 L935 229 L867 256 L806 296 L725 287 L648 318 L565 305 L489 334 L405 318 L330 348 L260 314 L193 326 L132 292 L78 294 Z" fill="url(#mapLand)" stroke="url(#mapCoast)" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M94 193 C150 178 205 178 263 154 C315 132 367 151 416 126 C468 103 520 147 584 121 C636 101 669 142 744 136 C809 131 856 153 902 148" fill="none" stroke="rgba(74,62,40,0.20)" stroke-width="8" stroke-linecap="round"/>
+            <path d="M82 266 C160 242 254 238 349 252 C455 268 551 248 653 232 C753 216 845 204 935 188" fill="none" stroke="rgba(200,151,58,0.22)" stroke-width="13" stroke-linecap="round"/>
+            <path d="M120 303 C205 312 239 358 318 341 C383 327 420 292 492 315 C552 335 585 342 650 314" fill="none" stroke="rgba(74,62,40,0.16)" stroke-width="7" stroke-linecap="round"/>
+            <text x="130" y="112" fill="rgba(122,106,74,0.42)" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">MARMARA</text>
+            <text x="130" y="405" fill="rgba(122,106,74,0.36)" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">EGE</text>
+            <text x="425" y="438" fill="rgba(122,106,74,0.36)" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">AKDENİZ</text>
+            <text x="702" y="98" fill="rgba(122,106,74,0.34)" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">KARADENİZ</text>
           </svg>
-          <a class="map-pin" style="--x: 17%; --y: 57%;" href="efes.html"><span>Efes</span></a>
-          <a class="map-pin" style="--x: 13%; --y: 35%;" href="troya.html"><span>Troya</span></a>
+          <a class="map-pin" style="--x: 18%; --y: 60%;" href="efes.html"><span>Efes</span></a>
+          <a class="map-pin" style="--x: 14%; --y: 37%;" href="troya.html"><span>Troya</span></a>
           <a class="map-pin" style="--x: 80%; --y: 63%;" href="gobeklitepe.html"><span>Göbeklitepe</span></a>
-          <a class="map-pin" style="--x: 49%; --y: 40%;" href="hattusa.html"><span>Hattuşa</span></a>
-          <a class="map-pin" style="--x: 35%; --y: 75%;" href="perge.html"><span>Perge</span></a>
-          <a class="map-pin" style="--x: 84%; --y: 50%;" href="nemrut.html"><span>Nemrut</span></a>
-          <a class="map-pin" style="--x: 34%; --y: 73%;" href="aspendos.html"><span>Aspendos</span></a>
-          <a class="map-pin" style="--x: 25%; --y: 78%;" href="patara.html"><span>Patara</span></a>
-          <a class="map-pin" style="--x: 22%; --y: 65%;" href="aphrodisias.html"><span>Aphrodisias</span></a>
-          <a class="map-pin" style="--x: 32%; --y: 66%;" href="sagalassos.html"><span>Sagalassos</span></a>
-          <a class="map-pin" style="--x: 18%; --y: 45%;" href="pergamon.html"><span>Pergamon</span></a>
-          <a class="map-pin" style="--x: 27%; --y: 60%;" href="hierapolis.html"><span>Hierapolis</span></a>
-          <a class="map-pin" style="--x: 39%; --y: 74%;" href="side.html"><span>Side</span></a>
-          <a class="map-pin" style="--x: 24%; --y: 76%;" href="xanthos.html"><span>Xanthos-Letoon</span></a>
-          <a class="map-pin" style="--x: 18%; --y: 62%;" href="milet.html"><span>Milet</span></a>
-          <a class="map-pin" style="--x: 22%; --y: 50%;" href="sardes.html"><span>Sardes</span></a>
+          <a class="map-pin" style="--x: 50%; --y: 39%;" href="hattusa.html"><span>Hattuşa</span></a>
+          <a class="map-pin" style="--x: 36%; --y: 73%;" href="perge.html"><span>Perge</span></a>
+          <a class="map-pin" style="--x: 84%; --y: 55%;" href="nemrut.html"><span>Nemrut</span></a>
+          <a class="map-pin" style="--x: 39%; --y: 76%;" href="aspendos.html"><span>Aspendos</span></a>
+          <a class="map-pin" style="--x: 27%; --y: 80%;" href="patara.html"><span>Patara</span></a>
+          <a class="map-pin" style="--x: 25%; --y: 66%;" href="aphrodisias.html"><span>Aphrodisias</span></a>
+          <a class="map-pin" style="--x: 34%; --y: 67%;" href="sagalassos.html"><span>Sagalassos</span></a>
+          <a class="map-pin" style="--x: 18%; --y: 49%;" href="pergamon.html"><span>Pergamon</span></a>
+          <a class="map-pin" style="--x: 29%; --y: 61%;" href="hierapolis.html"><span>Hierapolis</span></a>
+          <a class="map-pin" style="--x: 42%; --y: 75%;" href="side.html"><span>Side</span></a>
+          <a class="map-pin" style="--x: 26%; --y: 77%;" href="xanthos.html"><span>Xanthos-Letoon</span></a>
+          <a class="map-pin" style="--x: 19%; --y: 64%;" href="milet.html"><span>Milet</span></a>
+          <a class="map-pin" style="--x: 23%; --y: 53%;" href="sardes.html"><span>Sardes</span></a>
         </div>
         <aside class="map-panel">
           <h3>16 detay sayfası hazır</h3>
           <p>Efes'ten Sardes'e uzanan geniş rota hazırlandı. Harita pinleri hem masaüstünde hem mobilde tıklanabilir bağlantı olarak çalışır.</p>
+          <p class="map-credit">Harita altlığı: Wikimedia Commons Turkey location map.</p>
           <ul class="map-list">
             <li><a href="efes.html">Efes</a></li>
             <li><a href="troya.html">Troya</a></li>
