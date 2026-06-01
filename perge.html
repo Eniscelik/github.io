@@ -260,6 +260,76 @@
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+
+    .visual-route {
+      padding-top: 1rem;
+    }
+
+    .route-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5px;
+      margin-top: 1.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .route-shot {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .route-shot:first-child {
+      min-height: 430px;
+      grid-row: span 2;
+    }
+
+    .route-shot img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.04);
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .route-shot:hover img {
+      transform: scale(1.035);
+      filter: saturate(1.04) contrast(1.08);
+    }
+
+    .route-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem;
+      color: var(--paper);
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+    }
+
+    .route-caption strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .route-caption span,
+    .route-caption a {
+      color: rgba(255,253,248,0.72);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .route-caption a:hover { color: var(--accent-pale, var(--gold-light, #F0D5A8)); }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -277,7 +347,7 @@
       .nav-links { display: none; }
       .hero { padding: 7.5rem 1rem 4rem; }
       section { padding: 4rem 1rem; }
-      .story-grid, .places-grid, .feature-strip { grid-template-columns: 1fr; }
+      .route-gallery, .story-grid, .places-grid, .feature-strip { grid-template-columns: 1fr; }
       .fact-card { min-height: auto; }
       .page-actions { align-items: stretch; }
       .button { width: 100%; }
@@ -313,6 +383,32 @@
           <article class="fact-card"><div class="fact-label">Ana dönem</div><div class="fact-value">Helenistik<br>Roma</div></article>
           <article class="fact-card"><div class="fact-label">Öne çıkan yapı</div><div class="fact-value">Stadyum<br>Tiyatro</div></article>
           <article class="fact-card"><div class="fact-label">Tema</div><div class="fact-value">Pamfilya<br>Artemis</div></article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="visual-route" aria-label="Görsel rota">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görsel Rota</div>
+          <h2 class="section-title">Öne çıkan durakları gör</h2>
+          <p class="lead">Bu sayfadaki ana rota noktaları, açık lisanslı görsellerle desteklendi. Görseller, yapıları ve peyzajı metinle birlikte okumayı kolaylaştırır.</p>
+        </div>
+        <div class="route-gallery">
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20-%20Estadio.jpg" alt="Perge Stadyumu" loading="lazy">
+            <figcaption class="route-caption"><strong>Perge Stadyumu</strong><span>Pamfilya’nın kamusal spor alanı · <a href="https://commons.wikimedia.org/wiki/File:Perge_-_Estadio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20theatre%202012%203817.jpg" alt="Perge Tiyatrosu" loading="lazy">
+            <figcaption class="route-caption"><strong>Perge Tiyatrosu</strong><span>Roma dönemi gösteri mimarisi · <a href="https://commons.wikimedia.org/wiki/File:Perge_theatre_2012_3817.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20Colonnaded%20Street%20south%20of%20middle%20in%202012%203987.jpg" alt="Sütunlu Cadde" loading="lazy">
+            <figcaption class="route-caption"><strong>Sütunlu Cadde</strong><span>Kent planının ana omurgası · <a href="https://commons.wikimedia.org/wiki/File:Perge_Colonnaded_Street_south_of_middle_in_2012_3987.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
