@@ -329,41 +329,6 @@
     }
 
     .route-caption a:hover { color: var(--accent-pale, var(--gold-light, #F0D5A8)); }
-
-
-    .route-visual {
-      width: 100%;
-      height: 100%;
-      min-height: inherit;
-      display: block;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 26% 22%, rgba(255,255,255,0.22), transparent 18rem),
-        linear-gradient(135deg, color-mix(in srgb, var(--accent-light, #D9A45D) 72%, #fff 8%), color-mix(in srgb, var(--dark, #17150F) 82%, #000 6%));
-      transition: transform 0.45s ease, filter 0.45s ease;
-    }
-
-    .route-visual::before {
-      content: '';
-      position: absolute;
-      inset: 9% 7%;
-      border: 1px solid rgba(255,255,255,0.24);
-      pointer-events: none;
-    }
-
-    .route-visual svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .route-shot:hover .route-visual {
-      transform: scale(1.035);
-      filter: saturate(1.08) contrast(1.06);
-    }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -428,86 +393,20 @@
         <div class="reveal">
           <div class="section-label">Görsel Rota</div>
           <h2 class="section-title">Öne çıkan durakları gör</h2>
-          <p class="lead">Bu sayfadaki ana rota noktaları, yerel illüstratif görsel panellerle desteklendi. Görseller, yapıları ve peyzajı metinle birlikte okumayı kolaylaştırır.</p>
+          <p class="lead">Bu sayfadaki ana rota noktaları, görsellerle desteklendi. Görseller, yapıları ve peyzajı metinle birlikte okumayı kolaylaştırır.</p>
         </div>
         <div class="route-gallery">
           <figure class="route-shot reveal">
-            <div class="route-visual" role="img" aria-label="Perge Stadyumu görsel illüstrasyonu">
-              <svg viewBox="0 0 900 560" aria-hidden="true" focusable="false">
-                <defs>
-                  <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,0.26)"/><stop offset="1" stop-color="rgba(0,0,0,0.18)"/></linearGradient>
-                  <linearGradient id="stone" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,244,220,0.78)"/><stop offset="1" stop-color="rgba(95,65,42,0.72)"/></linearGradient>
-                </defs>
-                <rect width="900" height="560" fill="url(#sky)"/>
-                <circle cx="705" cy="110" r="62" fill="rgba(255,226,157,0.82)"/>
-                <path d="M0 370 C135 286 244 320 352 260 C470 195 592 258 707 214 C796 180 846 218 900 198 L900 560 L0 560 Z" fill="rgba(255,255,255,0.16)"/>
-                <path d="M0 420 C130 350 235 376 340 326 C484 256 590 342 720 286 C810 246 858 280 900 263 L900 560 L0 560 Z" fill="rgba(0,0,0,0.16)"/>
-                <path d="M145 395 L755 395" stroke="rgba(255,244,220,0.62)" stroke-width="18" stroke-linecap="round"/>
-                <path d="M214 375 L690 375" stroke="rgba(43,31,22,0.34)" stroke-width="10" stroke-linecap="round"/>
-                <g fill="url(#stone)" stroke="rgba(45,31,22,0.42)" stroke-width="4">
-                  <path d="M266 204 L640 204 L610 248 L296 248 Z"/>
-                  <rect x="300" y="248" width="38" height="142" rx="3"/>
-                  <rect x="383" y="248" width="38" height="142" rx="3"/>
-                  <rect x="466" y="248" width="38" height="142" rx="3"/>
-                  <rect x="549" y="248" width="38" height="142" rx="3"/>
-                  <path d="M250 390 L654 390 L690 430 L215 430 Z"/>
-                </g>
-                <text x="450" y="488" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="48" font-weight="700" fill="rgba(255,253,248,0.74)">Perge Stadyumu</text>
-              </svg>
-            </div>
-            <figcaption class="route-caption"><strong>Perge Stadyumu</strong><span>Pamfilya’nın kamusal spor alanı · Yerel illüstrasyon</span></figcaption>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20-%20Estadio.jpg" alt="Perge Stadyumu" loading="lazy">
+            <figcaption class="route-caption"><strong>Perge Stadyumu</strong><span>Pamfilya’nın kamusal spor alanı · <a href="https://commons.wikimedia.org/wiki/File:Perge_-_Estadio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
           </figure>
           <figure class="route-shot reveal">
-            <div class="route-visual" role="img" aria-label="Perge Tiyatrosu görsel illüstrasyonu">
-              <svg viewBox="0 0 900 560" aria-hidden="true" focusable="false">
-                <defs>
-                  <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,0.26)"/><stop offset="1" stop-color="rgba(0,0,0,0.18)"/></linearGradient>
-                  <linearGradient id="stone" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,244,220,0.78)"/><stop offset="1" stop-color="rgba(95,65,42,0.72)"/></linearGradient>
-                </defs>
-                <rect width="900" height="560" fill="url(#sky)"/>
-                <circle cx="705" cy="110" r="62" fill="rgba(255,226,157,0.82)"/>
-                <path d="M0 370 C135 286 244 320 352 260 C470 195 592 258 707 214 C796 180 846 218 900 198 L900 560 L0 560 Z" fill="rgba(255,255,255,0.16)"/>
-                <path d="M0 420 C130 350 235 376 340 326 C484 256 590 342 720 286 C810 246 858 280 900 263 L900 560 L0 560 Z" fill="rgba(0,0,0,0.16)"/>
-                <path d="M145 395 L755 395" stroke="rgba(255,244,220,0.62)" stroke-width="18" stroke-linecap="round"/>
-                <path d="M214 375 L690 375" stroke="rgba(43,31,22,0.34)" stroke-width="10" stroke-linecap="round"/>
-                <g fill="url(#stone)" stroke="rgba(45,31,22,0.42)" stroke-width="4">
-                  <path d="M266 204 L640 204 L610 248 L296 248 Z"/>
-                  <rect x="300" y="248" width="38" height="142" rx="3"/>
-                  <rect x="383" y="248" width="38" height="142" rx="3"/>
-                  <rect x="466" y="248" width="38" height="142" rx="3"/>
-                  <rect x="549" y="248" width="38" height="142" rx="3"/>
-                  <path d="M250 390 L654 390 L690 430 L215 430 Z"/>
-                </g>
-                <text x="450" y="488" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="48" font-weight="700" fill="rgba(255,253,248,0.74)">Perge Tiyatrosu</text>
-              </svg>
-            </div>
-            <figcaption class="route-caption"><strong>Perge Tiyatrosu</strong><span>Roma dönemi gösteri mimarisi · Yerel illüstrasyon</span></figcaption>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20theatre%202012%203817.jpg" alt="Perge Tiyatrosu" loading="lazy">
+            <figcaption class="route-caption"><strong>Perge Tiyatrosu</strong><span>Roma dönemi gösteri mimarisi · <a href="https://commons.wikimedia.org/wiki/File:Perge_theatre_2012_3817.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
           </figure>
           <figure class="route-shot reveal">
-            <div class="route-visual" role="img" aria-label="Sütunlu Cadde görsel illüstrasyonu">
-              <svg viewBox="0 0 900 560" aria-hidden="true" focusable="false">
-                <defs>
-                  <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,0.26)"/><stop offset="1" stop-color="rgba(0,0,0,0.18)"/></linearGradient>
-                  <linearGradient id="stone" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,244,220,0.78)"/><stop offset="1" stop-color="rgba(95,65,42,0.72)"/></linearGradient>
-                </defs>
-                <rect width="900" height="560" fill="url(#sky)"/>
-                <circle cx="705" cy="110" r="62" fill="rgba(255,226,157,0.82)"/>
-                <path d="M0 370 C135 286 244 320 352 260 C470 195 592 258 707 214 C796 180 846 218 900 198 L900 560 L0 560 Z" fill="rgba(255,255,255,0.16)"/>
-                <path d="M0 420 C130 350 235 376 340 326 C484 256 590 342 720 286 C810 246 858 280 900 263 L900 560 L0 560 Z" fill="rgba(0,0,0,0.16)"/>
-                <path d="M145 395 L755 395" stroke="rgba(255,244,220,0.62)" stroke-width="18" stroke-linecap="round"/>
-                <path d="M214 375 L690 375" stroke="rgba(43,31,22,0.34)" stroke-width="10" stroke-linecap="round"/>
-                <g fill="url(#stone)" stroke="rgba(45,31,22,0.42)" stroke-width="4">
-                  <path d="M266 204 L640 204 L610 248 L296 248 Z"/>
-                  <rect x="300" y="248" width="38" height="142" rx="3"/>
-                  <rect x="383" y="248" width="38" height="142" rx="3"/>
-                  <rect x="466" y="248" width="38" height="142" rx="3"/>
-                  <rect x="549" y="248" width="38" height="142" rx="3"/>
-                  <path d="M250 390 L654 390 L690 430 L215 430 Z"/>
-                </g>
-                <text x="450" y="488" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="48" font-weight="700" fill="rgba(255,253,248,0.74)">Sütunlu Cadde</text>
-              </svg>
-            </div>
-            <figcaption class="route-caption"><strong>Sütunlu Cadde</strong><span>Kent planının ana omurgası · Yerel illüstrasyon</span></figcaption>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20Colonnaded%20Street%20south%20of%20middle%20in%202012%203987.jpg" alt="Sütunlu Cadde" loading="lazy">
+            <figcaption class="route-caption"><strong>Sütunlu Cadde</strong><span>Kent planının ana omurgası · <a href="https://commons.wikimedia.org/wiki/File:Perge_Colonnaded_Street_south_of_middle_in_2012_3987.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
           </figure>
         </div>
       </div>

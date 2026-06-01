@@ -249,12 +249,25 @@
       border: 0.5px solid rgba(74, 62, 40, 0.18);
     }
 
+    .map-image {
+      position: absolute;
+      inset: 8% 4% 9% 3%;
+      width: 93%;
+      height: 83%;
+      object-fit: contain;
+      opacity: 0.9;
+      filter: sepia(0.22) saturate(0.82) contrast(0.96) drop-shadow(0 24px 40px rgba(46,38,24,0.13));
+      z-index: 1;
+    }
+
     .turkey-map svg {
       position: absolute;
-      inset: 5% 4% 8% 3%;
+      inset: 8% 4% 9% 3%;
       width: 93%;
-      height: 87%;
+      height: 83%;
+      opacity: 0.22;
       filter: drop-shadow(0 24px 40px rgba(46,38,24,0.13));
+      z-index: 0;
     }
 
     .map-pin {
@@ -273,7 +286,7 @@
       box-shadow: 0 0 0 7px rgba(200,151,58,0.18), 0 10px 22px rgba(46,38,24,0.18);
       text-decoration: none;
       transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-      z-index: 2;
+      z-index: 3;
     }
 
     .map-pin::before {
@@ -340,6 +353,13 @@
       font-size: 14px;
       font-weight: 300;
       line-height: 1.8;
+    }
+
+    .map-credit {
+      margin-top: -0.5rem;
+      color: rgba(232,194,122,0.36);
+      font-size: 11px !important;
+      letter-spacing: 0.5px;
     }
 
     .map-list {
@@ -710,6 +730,7 @@
 
       <div class="map-layout reveal">
         <div class="turkey-map" aria-label="Türkiye haritası üzerinde antik kent bağlantıları">
+          <img class="map-image" src="https://commons.wikimedia.org/wiki/Special:FilePath/Turkey%20location%20map.svg" alt="Türkiye haritası" loading="lazy">
           <svg viewBox="0 0 1000 520" role="img" aria-label="Sadeleştirilmiş Türkiye haritası">
             <defs>
               <linearGradient id="mapLand" x1="0" x2="1" y1="0" y2="1">
@@ -750,6 +771,7 @@
         <aside class="map-panel">
           <h3>16 detay sayfası hazır</h3>
           <p>Efes'ten Sardes'e uzanan geniş rota hazırlandı. Harita pinleri hem masaüstünde hem mobilde tıklanabilir bağlantı olarak çalışır.</p>
+          <p class="map-credit">Harita altlığı: Wikimedia Commons Turkey location map.</p>
           <ul class="map-list">
             <li><a href="efes.html">Efes</a></li>
             <li><a href="troya.html">Troya</a></li>
