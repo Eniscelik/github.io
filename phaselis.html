@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phaselis Antik Kenti — Antik Türkiye</title>
+  <meta name="description" content="Phaselis için tarihçe, görsel rota, önemli yapılar ve ziyaret notları.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--gold:#C8973A;--gold-soft:#E8C27A;--ink:#2E2618;--muted:#76694F;--paper:#FFFDF8;--cream:#FAF6EE;--dark:#17120F;--line:rgba(74,62,40,.18)}
+    html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--cream),#EFE3CF);overflow-x:hidden}a{color:inherit}.skip-link{position:absolute;top:-48px;left:1rem;z-index:200;padding:.65rem .9rem;background:var(--gold-soft);color:var(--dark);text-decoration:none}.skip-link:focus{top:1rem}nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 2rem;background:rgba(23,18,15,.93);backdrop-filter:blur(10px)}.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:#F5E6C8;text-decoration:none;letter-spacing:1px}.nav-links{display:flex;gap:1.2rem;list-style:none}.nav-links a{font-size:12px;color:rgba(245,230,200,.7);text-decoration:none;text-transform:uppercase;letter-spacing:1.2px}.hero{min-height:82vh;display:grid;align-items:end;position:relative;padding:8rem 2rem 5rem;color:#F5E6C8;background:var(--dark);overflow:hidden}.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.48;filter:sepia(.18) saturate(.86) contrast(.95)}.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,18,15,.92),rgba(23,18,15,.46),rgba(23,18,15,.82)),linear-gradient(0deg,var(--cream),transparent 28%)}.hero-inner,.container{width:min(1120px,100%);margin:0 auto}.hero-inner{position:relative;z-index:1}.breadcrumb{display:inline-block;margin-bottom:1.7rem;color:rgba(245,230,200,.7);font-size:12px;text-transform:uppercase;letter-spacing:1.7px;text-decoration:none}.kicker{display:inline-block;margin-bottom:1rem;padding:.45rem 1rem;border:1px solid rgba(200,151,58,.55);color:var(--gold-soft);font-size:11px;letter-spacing:3px;text-transform:uppercase}.hero h1{max-width:860px;font-family:'Cormorant Garamond',serif;font-size:clamp(54px,9vw,112px);line-height:.92}.hero p{max-width:720px;margin-top:1.4rem;color:rgba(245,230,200,.82);font-size:18px;line-height:1.8}.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:-2.4rem;background:var(--line);border:1px solid var(--line);position:relative;z-index:2}.fact{padding:1.35rem;background:rgba(255,253,248,.92)}.fact span{display:block;margin-bottom:.55rem;color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px}.fact strong{font-family:'Cormorant Garamond',serif;font-size:27px;line-height:1.05}section{padding:4.6rem 2rem}.label{margin-bottom:1rem;color:var(--gold);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase}.title{max-width:760px;margin-bottom:1rem;font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);line-height:1.03}.lead,.copy p{color:var(--muted);font-size:16px;line-height:1.9}.intro{display:grid;grid-template-columns:minmax(0,.9fr) minmax(280px,.55fr);gap:3rem}.note{position:sticky;top:6rem;padding:1.6rem;background:var(--dark);color:rgba(245,230,200,.75);border:1px solid rgba(200,151,58,.25)}.note h2{font-family:'Cormorant Garamond',serif;color:#F5E6C8;font-size:30px;margin-bottom:.8rem}.visual-grid,.places{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:2rem;background:var(--line);border:1px solid var(--line)}.visual-card,.place{min-height:220px;padding:1.4rem;background:rgba(255,253,248,.84);display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}.visual-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.68;transition:transform .35s ease}.visual-card:hover img{transform:scale(1.04)}.visual-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(23,18,15,.82),transparent 62%)}.visual-card h3,.visual-card p{position:relative;z-index:1;color:#fff}.visual-card h3{font-family:'Cormorant Garamond',serif;font-size:30px}.visual-card p{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.72)}.place{min-height:180px}.place span{color:var(--gold);font-weight:700;font-size:12px;letter-spacing:2px}.place h3{font-family:'Cormorant Garamond',serif;font-size:30px;margin:.65rem 0}.place p{color:var(--muted);line-height:1.75}.actions{display:flex;flex-wrap:wrap;gap:1rem}.button{display:inline-flex;padding:.85rem 1.15rem;border:1px solid rgba(46,38,24,.22);text-decoration:none;background:rgba(255,253,248,.75)}.button.primary{background:var(--dark);color:#F5E6C8}footer{padding:2rem;text-align:center;color:var(--muted);border-top:1px solid var(--line)}.reveal{opacity:0;transform:translateY(24px);transition:.7s ease}.reveal.visible{opacity:1;transform:none}@media(max-width:820px){nav{padding:.9rem 1rem}.nav-links{display:none}.hero{min-height:72vh;padding:7rem 1.2rem 4rem}.facts,.visual-grid,.places,.intro{grid-template-columns:1fr}section{padding:3.5rem 1.2rem}.note{position:static}}
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">İçeriğe geç</a>
+  <nav aria-label="Ana menü">
+    <a class="nav-logo" href="index.html">Antik Türkiye</a>
+    <ul class="nav-links">
+      <li><a href="index.html#harita">Harita</a></li>
+      <li><a href="index.html#kentler">Kentler</a></li>
+      <li><a href="#gorulecekler">Rota</a></li>
+    </ul>
+  </nav>
+  <header class="hero">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Phaselis%20ancient%20city.jpg" alt="Phaselis antik kent görseli" loading="eager">
+    <div class="hero-inner">
+      <a class="breadcrumb" href="index.html#kentler">← Tüm antik kentler</a>
+      <div class="kicker">Likya · Antalya</div>
+      <h1>Phaselis<br><em>Üç limanlı kıyı kenti ve sütunlu cadde</em></h1>
+      <p>Phaselis, doğal koyları, üç limanı, ana caddesi ve Roma dönemi yapılarıyla deniz ticareti ve kent yaşamını birlikte anlatır.</p>
+    </div>
+  </header>
+  <main id="icerik">
+    <section class="container facts" aria-label="Phaselis kısa bilgiler">
+      <article class="fact"><span>Bölge</span><strong>Likya</strong></article>
+      <article class="fact"><span>Konum</span><strong>Antalya</strong></article>
+      <article class="fact"><span>Dönem</span><strong>Likya · Roma</strong></article>
+      <article class="fact"><span>Odak</span><strong>Kuzey Limanı</strong></article>
+    </section>
+    <section>
+      <div class="container intro">
+        <div class="copy reveal">
+          <div class="label">Genel Bakış</div>
+          <h2 class="title">Phaselis neden rotaya eklenmeli?</h2>
+          <p>Phaselis, doğal koyları, üç limanı, ana caddesi ve Roma dönemi yapılarıyla deniz ticareti ve kent yaşamını birlikte anlatır.</p>
+          <p>Bu sayfa; ana yapıları, kent dokusunu ve çevre peyzajını tek bir kısa rota altında toplar. Böylece haritadan gelen ziyaretçi, önce hangi yapılara bakacağını hızlıca anlayabilir.</p>
+        </div>
+        <aside class="note reveal">
+          <h2>Ziyaret notu</h2>
+          <p>Görseller URL üzerinden beslenir; böylece sayfa hafif kalır ve GitHub Pages üzerinde ek dosya yüklemeden çalışır.</p>
+          <p>Görsel kaynağı: <a href="https://commons.wikimedia.org/wiki/File:Phaselis_ancient_city.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+        </aside>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="reveal"><div class="label">Görsel Rota</div><h2 class="title">Öne çıkan duraklar</h2><p class="lead">Aynı kaynak görsel, sayfa içinde kırpılarak rota kartlarında kullanılır; URL yapısı korunur ve SVG'ye çevrilmez.</p></div>
+        <div class="visual-grid">
+        <article class="visual-card reveal"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Phaselis%20ancient%20city.jpg" alt="Phaselis Kuzey Limanı görseli" loading="lazy"><h3>Kuzey Limanı</h3><p>Phaselis rotası · Wikimedia Commons</p></article>
+        <article class="visual-card reveal"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Phaselis%20ancient%20city.jpg" alt="Phaselis Güney Limanı görseli" loading="lazy"><h3>Güney Limanı</h3><p>Phaselis rotası · Wikimedia Commons</p></article>
+        <article class="visual-card reveal"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Phaselis%20ancient%20city.jpg" alt="Phaselis Sütunlu Cadde görseli" loading="lazy"><h3>Sütunlu Cadde</h3><p>Phaselis rotası · Wikimedia Commons</p></article>
+        </div>
+      </div>
+    </section>
+    <section id="gorulecekler">
+      <div class="container">
+        <div class="reveal"><div class="label">Görülmesi Gerekenler</div><h2 class="title">Phaselis gezi durakları</h2></div>
+        <div class="places">
+        <article class="place reveal"><span>01</span><h3>Kuzey Limanı</h3><p>Kuzey Limanı, Phaselis gezisinde hem fotoğraf hem de tarih okuması için öncelik verilebilecek duraklardan biridir.</p></article>
+        <article class="place reveal"><span>02</span><h3>Güney Limanı</h3><p>Güney Limanı, Phaselis gezisinde hem fotoğraf hem de tarih okuması için öncelik verilebilecek duraklardan biridir.</p></article>
+        <article class="place reveal"><span>03</span><h3>Sütunlu Cadde</h3><p>Sütunlu Cadde, Phaselis gezisinde hem fotoğraf hem de tarih okuması için öncelik verilebilecek duraklardan biridir.</p></article>
+        <article class="place reveal"><span>04</span><h3>Tiyatro</h3><p>Tiyatro, Phaselis gezisinde hem fotoğraf hem de tarih okuması için öncelik verilebilecek duraklardan biridir.</p></article>
+        <article class="place reveal"><span>05</span><h3>Hadrian Kapısı</h3><p>Hadrian Kapısı, Phaselis gezisinde hem fotoğraf hem de tarih okuması için öncelik verilebilecek duraklardan biridir.</p></article>
+        <article class="place reveal"><span>06</span><h3>Su Kemerleri</h3><p>Su Kemerleri, Phaselis gezisinde hem fotoğraf hem de tarih okuması için öncelik verilebilecek duraklardan biridir.</p></article>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container actions reveal">
+        <a class="button" href="myra.html">← Önceki kent: Myra</a>
+        <a class="button" href="index.html#kentler">Tüm kentlere dön</a>
+        <a class="button primary" href="knidos.html">Sonraki kent: Knidos →</a>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</footer>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), index * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
