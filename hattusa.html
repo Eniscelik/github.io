@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hattuşa — Antik Türkiye</title>
+  <meta name="description" content="Hattuşa'nın Hitit başkenti olarak tarihi, surları, kapıları, Yazılıkaya kutsal alanı ve ziyaret notları.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --copper: #B66A3C;
+      --copper-light: #E09A62;
+      --copper-pale: #F0C49A;
+      --basalt: #17120F;
+      --basalt-soft: #271B16;
+      --slate: #3D332B;
+      --parchment: #FAF1E4;
+      --parchment-dark: #EEDDC5;
+      --paper: #FFFDF8;
+      --ink: #2E2119;
+      --ink-muted: #776150;
+      --line: rgba(61, 51, 43, 0.17);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 16%, rgba(182,106,60,0.13), transparent 28rem),
+        radial-gradient(circle at 88% 32%, rgba(61,51,43,0.12), transparent 30rem),
+        linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image:
+        linear-gradient(rgba(46,33,25,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,33,25,0.045) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(182,106,60,0.08) 1px, transparent 1.4px);
+      background-size: 54px 54px, 54px 54px, 22px 22px;
+    }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 1rem;
+      z-index: 200;
+      padding: 10px 14px;
+      color: var(--basalt);
+      background: var(--copper-pale);
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus { top: 1rem; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(23, 18, 15, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid rgba(224, 154, 98, 0.22);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--copper-pale);
+      text-decoration: none;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(240, 196, 154, 0.66);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus { color: var(--copper-pale); }
+
+    .hero {
+      min-height: 78vh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      padding: 9rem 2rem 5rem;
+      color: var(--copper-pale);
+      background:
+        linear-gradient(115deg, rgba(23,18,15,0.96), rgba(46,33,25,0.80)),
+        radial-gradient(circle at 74% 24%, rgba(224,154,98,0.22), transparent 28rem),
+        radial-gradient(circle at 22% 78%, rgba(61,51,43,0.32), transparent 24rem),
+        var(--basalt);
+    }
+
+    .hero::before {
+      content: 'HATTUSA';
+      position: absolute;
+      right: -0.06em;
+      bottom: -0.2em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(88px, 20vw, 270px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(240, 196, 154, 0.046);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 150px;
+      background: linear-gradient(to bottom, transparent, var(--parchment));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      color: rgba(240,196,154,0.6);
+      font-size: 12px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .breadcrumb:hover { color: var(--copper-pale); }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 6px 18px;
+      border: 0.5px solid rgba(224,154,98,0.46);
+      color: var(--copper-light);
+      font-size: 11px;
+      letter-spacing: 3.6px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(54px, 9vw, 112px);
+      font-weight: 700;
+      line-height: 0.92;
+      color: var(--copper-pale);
+    }
+
+    .hero h1 em {
+      display: block;
+      color: #FFF2E0;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-summary {
+      max-width: 690px;
+      margin-top: 1.5rem;
+      color: rgba(240,196,154,0.75);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    main { position: relative; z-index: 1; }
+    section { padding: 5rem 2rem; }
+    .container { width: min(1120px, 100%); margin: 0 auto; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: -2.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .fact-card {
+      min-height: 138px;
+      padding: 1.5rem;
+      background: rgba(255,253,248,0.84);
+    }
+
+    .fact-label {
+      margin-bottom: 0.7rem;
+      color: var(--copper);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .fact-value {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: 27px;
+      font-weight: 600;
+      line-height: 1.06;
+    }
+
+    .intro-grid,
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.6fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .section-label {
+      margin-bottom: 1rem;
+      color: var(--copper);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 780px;
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.02;
+    }
+
+    .lead,
+    .copy p {
+      color: var(--ink-muted);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    .lead { font-size: 17px; }
+    .copy p { margin-bottom: 1.2rem; }
+
+    .note-panel {
+      position: sticky;
+      top: 6rem;
+      padding: 1.75rem;
+      border: 0.5px solid rgba(182,106,60,0.34);
+      background:
+        linear-gradient(180deg, rgba(23,18,15,0.95), rgba(46,33,25,0.95)),
+        var(--basalt);
+      color: rgba(240,196,154,0.75);
+    }
+
+    .note-panel h2 {
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--copper-pale);
+      font-size: 30px;
+      line-height: 1.08;
+    }
+
+    .note-panel p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .content-block {
+      border-top: 0.5px solid var(--line);
+      background: rgba(255,253,248,0.34);
+    }
+
+    .feature-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .feature-card,
+    .story-card,
+    .place-card {
+      min-height: 225px;
+      padding: 1.7rem;
+      background: var(--paper);
+    }
+
+    .feature-card strong,
+    .story-card h3,
+    .place-card h3 {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: 27px;
+      line-height: 1.08;
+    }
+
+    .feature-card span,
+    .story-card p,
+    .place-card p {
+      color: var(--ink-muted);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .era-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--paper);
+      border: 0.5px solid var(--line);
+    }
+
+    .era-table th,
+    .era-table td {
+      padding: 1rem;
+      border-bottom: 0.5px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .era-table th {
+      color: var(--copper);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(238,221,197,0.7);
+    }
+
+    .era-table td {
+      color: var(--ink-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .era-table strong { color: var(--ink); }
+
+    .story-grid,
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .place-number {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+      border: 0.5px solid rgba(182,106,60,0.46);
+      color: var(--copper);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .visit-section {
+      background: var(--basalt);
+      color: var(--copper-pale);
+    }
+
+    .visit-section .section-title { color: var(--copper-pale); }
+    .visit-section .lead { color: rgba(240,196,154,0.56); }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: rgba(224,154,98,0.14);
+      border: 0.5px solid rgba(224,154,98,0.14);
+    }
+
+    .visit-card {
+      padding: 1.6rem;
+      background: var(--basalt);
+      border-bottom: 2px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .visit-card:hover {
+      background: var(--basalt-soft);
+      border-color: var(--copper-light);
+    }
+
+    .visit-card h3 {
+      margin-bottom: 0.7rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--copper-pale);
+      font-size: 25px;
+    }
+
+    .visit-card p {
+      color: rgba(240,196,154,0.5);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .page-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2.5rem;
+      border-top: 0.5px solid var(--line);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 1.4rem;
+      border: 0.5px solid rgba(61,51,43,0.25);
+      color: var(--ink);
+      background: transparent;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s, color 0.2s;
+    }
+
+    .button.primary {
+      color: var(--parchment);
+      background: var(--basalt);
+      border-color: var(--basalt);
+    }
+
+    .button:hover,
+    .button:focus {
+      transform: translateY(-1px);
+      background: var(--parchment-dark);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus {
+      color: var(--copper-pale);
+      background: var(--slate);
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: var(--basalt);
+      border-top: 0.5px solid rgba(224,154,98,0.16);
+    }
+
+    footer p {
+      color: rgba(224,154,98,0.36);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: rgba(224,154,98,0.58);
+      text-decoration: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+
+    .visual-route {
+      padding-top: 1rem;
+    }
+
+    .route-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5px;
+      margin-top: 1.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .route-shot {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .route-shot:first-child {
+      min-height: 430px;
+      grid-row: span 2;
+    }
+
+    .route-shot img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.04);
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .route-shot:hover img {
+      transform: scale(1.035);
+      filter: saturate(1.04) contrast(1.08);
+    }
+
+    .route-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem;
+      color: var(--paper);
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+    }
+
+    .route-caption strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .route-caption span,
+    .route-caption a {
+      color: rgba(255,253,248,0.72);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .route-caption a:hover { color: var(--accent-pale, var(--gold-light, #F0D5A8)); }
+
+
+    .route-visual {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 26% 22%, rgba(255,255,255,0.22), transparent 18rem),
+        linear-gradient(135deg, color-mix(in srgb, var(--accent-light, #D9A45D) 72%, #fff 8%), color-mix(in srgb, var(--dark, #17150F) 82%, #000 6%));
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .route-visual::before {
+      content: '';
+      position: absolute;
+      inset: 9% 7%;
+      border: 1px solid rgba(255,255,255,0.24);
+      pointer-events: none;
+    }
+
+    .route-visual svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .route-shot:hover .route-visual {
+      transform: scale(1.035);
+      filter: saturate(1.08) contrast(1.06);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .facts,
+      .intro-grid,
+      .two-column,
+      .visit-grid { grid-template-columns: 1fr; }
+      .feature-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .note-panel { position: static; }
+      .hero { min-height: 70vh; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7.5rem 1rem 4rem; }
+      section { padding: 4rem 1rem; }
+      .route-gallery,
+      .story-grid,
+      .places-grid,
+      .feature-strip { grid-template-columns: 1fr; }
+      .fact-card { min-height: auto; }
+      .page-actions { align-items: stretch; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+  <nav aria-label="Ana menü">
+    <a href="index.html" class="nav-logo">Antik Türkiye</a>
+    <ul class="nav-links">
+      <li><a href="index.html#kentler">Kentler</a></li>
+      <li><a href="index.html#donemler">Dönemler</a></li>
+      <li><a href="#kapilar">Kapılar</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner reveal">
+      <a class="breadcrumb" href="index.html">← Ana sayfaya dön</a>
+      <div class="hero-kicker">Çorum · Boğazkale</div>
+      <h1>Hattuşa <em>Hitit Başkenti</em></h1>
+      <p class="hero-summary">Surları, anıtsal kapıları, tapınak alanları ve Yazılıkaya kutsal mekanıyla Hattuşa; Hitit İmparatorluğu'nun siyasi, dini ve diplomatik hafızasını taşıyan benzersiz bir başkenttir.</p>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <section aria-label="Hattuşa hızlı bilgiler">
+      <div class="container">
+        <div class="facts reveal">
+          <article class="fact-card">
+            <div class="fact-label">Konum</div>
+            <div class="fact-value">Çorum<br>Boğazkale</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Ana dönem</div>
+            <div class="fact-value">Hitit<br>İmparatorluğu</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Öne çıkan yapı</div>
+            <div class="fact-value">Aslan<br>Kapısı</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Miras değeri</div>
+            <div class="fact-value">UNESCO<br>Alanı</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="visual-route" aria-label="Görsel rota">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görsel Rota</div>
+          <h2 class="section-title">Öne çıkan durakları gör</h2>
+          <p class="lead">Bu sayfadaki ana rota noktaları, yerel illüstratif görsel panellerle desteklendi. Görseller, yapıları ve peyzajı metinle birlikte okumayı kolaylaştırır.</p>
+        </div>
+        <div class="route-gallery">
+          <figure class="route-shot reveal">
+            <div class="route-visual" role="img" aria-label="Aslan Kapısı görsel illüstrasyonu">
+              <svg viewBox="0 0 900 560" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,0.26)"/><stop offset="1" stop-color="rgba(0,0,0,0.18)"/></linearGradient>
+                  <linearGradient id="stone" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,244,220,0.78)"/><stop offset="1" stop-color="rgba(95,65,42,0.72)"/></linearGradient>
+                </defs>
+                <rect width="900" height="560" fill="url(#sky)"/>
+                <circle cx="705" cy="110" r="62" fill="rgba(255,226,157,0.82)"/>
+                <path d="M0 370 C135 286 244 320 352 260 C470 195 592 258 707 214 C796 180 846 218 900 198 L900 560 L0 560 Z" fill="rgba(255,255,255,0.16)"/>
+                <path d="M0 420 C130 350 235 376 340 326 C484 256 590 342 720 286 C810 246 858 280 900 263 L900 560 L0 560 Z" fill="rgba(0,0,0,0.16)"/>
+                <path d="M145 395 L755 395" stroke="rgba(255,244,220,0.62)" stroke-width="18" stroke-linecap="round"/>
+                <path d="M214 375 L690 375" stroke="rgba(43,31,22,0.34)" stroke-width="10" stroke-linecap="round"/>
+                <g fill="url(#stone)" stroke="rgba(45,31,22,0.42)" stroke-width="4">
+                  <path d="M266 204 L640 204 L610 248 L296 248 Z"/>
+                  <rect x="300" y="248" width="38" height="142" rx="3"/>
+                  <rect x="383" y="248" width="38" height="142" rx="3"/>
+                  <rect x="466" y="248" width="38" height="142" rx="3"/>
+                  <rect x="549" y="248" width="38" height="142" rx="3"/>
+                  <path d="M250 390 L654 390 L690 430 L215 430 Z"/>
+                </g>
+                <text x="450" y="488" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="48" font-weight="700" fill="rgba(255,253,248,0.74)">Aslan Kapısı</text>
+              </svg>
+            </div>
+            <figcaption class="route-caption"><strong>Aslan Kapısı</strong><span>Hattuşa’nın koruyucu taş eşiği · Yerel illüstrasyon</span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <div class="route-visual" role="img" aria-label="Sfenks Kapısı görsel illüstrasyonu">
+              <svg viewBox="0 0 900 560" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,0.26)"/><stop offset="1" stop-color="rgba(0,0,0,0.18)"/></linearGradient>
+                  <linearGradient id="stone" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,244,220,0.78)"/><stop offset="1" stop-color="rgba(95,65,42,0.72)"/></linearGradient>
+                </defs>
+                <rect width="900" height="560" fill="url(#sky)"/>
+                <circle cx="705" cy="110" r="62" fill="rgba(255,226,157,0.82)"/>
+                <path d="M0 370 C135 286 244 320 352 260 C470 195 592 258 707 214 C796 180 846 218 900 198 L900 560 L0 560 Z" fill="rgba(255,255,255,0.16)"/>
+                <path d="M0 420 C130 350 235 376 340 326 C484 256 590 342 720 286 C810 246 858 280 900 263 L900 560 L0 560 Z" fill="rgba(0,0,0,0.16)"/>
+                <path d="M145 395 L755 395" stroke="rgba(255,244,220,0.62)" stroke-width="18" stroke-linecap="round"/>
+                <path d="M214 375 L690 375" stroke="rgba(43,31,22,0.34)" stroke-width="10" stroke-linecap="round"/>
+                <g fill="url(#stone)" stroke="rgba(45,31,22,0.42)" stroke-width="4">
+                  <path d="M266 204 L640 204 L610 248 L296 248 Z"/>
+                  <rect x="300" y="248" width="38" height="142" rx="3"/>
+                  <rect x="383" y="248" width="38" height="142" rx="3"/>
+                  <rect x="466" y="248" width="38" height="142" rx="3"/>
+                  <rect x="549" y="248" width="38" height="142" rx="3"/>
+                  <path d="M250 390 L654 390 L690 430 L215 430 Z"/>
+                </g>
+                <text x="450" y="488" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="48" font-weight="700" fill="rgba(255,253,248,0.74)">Sfenks Kapısı</text>
+              </svg>
+            </div>
+            <figcaption class="route-caption"><strong>Sfenks Kapısı</strong><span>Yüksek sur hattında tören etkisi · Yerel illüstrasyon</span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <div class="route-visual" role="img" aria-label="Yazılıkaya görsel illüstrasyonu">
+              <svg viewBox="0 0 900 560" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,0.26)"/><stop offset="1" stop-color="rgba(0,0,0,0.18)"/></linearGradient>
+                  <linearGradient id="stone" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="rgba(255,244,220,0.78)"/><stop offset="1" stop-color="rgba(95,65,42,0.72)"/></linearGradient>
+                </defs>
+                <rect width="900" height="560" fill="url(#sky)"/>
+                <circle cx="705" cy="110" r="62" fill="rgba(255,226,157,0.82)"/>
+                <path d="M0 370 C135 286 244 320 352 260 C470 195 592 258 707 214 C796 180 846 218 900 198 L900 560 L0 560 Z" fill="rgba(255,255,255,0.16)"/>
+                <path d="M0 420 C130 350 235 376 340 326 C484 256 590 342 720 286 C810 246 858 280 900 263 L900 560 L0 560 Z" fill="rgba(0,0,0,0.16)"/>
+                <path d="M145 395 L755 395" stroke="rgba(255,244,220,0.62)" stroke-width="18" stroke-linecap="round"/>
+                <path d="M214 375 L690 375" stroke="rgba(43,31,22,0.34)" stroke-width="10" stroke-linecap="round"/>
+                <g fill="url(#stone)" stroke="rgba(45,31,22,0.42)" stroke-width="4">
+                  <path d="M266 204 L640 204 L610 248 L296 248 Z"/>
+                  <rect x="300" y="248" width="38" height="142" rx="3"/>
+                  <rect x="383" y="248" width="38" height="142" rx="3"/>
+                  <rect x="466" y="248" width="38" height="142" rx="3"/>
+                  <rect x="549" y="248" width="38" height="142" rx="3"/>
+                  <path d="M250 390 L654 390 L690 430 L215 430 Z"/>
+                </g>
+                <text x="450" y="488" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="48" font-weight="700" fill="rgba(255,253,248,0.74)">Yazılıkaya</text>
+              </svg>
+            </div>
+            <figcaption class="route-caption"><strong>Yazılıkaya</strong><span>Hitit tanrılar alayı kabartmaları · Yerel illüstrasyon</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container intro-grid">
+        <div class="reveal">
+          <div class="section-label">Kent Portresi</div>
+          <h2 class="section-title">Anadolu'nun imparatorluk başkenti</h2>
+          <p class="lead">Hattuşa, Orta Anadolu'nun kıvrımlı topoğrafyası içinde kurulmuş, doğal savunma olanaklarıyla anıtsal mimariyi birleştiren güçlü bir başkenttir. Kentte surlar, kapılar, tapınaklar, arşivler ve kutsal alanlar Hitit dünyasının siyasi ve dini düzenini birlikte anlatır.</p>
+        </div>
+        <aside class="note-panel reveal" aria-label="Kısa not">
+          <h2>Neden önemli?</h2>
+          <p>Hattuşa, Hitit İmparatorluğu'nun yönetim merkezi olmasının yanında çivi yazılı tablet arşivleriyle diplomasi, hukuk, din ve günlük yönetim hakkında benzersiz bilgiler sunar. Kadeş Antlaşması gibi dünya tarihinin erken diplomatik belgeleri de bu kültürel çevreyle ilişkilidir.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-block" id="tarihce">
+      <div class="container two-column">
+        <div class="reveal">
+          <div class="section-label">Tarihçe</div>
+          <h2 class="section-title">Kaya, sur ve tabletlerle kurulan iktidar</h2>
+        </div>
+        <div class="copy reveal">
+          <p>Hattuşa, Hititlerin başkenti olarak özellikle M.Ö. 2. binyılda büyük önem kazandı. Kent, yalnızca saray ve tapınaklardan ibaret değildi; aynı zamanda idari kayıtların tutulduğu, dini törenlerin düzenlendiği ve imparatorluk siyasetinin yönetildiği bir merkezdi.</p>
+          <p>Kentin anıtsal surları ve kapıları, başkentin hem savunma hem de temsil gücünü gösterir. Yazılıkaya kutsal alanı ise Hitit tanrılar dünyasının taş kabartmalarla görünür hale geldiği özel bir mekandır.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="kapilar">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Anıtsal Mimari</div>
+          <h2 class="section-title">Kapılar, surlar ve kutsal akslar</h2>
+          <p class="lead">Hattuşa'yı gezerken kentin taş işçiliğini yalnızca savunma yapısı olarak değil, imparatorluk görkemini sahneleyen bir mimari dil olarak okumak gerekir. Aslan, Sfenks ve Kral Kapısı bu dilin en güçlü simgeleridir.</p>
+        </div>
+        <div class="feature-strip">
+          <article class="feature-card reveal">
+            <strong>Aslan Kapısı</strong>
+            <span>Koruyucu aslan kabartmaları, kentin gücünü ve kutsal sınır duygusunu ziyaretçiye ilk anda hissettirir.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Sfenks Kapısı</strong>
+            <span>Yüksek noktadaki kapı düzeni, sur hattının anıtsal ve törensel karakterini vurgular.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Kral Kapısı</strong>
+            <span>Savaşçı kabartmasıyla tanınan bu kapı, askeri güç ve krallık temsili açısından önemlidir.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Yazılıkaya</strong>
+            <span>Kaya yüzeylerine işlenmiş tanrı ve tanrıça kabartmaları, Hitit dini evrenini taş üzerinde görünür kılar.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="medeniyetler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Hitit Bağlamı</div>
+          <h2 class="section-title">Hattuşa hangi dünyayı anlatır?</h2>
+        </div>
+        <div class="reveal">
+          <table class="era-table" aria-label="Hattuşa dönemleri ve anlamları">
+            <thead>
+              <tr>
+                <th>Başlık</th>
+                <th>Bağlam</th>
+                <th>Öne çıkan anlam</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Hitit Başkenti</strong></td>
+                <td>İmparatorluk yönetimi</td>
+                <td>Saray, arşiv, idare ve diplomasi merkezi</td>
+              </tr>
+              <tr>
+                <td><strong>Tapınaklar</strong></td>
+                <td>Resmi din ve törenler</td>
+                <td>Çok tanrılı Hitit panteonunun kent ölçeğinde temsili</td>
+              </tr>
+              <tr>
+                <td><strong>Tablet Arşivleri</strong></td>
+                <td>Çivi yazılı belgeler</td>
+                <td>Hukuk, diplomasi, ritüel ve yönetim kayıtları</td>
+              </tr>
+              <tr>
+                <td><strong>Surlar ve Kapılar</strong></td>
+                <td>Savunma ve temsil</td>
+                <td>Kentin imparatorluk gücünü fiziksel olarak sahnelemesi</td>
+              </tr>
+              <tr>
+                <td><strong>Yazılıkaya</strong></td>
+                <td>Kutsal kaya alanı</td>
+                <td>Tanrılar alayı kabartmaları ve dini hafıza</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="hikayeler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Hikayeler ve İnanç</div>
+          <h2 class="section-title">Bin tanrılı ülkenin taş hafızası</h2>
+          <p class="lead">Hitit dünyası, farklı bölgelerin tanrılarını, ritüellerini ve siyasi geleneklerini bir arada tutan karmaşık bir imparatorluk kültürüne sahipti. Hattuşa bu çok sesli dünyanın başkent sahnesidir.</p>
+        </div>
+        <div class="story-grid">
+          <article class="story-card reveal">
+            <h3>Bin Tanrılı Ülke</h3>
+            <p>Hitit metinlerinde farklı kent ve halkların tanrıları imparatorluk panteonuna dahil edilir. Bu nedenle Hattuşa, dini çeşitliliğin yönetildiği bir merkez olarak okunabilir.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Yazılıkaya Alayı</h3>
+            <p>Yazılıkaya'daki kabartmalar, tanrı ve tanrıçaların ritmik bir düzen içinde ilerlediği güçlü bir görsel anlatı sunar.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Kadeş Diplomasisi</h3>
+            <p>Hitit dünyası, Mısır ile kurduğu diplomatik ilişki ve Kadeş Antlaşması geleneğiyle eskiçağ siyasetinin en önemli örneklerinden birini temsil eder.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Arşivlerin Sesi</h3>
+            <p>Çivi yazılı tabletler, kralların kararlarından ritüel metinlere kadar geniş bir kayıt dünyasını bugüne taşır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="gorulecekler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görülmesi Gerekenler</div>
+          <h2 class="section-title">Hattuşa rotasının ana durakları</h2>
+        </div>
+        <div class="places-grid">
+          <article class="place-card reveal">
+            <div class="place-number">1</div>
+            <h3>Aslan Kapısı</h3>
+            <p>Hattuşa'nın en tanınan girişlerinden biridir. Aslan kabartmaları, kapının koruyucu ve temsil edici anlamını güçlendirir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">2</div>
+            <h3>Sfenks Kapısı</h3>
+            <p>Yüksek sur hattında yer alan bu kapı, kentin anıtsal planını ve tören etkisini anlamak için önemlidir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">3</div>
+            <h3>Kral Kapısı</h3>
+            <p>Savaşçı figürüyle bilinen kapı, Hitit askeri ve kraliyet imgesinin en güçlü örneklerinden biridir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">4</div>
+            <h3>Büyük Tapınak</h3>
+            <p>Kentin dini ve ekonomik düzenini hissettiren en önemli yapılardan biridir; depolar, avlular ve kutsal alan algısı birlikte okunur.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">5</div>
+            <h3>Yazılıkaya</h3>
+            <p>Hattuşa yakınındaki bu kutsal kaya alanı, Hitit tanrılar dünyasının en etkileyici görsel kayıtlarından biridir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">6</div>
+            <h3>Nişantepe ve Arşiv Alanları</h3>
+            <p>İdari kayıtlar ve yazılı kültür, Hattuşa'nın yalnızca taş yapılarla değil belgelerle de konuştuğunu gösterir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit-section" aria-label="Ziyaret notları">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Ziyaret Notları</div>
+          <h2 class="section-title">Hattuşa'yı gezerken nasıl okumalı?</h2>
+          <p class="lead">Hattuşa geniş bir alana yayılır ve bazı bölümler araçla gezmeye daha uygundur. Kentin etkisini anlamak için kapıları, tapınak alanlarını ve Yazılıkaya'yı aynı rota içinde düşünmek gerekir.</p>
+        </div>
+        <div class="visit-grid">
+          <article class="visit-card reveal">
+            <h3>Rota önerisi</h3>
+            <p>Önce kent içindeki sur ve kapı hattını, ardından Büyük Tapınak ve Yazılıkaya kutsal alanını planlamak dengeli bir gezi sağlar.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Okuma ipucu</h3>
+            <p>Kapıları yalnızca giriş noktası değil, Hitit iktidarının taş üzerinde kurduğu temsil sahneleri olarak düşünmek gerekir.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Yakın çevre</h3>
+            <p>Boğazkale çevresi ve Çorum müzeleri, Hitit arkeolojisini daha geniş bağlamda anlamaya yardımcı olur.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container page-actions reveal">
+        <a class="button" href="gobeklitepe.html">← Önceki kent: Göbeklitepe</a>
+        <a class="button" href="index.html#kentler">Tüm kentlere dön</a>
+        <a class="button primary" href="perge.html">Sonraki kent: Perge →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), index * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
