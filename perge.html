@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perge Antik Kenti — Antik Türkiye</title>
+  <meta name="description" content="Perge Antik Kenti'nin Pamfilya tarihi, Roma kent planı, Artemis kültü, stadyumu, tiyatrosu ve ziyaret notları.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #B97931;
+      --accent-light: #E2A95E;
+      --accent-pale: #F3D29A;
+      --dark: #17130F;
+      --dark-soft: #261E15;
+      --deep: #5B3A1D;
+      --base: #FBF3E7;
+      --base-dark: #EEDFC7;
+      --paper: #FFFDF8;
+      --ink: #2D2318;
+      --ink-muted: #76624A;
+      --line: rgba(91, 58, 29, 0.17);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 16% 16%, rgba(185,121,49,0.13), transparent 28rem),
+        radial-gradient(circle at 86% 34%, rgba(91,58,29,0.11), transparent 30rem),
+        linear-gradient(180deg, var(--base) 0%, var(--base-dark) 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image:
+        linear-gradient(rgba(46,33,25,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,33,25,0.045) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(180,110,60,0.08) 1px, transparent 1.4px);
+      background-size: 52px 52px, 52px 52px, 24px 24px;
+    }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 1rem;
+      z-index: 200;
+      padding: 10px 14px;
+      color: var(--dark);
+      background: var(--accent-pale);
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus { top: 1rem; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(23, 19, 15, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid rgba(230, 170, 100, 0.22);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--accent-pale);
+      text-decoration: none;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(245, 215, 180, 0.66);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a:focus { color: var(--accent-pale); }
+
+    .hero {
+      min-height: 78vh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      padding: 9rem 2rem 5rem;
+      color: var(--accent-pale);
+      background:
+        linear-gradient(115deg, rgba(23,19,15,0.96), rgba(45,35,24,0.80)),
+        radial-gradient(circle at 74% 24%, rgba(226,169,94,0.22), transparent 28rem),
+        var(--dark);
+    }
+
+    .hero::before {
+      content: 'PERGE';
+      position: absolute;
+      right: -0.06em;
+      bottom: -0.2em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(86px, 19vw, 260px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(245, 215, 180, 0.046);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 150px;
+      background: linear-gradient(to bottom, transparent, var(--base));
+    }
+
+    .hero-inner { position: relative; z-index: 1; width: min(1120px, 100%); margin: 0 auto; }
+
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      color: rgba(245,215,180,0.6);
+      font-size: 12px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .breadcrumb:hover { color: var(--accent-pale); }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 6px 18px;
+      border: 0.5px solid rgba(230,170,100,0.46);
+      color: var(--accent-light);
+      font-size: 11px;
+      letter-spacing: 3.6px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(54px, 9vw, 112px);
+      font-weight: 700;
+      line-height: 0.92;
+      color: var(--accent-pale);
+    }
+
+    .hero h1 em { display: block; color: #FFF4E4; font-style: italic; font-weight: 400; }
+
+    .hero-summary {
+      max-width: 700px;
+      margin-top: 1.5rem;
+      color: rgba(245,215,180,0.75);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    main { position: relative; z-index: 1; }
+    section { padding: 5rem 2rem; }
+    .container { width: min(1120px, 100%); margin: 0 auto; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: -2.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .fact-card { min-height: 138px; padding: 1.5rem; background: rgba(255,253,248,0.84); }
+    .fact-label { margin-bottom: 0.7rem; color: var(--accent); font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+    .fact-value { font-family: 'Cormorant Garamond', serif; color: var(--ink); font-size: 27px; font-weight: 600; line-height: 1.06; }
+
+    .intro-grid, .two-column { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.6fr); gap: 3rem; align-items: start; }
+    .section-label { margin-bottom: 1rem; color: var(--accent); font-size: 10px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; }
+    .section-title { max-width: 780px; margin-bottom: 1rem; font-family: 'Cormorant Garamond', serif; color: var(--ink); font-size: clamp(36px, 5vw, 60px); font-weight: 700; line-height: 1.02; }
+    .lead, .copy p { color: var(--ink-muted); font-size: 16px; font-weight: 300; line-height: 1.9; }
+    .lead { font-size: 17px; }
+    .copy p { margin-bottom: 1.2rem; }
+
+    .note-panel {
+      position: sticky;
+      top: 6rem;
+      padding: 1.75rem;
+      border: 0.5px solid rgba(180,110,60,0.34);
+      background: linear-gradient(180deg, rgba(23,19,15,0.96), rgba(45,35,24,0.80)), var(--dark);
+      color: rgba(245,215,180,0.75);
+    }
+
+    .note-panel h2 { margin-bottom: 1rem; font-family: 'Cormorant Garamond', serif; color: var(--accent-pale); font-size: 30px; line-height: 1.08; }
+    .note-panel p { font-size: 14px; font-weight: 300; line-height: 1.75; }
+
+    .content-block { border-top: 0.5px solid var(--line); background: rgba(255,253,248,0.34); }
+    .feature-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5px; margin-top: 2rem; background: var(--line); border: 0.5px solid var(--line); }
+    .feature-card, .story-card, .place-card { min-height: 225px; padding: 1.7rem; background: var(--paper); }
+    .feature-card strong, .story-card h3, .place-card h3 { display: block; margin-bottom: 0.8rem; font-family: 'Cormorant Garamond', serif; color: var(--ink); font-size: 27px; line-height: 1.08; }
+    .feature-card span, .story-card p, .place-card p { color: var(--ink-muted); font-size: 14px; font-weight: 300; line-height: 1.75; }
+
+    .era-table { width: 100%; border-collapse: collapse; background: var(--paper); border: 0.5px solid var(--line); }
+    .era-table th, .era-table td { padding: 1rem; border-bottom: 0.5px solid var(--line); text-align: left; vertical-align: top; }
+    .era-table th { color: var(--accent); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; background: rgba(238,223,199,0.7); }
+    .era-table td { color: var(--ink-muted); font-size: 14px; line-height: 1.55; }
+    .era-table strong { color: var(--ink); }
+
+    .story-grid, .places-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5px; margin-top: 2rem; background: var(--line); border: 0.5px solid var(--line); }
+    .place-number { display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; margin-bottom: 1.1rem; border: 0.5px solid rgba(180,110,60,0.46); color: var(--accent); font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 700; }
+
+    .visit-section { background: var(--dark); color: var(--accent-pale); }
+    .visit-section .section-title { color: var(--accent-pale); }
+    .visit-section .lead { color: rgba(245,215,180,0.56); }
+    .visit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5px; margin-top: 2rem; background: rgba(230,170,100,0.14); border: 0.5px solid rgba(230,170,100,0.14); }
+    .visit-card { padding: 1.6rem; background: var(--dark); border-bottom: 2px solid transparent; transition: background 0.2s, border-color 0.2s; }
+    .visit-card:hover { background: var(--dark-soft); border-color: var(--accent-light); }
+    .visit-card h3 { margin-bottom: 0.7rem; font-family: 'Cormorant Garamond', serif; color: var(--accent-pale); font-size: 25px; }
+    .visit-card p { color: rgba(245,215,180,0.5); font-size: 13px; font-weight: 300; line-height: 1.7; }
+
+    .page-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; padding-top: 2.5rem; border-top: 0.5px solid var(--line); }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 1.4rem; border: 0.5px solid rgba(61,51,43,0.25); color: var(--ink); background: transparent; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: transform 0.15s, background 0.2s, color 0.2s; }
+    .button.primary { color: var(--base); background: var(--dark); border-color: var(--dark); }
+    .button:hover, .button:focus { transform: translateY(-1px); background: var(--base-dark); }
+    .button.primary:hover, .button.primary:focus { color: var(--accent-pale); background: var(--deep); }
+
+    footer { padding: 2rem; text-align: center; background: var(--dark); border-top: 0.5px solid rgba(230,170,100,0.16); }
+    footer p { color: rgba(230,170,100,0.36); font-size: 12px; letter-spacing: 1px; }
+    footer a { color: rgba(230,170,100,0.58); text-decoration: none; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+
+    .visual-route {
+      padding-top: 1rem;
+    }
+
+    .route-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5px;
+      margin-top: 1.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .route-shot {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .route-shot:first-child {
+      min-height: 430px;
+      grid-row: span 2;
+    }
+
+    .route-shot img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.04);
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .route-shot:hover img {
+      transform: scale(1.035);
+      filter: saturate(1.04) contrast(1.08);
+    }
+
+    .route-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem;
+      color: var(--paper);
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+    }
+
+    .route-caption strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .route-caption span,
+    .route-caption a {
+      color: rgba(255,253,248,0.72);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .route-caption a:hover { color: var(--accent-pale, var(--gold-light, #F0D5A8)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
+    @media (max-width: 960px) {
+      .facts, .intro-grid, .two-column, .visit-grid { grid-template-columns: 1fr; }
+      .feature-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .note-panel { position: static; }
+      .hero { min-height: 70vh; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7.5rem 1rem 4rem; }
+      section { padding: 4rem 1rem; }
+      .route-gallery, .story-grid, .places-grid, .feature-strip { grid-template-columns: 1fr; }
+      .fact-card { min-height: auto; }
+      .page-actions { align-items: stretch; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+  <nav aria-label="Ana menü">
+    <a href="index.html" class="nav-logo">Antik Türkiye</a>
+    <ul class="nav-links">
+      <li><a href="index.html#kentler">Kentler</a></li>
+      <li><a href="index.html#donemler">Dönemler</a></li>
+      <li><a href="#stadyum">Stadyum</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner reveal">
+      <a class="breadcrumb" href="index.html">← Ana sayfaya dön</a>
+      <div class="hero-kicker">Antalya · Aksu</div>
+      <h1>Perge <em>Antik Kenti</em></h1>
+      <p class="hero-summary">Sütunlu caddeleri, anıtsal kapıları, stadyumu ve tiyatrosuyla Perge; Pamfilya'nın kent planı en güçlü okunan antik merkezlerinden biridir.</p>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <section aria-label="Perge hızlı bilgiler">
+      <div class="container">
+        <div class="facts reveal">
+          <article class="fact-card"><div class="fact-label">Konum</div><div class="fact-value">Antalya<br>Aksu</div></article>
+          <article class="fact-card"><div class="fact-label">Ana dönem</div><div class="fact-value">Helenistik<br>Roma</div></article>
+          <article class="fact-card"><div class="fact-label">Öne çıkan yapı</div><div class="fact-value">Stadyum<br>Tiyatro</div></article>
+          <article class="fact-card"><div class="fact-label">Tema</div><div class="fact-value">Pamfilya<br>Artemis</div></article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="visual-route" aria-label="Görsel rota">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görsel Rota</div>
+          <h2 class="section-title">Öne çıkan durakları gör</h2>
+          <p class="lead">Bu sayfadaki ana rota noktaları, açık lisanslı görsellerle desteklendi. Görseller, yapıları ve peyzajı metinle birlikte okumayı kolaylaştırır.</p>
+        </div>
+        <div class="route-gallery">
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20-%20Estadio.jpg" alt="Perge Stadyumu" loading="lazy">
+            <figcaption class="route-caption"><strong>Perge Stadyumu</strong><span>Pamfilya’nın kamusal spor alanı · <a href="https://commons.wikimedia.org/wiki/File:Perge_-_Estadio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20theatre%202012%203817.jpg" alt="Perge Tiyatrosu" loading="lazy">
+            <figcaption class="route-caption"><strong>Perge Tiyatrosu</strong><span>Roma dönemi gösteri mimarisi · <a href="https://commons.wikimedia.org/wiki/File:Perge_theatre_2012_3817.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perge%20Colonnaded%20Street%20south%20of%20middle%20in%202012%203987.jpg" alt="Sütunlu Cadde" loading="lazy">
+            <figcaption class="route-caption"><strong>Sütunlu Cadde</strong><span>Kent planının ana omurgası · <a href="https://commons.wikimedia.org/wiki/File:Perge_Colonnaded_Street_south_of_middle_in_2012_3987.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container intro-grid">
+        <div class="reveal">
+          <div class="section-label">Kent Portresi</div>
+          <h2 class="section-title">Pamfilya’nın mermer düzeni</h2>
+          <p class="lead">Perge, Antalya yakınlarında Kestros/Aksu vadisinin verimli coğrafyasında gelişen önemli bir Pamfilya kentidir. Bugün görülen kalıntılar özellikle Roma dönemindeki düzenli kent planını, sütunlu caddeleri, hamamları, agora ve anıtsal eğlence yapılarıyla birlikte güçlü biçimde yansıtır.</p>
+        </div>
+        <aside class="note-panel reveal" aria-label="Kısa not">
+          <h2>Neden önemli?</h2>
+          <p>Perge, Roma kentleşmesini Anadolu’da çok okunaklı biçimde gösteren alanlardan biridir. Stadyum, tiyatro, sütunlu cadde ve anıtsal kapıların aynı rota üzerinde izlenebilmesi, ziyaretçiye antik bir kentin kamusal yaşamını bütün halinde hissettirir.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-block" id="tarihce">
+      <div class="container two-column">
+        <div class="reveal"><div class="section-label">Tarihçe</div><h2 class="section-title">Pamfilya’dan Roma kent estetiğine</h2></div>
+        <div class="copy reveal"><p>Perge’nin tarihi Pamfilya bölgesinin yerel kültürleri, Helenistik dünya ve Roma egemenliği arasında şekillenir. Kent, ticaret yolları ve verimli ova bağlantıları sayesinde bölgesel bir merkez niteliği kazandı.</p><p>Roma döneminde Perge, anıtsal kamusal yapılar ve düzenli cadde sistemiyle zenginleşti. Artemis kültü, heykeltıraşlık geleneği ve kamusal mimari, kentin kültürel kimliğini belirleyen başlıca unsurlar arasında yer aldı.</p></div>
+      </div>
+    </section>
+
+    <section id="stadyum">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Kentsel Mimari</div>
+          <h2 class="section-title">Sütunlu cadde, stadyum ve anıtsal kapılar</h2>
+          <p class="lead">Perge’yi gezerken en etkileyici deneyim, kentin ana akslarını takip ederek kamusal yaşamın nasıl örgütlendiğini hissetmektir. Kapılar, hamamlar, agora ve stadyum birlikte büyük bir Roma kenti atmosferi kurar.</p>
+        </div>
+        <div class="feature-strip">
+          <article class="feature-card reveal">
+            <strong>Stadyum</strong>
+            <span>Antik dünyanın iyi korunmuş stadyum örneklerinden biri olarak Perge’nin sosyal yaşamını güçlü biçimde yansıtır.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Tiyatro</strong>
+            <span>Sahne yapısı ve oturma düzeniyle kentin gösteri kültürünü ve Roma dönemi mimari zenginliğini gösterir.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Sütunlu Cadde</strong>
+            <span>Su kanalı ve sütun dizileriyle Perge’nin planlı kent estetiğini en iyi hissettiren akslardan biridir.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Helenistik Kapı</strong>
+            <span>Yuvarlak kuleleriyle tanınan kapı düzeni, kentin anıtsal giriş algısını oluşturur.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="medeniyetler">
+      <div class="container">
+        <div class="reveal"><div class="section-label">Medeniyet Katmanları</div><h2 class="section-title">Perge hangi dönemleri anlatır?</h2></div>
+        <div class="reveal">
+          <table class="era-table" aria-label="Perge dönemleri ve anlamları">
+            <thead><tr><th>Başlık</th><th>Bağlam</th><th>Öne çıkan anlam</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Pamfilya Bağlamı</strong></td>
+                <td>Yerel Anadolu ve Akdeniz kültürleri</td>
+                <td>Bölgesel kimlik, dil ve kentleşme geleneği</td>
+              </tr>
+              <tr>
+                <td><strong>Helenistik Dönem</strong></td>
+                <td>Doğu Akdeniz krallıkları ve Yunan kültürü</td>
+                <td>Anıtsal girişler, kent planı ve kült merkezi</td>
+              </tr>
+              <tr>
+                <td><strong>Roma Dönemi</strong></td>
+                <td>Roma İmparatorluğu</td>
+                <td>Stadyum, tiyatro, hamamlar ve sütunlu cadde</td>
+              </tr>
+              <tr>
+                <td><strong>Erken Hristiyanlık</strong></td>
+                <td>Geç Antik Çağ</td>
+                <td>Kentte dini dönüşüm ve piskoposluk geleneği</td>
+              </tr>
+              <tr>
+                <td><strong>Modern Kazılar</strong></td>
+                <td>Arkeolojik araştırma ve koruma</td>
+                <td>Antalya Müzesi koleksiyonlarıyla birlikte okunan zengin buluntu dünyası</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="hikayeler">
+      <div class="container">
+        <div class="reveal"><div class="section-label">Hikayeler ve Kültür</div><h2 class="section-title">Artemis, kent ve kamusal yaşam</h2><p class="lead">Perge’nin hikayesi yalnızca yapılardan ibaret değildir. Artemis kültü, heykeltıraşlık, spor ve gösteri yaşamı kentin kimliğini çok katmanlı hale getirir.</p></div>
+        <div class="story-grid">
+          <article class="story-card reveal">
+            <h3>Artemis Pergaia</h3>
+            <p>Perge, Artemis kültüyle tanınır. Kentin dini kimliği, Pamfilya’nın yerel gelenekleriyle Akdeniz dünyasının tanrıça anlatılarını buluşturur.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Stadyum Kültürü</h3>
+            <p>Atletik yarışlar ve kamusal buluşmalar, stadyumu kentin sosyal belleğinde önemli bir merkez haline getirir.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Heykeltıraşlık Geleneği</h3>
+            <p>Perge buluntuları, Antalya Müzesi’nde görülebilen zengin heykel geleneğiyle kentin sanat üretimini ortaya koyar.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Aziz Pavlus Rotası</h3>
+            <p>Hristiyan gelenekte Perge, Aziz Pavlus’un Anadolu yolculuklarıyla da anılan yerlerden biridir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="gorulecekler">
+      <div class="container">
+        <div class="reveal"><div class="section-label">Görülmesi Gerekenler</div><h2 class="section-title">Perge rotasının ana durakları</h2></div>
+        <div class="places-grid">
+          <article class="place-card reveal">
+            <div class="place-number">1</div>
+            <h3>Stadyum</h3>
+            <p>Uzun planı ve oturma sıralarıyla Perge’nin en etkileyici yapılarından biridir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">2</div>
+            <h3>Tiyatro</h3>
+            <p>Sahne binası ve kabartmalarıyla kentin gösteri kültürünü anlatır.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">3</div>
+            <h3>Sütunlu Cadde</h3>
+            <p>Ortadaki su kanalı ve sütun dizileriyle antik kent atmosferini güçlü biçimde hissettirir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">4</div>
+            <h3>Helenistik Kapı</h3>
+            <p>Yuvarlak kuleleri ve anıtsal girişiyle Perge’nin simgesel duraklarından biridir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">5</div>
+            <h3>Agora</h3>
+            <p>Ticari ve sosyal yaşamın merkezini gösteren kamusal alanlardan biridir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">6</div>
+            <h3>Roma Hamamları</h3>
+            <p>Kentin gündelik yaşam, temizlik ve sosyalleşme kültürünü anlamaya yardımcı olur.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit-section" aria-label="Ziyaret notları">
+      <div class="container">
+        <div class="reveal"><div class="section-label">Ziyaret Notları</div><h2 class="section-title">Perge’yi gezerken nasıl okumalı?</h2><p class="lead">Perge geniş ve açık bir alandır. Ana caddeyi, stadyumu ve tiyatroyu birlikte gezmek kentin ölçeğini anlamayı kolaylaştırır.</p></div>
+        <div class="visit-grid">
+          <article class="visit-card reveal">
+            <h3>En iyi zaman</h3>
+            <p>Antalya sıcakları nedeniyle sabah erken saatler veya gün batımına yakın zamanlar daha rahat olabilir.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Okuma ipucu</h3>
+            <p>Perge’yi tek tek yapılar yerine ana aks, kapı ve kamusal alan ilişkileriyle okumak gerekir.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Yakın çevre</h3>
+            <p>Aspendos, Side ve Antalya Müzesi ile birlikte planlandığında Pamfilya mirası daha iyi anlaşılır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container page-actions reveal">
+        <a class="button" href="hattusa.html">← Önceki kent: Hattuşa</a>
+        <a class="button" href="index.html#kentler">Tüm kentlere dön</a>
+        <a class="button primary" href="nemrut.html">Sonraki kent: Nemrut Dağı →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><p>© 2026 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</p></footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), index * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
