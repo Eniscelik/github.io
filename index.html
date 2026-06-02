@@ -414,9 +414,24 @@
     }
 
     .mini-city {
-      min-height: 150px;
-      padding: 1.25rem;
+      min-height: 170px;
+      padding: 1.35rem;
       background: rgba(255,253,248,0.72);
+    }
+
+    .mini-city .step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 1rem;
+      border: 0.5px solid rgba(200,151,58,0.46);
+      border-radius: 50%;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
     }
 
     .mini-city strong {
@@ -1470,14 +1485,14 @@
       </div>
 
       <div class="more-cities reveal">
-        <div class="section-label">Sıradaki İçerikler</div>
-        <h2 class="section-title">Rota hâlâ genişleyebilir</h2>
-        <p class="section-desc">Bu güncelleme ile haritada 51 antik kent sayfası hazır. Bir sonraki adımda içerikler daha uzun kent hikâyeleri, müze bağlantıları ve rota süreleriyle derinleştirilebilir.</p>
+        <div class="section-label">Sıradaki İşler</div>
+        <h2 class="section-title">İçerikleri olgunlaştırma planı</h2>
+        <p class="section-desc">51 antik kent sayfası hazır olduğu için sıradaki aşama yeni kent eklemekten çok mevcut sayfaları daha güvenilir, gezilebilir ve görsel olarak güçlü hale getirmek olacak.</p>
         <div class="mini-city-grid">
-          <article class="mini-city"><strong>Notion / İçerik planı</strong><span class="meta">Metin derinleştirme</span><p>Her kent için dönem tablosu, mitolojik anlatı ve yakın müze bilgileri eklenebilir.</p></article>
-          <article class="mini-city"><strong>Fotoğraf kontrolü</strong><span class="meta">Wikimedia URL</span><p>URL ile beslenen görseller kent kent doğrulanıp daha iyi dosyalarla değiştirilebilir.</p></article>
-          <article class="mini-city"><strong>Rota süreleri</strong><span class="meta">Ziyaret planı</span><p>Her sayfaya ortalama gezi süresi, giriş notu ve yakın rota bağlantısı eklenebilir.</p></article>
-          <article class="mini-city"><strong>Harita iyileştirme</strong><span class="meta">Pin kümeleri</span><p>Yoğun bölgelerde pin kümelenmesi veya yakınlaştırma davranışı planlanabilir.</p></article>
+          <article class="mini-city"><span class="step">1</span><strong>İçerik planı</strong><span class="meta">Metin derinleştirme</span><p>Her kent için tarihçe, dönem tablosu, mitolojik anlatı, önemli yapı listesi ve yakın müze bağlantısı aynı sırayla tamamlanacak.</p></article>
+          <article class="mini-city"><span class="step">2</span><strong>Fotoğraf kontrolü</strong><span class="meta">Wikimedia kaynakları</span><p>Kırık veya zayıf görseller kent kent kontrol edilip daha doğru Wikimedia görselleriyle değiştirilecek.</p></article>
+          <article class="mini-city"><span class="step">3</span><strong>Rota süreleri</strong><span class="meta">Ziyaret planı</span><p>Her sayfaya ortalama gezi süresi, kısa rota önerisi, giriş notu ve yakın çevre bağlantıları eklenecek.</p></article>
+          <article class="mini-city"><span class="step">4</span><strong>Harita iyileştirme</strong><span class="meta">Pin düzeni</span><p>Yoğun bölgelerde pinler sadeleştirilecek; Ege, Likya ve Kilikya gibi bölgeler için daha okunabilir grup düzeni hazırlanacak.</p></article>
         </div>
       </div>
 
