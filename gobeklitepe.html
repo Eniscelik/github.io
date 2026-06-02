@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Göbeklitepe — Antik Türkiye</title>
+  <meta name="description" content="Göbeklitepe'nin Neolitik anıtsal yapıları, T biçimli dikilitaşları, sembolleri ve ziyaret notları.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --earth: #9B6B35;
+      --earth-light: #D9A45D;
+      --earth-pale: #F0D5A8;
+      --obsidian: #17150F;
+      --obsidian-soft: #252116;
+      --moss: #3F4A2C;
+      --bone: #FBF5E9;
+      --bone-dark: #EEE1C9;
+      --paper: #FFFDF7;
+      --ink: #2B2518;
+      --ink-muted: #74664B;
+      --line: rgba(63, 74, 44, 0.17);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 14% 18%, rgba(155,107,53,0.13), transparent 28rem),
+        radial-gradient(circle at 86% 34%, rgba(63,74,44,0.11), transparent 30rem),
+        linear-gradient(180deg, var(--bone) 0%, var(--bone-dark) 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.16;
+      background-image:
+        radial-gradient(circle, rgba(43,37,24,0.10) 1px, transparent 1.2px),
+        linear-gradient(45deg, rgba(155,107,53,0.04) 25%, transparent 25%, transparent 50%, rgba(155,107,53,0.04) 50%, rgba(155,107,53,0.04) 75%, transparent 75%);
+      background-size: 28px 28px, 64px 64px;
+    }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 1rem;
+      z-index: 200;
+      padding: 10px 14px;
+      color: var(--obsidian);
+      background: var(--earth-pale);
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus { top: 1rem; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(23, 21, 15, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid rgba(217, 164, 93, 0.22);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--earth-pale);
+      text-decoration: none;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(240, 213, 168, 0.66);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus { color: var(--earth-pale); }
+
+    .hero {
+      min-height: 78vh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      padding: 9rem 2rem 5rem;
+      color: var(--earth-pale);
+      background:
+        linear-gradient(115deg, rgba(23,21,15,0.96), rgba(43,37,24,0.78)),
+        radial-gradient(circle at 72% 22%, rgba(217,164,93,0.22), transparent 28rem),
+        radial-gradient(circle at 20% 80%, rgba(63,74,44,0.28), transparent 24rem),
+        var(--obsidian);
+    }
+
+    .hero::before {
+      content: 'TAS TEPE';
+      position: absolute;
+      right: -0.05em;
+      bottom: -0.19em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(84px, 19vw, 250px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(240, 213, 168, 0.045);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 150px;
+      background: linear-gradient(to bottom, transparent, var(--bone));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      color: rgba(240,213,168,0.6);
+      font-size: 12px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .breadcrumb:hover { color: var(--earth-pale); }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 6px 18px;
+      border: 0.5px solid rgba(217,164,93,0.46);
+      color: var(--earth-light);
+      font-size: 11px;
+      letter-spacing: 3.6px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(54px, 9vw, 112px);
+      font-weight: 700;
+      line-height: 0.92;
+      color: var(--earth-pale);
+    }
+
+    .hero h1 em {
+      display: block;
+      color: #FFF5E0;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-summary {
+      max-width: 680px;
+      margin-top: 1.5rem;
+      color: rgba(240,213,168,0.75);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    main { position: relative; z-index: 1; }
+    section { padding: 5rem 2rem; }
+    .container { width: min(1120px, 100%); margin: 0 auto; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: -2.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .fact-card {
+      min-height: 138px;
+      padding: 1.5rem;
+      background: rgba(255,253,247,0.84);
+    }
+
+    .fact-label {
+      margin-bottom: 0.7rem;
+      color: var(--earth);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .fact-value {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: 27px;
+      font-weight: 600;
+      line-height: 1.06;
+    }
+
+    .intro-grid,
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.6fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .section-label {
+      margin-bottom: 1rem;
+      color: var(--earth);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 780px;
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.02;
+    }
+
+    .lead,
+    .copy p {
+      color: var(--ink-muted);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    .lead { font-size: 17px; }
+    .copy p { margin-bottom: 1.2rem; }
+
+    .note-panel {
+      position: sticky;
+      top: 6rem;
+      padding: 1.75rem;
+      border: 0.5px solid rgba(155,107,53,0.34);
+      background:
+        linear-gradient(180deg, rgba(23,21,15,0.95), rgba(43,37,24,0.95)),
+        var(--obsidian);
+      color: rgba(240,213,168,0.75);
+    }
+
+    .note-panel h2 {
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--earth-pale);
+      font-size: 30px;
+      line-height: 1.08;
+    }
+
+    .note-panel p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .content-block {
+      border-top: 0.5px solid var(--line);
+      background: rgba(255,253,247,0.34);
+    }
+
+    .feature-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .feature-card,
+    .story-card,
+    .place-card {
+      min-height: 225px;
+      padding: 1.7rem;
+      background: var(--paper);
+    }
+
+    .feature-card strong,
+    .story-card h3,
+    .place-card h3 {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: 27px;
+      line-height: 1.08;
+    }
+
+    .feature-card span,
+    .story-card p,
+    .place-card p {
+      color: var(--ink-muted);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .era-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--paper);
+      border: 0.5px solid var(--line);
+    }
+
+    .era-table th,
+    .era-table td {
+      padding: 1rem;
+      border-bottom: 0.5px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .era-table th {
+      color: var(--earth);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(238,225,201,0.7);
+    }
+
+    .era-table td {
+      color: var(--ink-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .era-table strong { color: var(--ink); }
+
+    .story-grid,
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .place-number {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+      border: 0.5px solid rgba(155,107,53,0.46);
+      color: var(--earth);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .visit-section {
+      background: var(--obsidian);
+      color: var(--earth-pale);
+    }
+
+    .visit-section .section-title { color: var(--earth-pale); }
+    .visit-section .lead { color: rgba(240,213,168,0.56); }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: rgba(217,164,93,0.14);
+      border: 0.5px solid rgba(217,164,93,0.14);
+    }
+
+    .visit-card {
+      padding: 1.6rem;
+      background: var(--obsidian);
+      border-bottom: 2px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .visit-card:hover {
+      background: var(--obsidian-soft);
+      border-color: var(--earth-light);
+    }
+
+    .visit-card h3 {
+      margin-bottom: 0.7rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--earth-pale);
+      font-size: 25px;
+    }
+
+    .visit-card p {
+      color: rgba(240,213,168,0.5);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .page-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2.5rem;
+      border-top: 0.5px solid var(--line);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 1.4rem;
+      border: 0.5px solid rgba(63,74,44,0.25);
+      color: var(--ink);
+      background: transparent;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s, color 0.2s;
+    }
+
+    .button.primary {
+      color: var(--bone);
+      background: var(--obsidian);
+      border-color: var(--obsidian);
+    }
+
+    .button:hover,
+    .button:focus {
+      transform: translateY(-1px);
+      background: var(--bone-dark);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus {
+      color: var(--earth-pale);
+      background: var(--moss);
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: var(--obsidian);
+      border-top: 0.5px solid rgba(217,164,93,0.16);
+    }
+
+    footer p {
+      color: rgba(217,164,93,0.36);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: rgba(217,164,93,0.58);
+      text-decoration: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+
+    .visual-route {
+      padding-top: 1rem;
+    }
+
+    .route-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5px;
+      margin-top: 1.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .route-shot {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .route-shot:first-child {
+      min-height: 430px;
+      grid-row: span 2;
+    }
+
+    .route-shot img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.04);
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .route-shot:hover img {
+      transform: scale(1.035);
+      filter: saturate(1.04) contrast(1.08);
+    }
+
+    .route-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem;
+      color: var(--paper);
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+    }
+
+    .route-caption strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .route-caption span,
+    .route-caption a {
+      color: rgba(255,253,248,0.72);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .route-caption a:hover { color: var(--accent-pale, var(--gold-light, #F0D5A8)); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .facts,
+      .intro-grid,
+      .two-column,
+      .visit-grid { grid-template-columns: 1fr; }
+      .feature-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .note-panel { position: static; }
+      .hero { min-height: 70vh; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7.5rem 1rem 4rem; }
+      section { padding: 4rem 1rem; }
+      .route-gallery,
+      .story-grid,
+      .places-grid,
+      .feature-strip { grid-template-columns: 1fr; }
+      .fact-card { min-height: auto; }
+      .page-actions { align-items: stretch; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+  <nav aria-label="Ana menü">
+    <a href="index.html" class="nav-logo">Antik Türkiye</a>
+    <ul class="nav-links">
+      <li><a href="index.html#kentler">Kentler</a></li>
+      <li><a href="index.html#donemler">Dönemler</a></li>
+      <li><a href="#dikilitaslar">Dikilitaşlar</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner reveal">
+      <a class="breadcrumb" href="index.html">← Ana sayfaya dön</a>
+      <div class="hero-kicker">Şanlıurfa · Örencik</div>
+      <h1>Göbeklitepe <em>Neolitik Alanı</em></h1>
+      <p class="hero-summary">T biçimli dikilitaşları, dairesel anıtsal yapıları ve sembolik kabartmalarıyla Göbeklitepe, insan topluluklarının yerleşiklik ve inanç tarihine dair düşünme biçimimizi değiştiren en etkileyici Neolitik alanlardan biridir.</p>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <section aria-label="Göbeklitepe hızlı bilgiler">
+      <div class="container">
+        <div class="facts reveal">
+          <article class="fact-card">
+            <div class="fact-label">Konum</div>
+            <div class="fact-value">Şanlıurfa<br>Örencik</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Dönem</div>
+            <div class="fact-value">Çanak Çömleksiz<br>Neolitik</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Öne çıkan form</div>
+            <div class="fact-value">T Biçimli<br>Dikilitaş</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Miras değeri</div>
+            <div class="fact-value">UNESCO<br>Alanı</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="visual-route" aria-label="Görsel rota">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görsel Rota</div>
+          <h2 class="section-title">Öne çıkan durakları gör</h2>
+          <p class="lead">Bu sayfadaki ana rota noktaları, görsellerle desteklendi. Görseller, yapıları ve peyzajı metinle birlikte okumayı kolaylaştırır.</p>
+        </div>
+        <div class="route-gallery">
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gobekli%20Tepe%201.jpg" alt="Anıtsal Alan" loading="lazy">
+            <figcaption class="route-caption"><strong>Anıtsal Alan</strong><span>Dairesel yapılar ve T biçimli taşlar · <a href="https://commons.wikimedia.org/wiki/File:Gobekli_Tepe_1.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/T-shaped-pillars-PPN.jpg" alt="T Biçimli Dikilitaşlar" loading="lazy">
+            <figcaption class="route-caption"><strong>T Biçimli Dikilitaşlar</strong><span>Neolitik sembol dünyasının ana formu · <a href="https://commons.wikimedia.org/wiki/File:T-shaped-pillars-PPN.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/G%C3%B6bekli%20Tepe%20Pillar.JPG" alt="Dikilitaş Detayı" loading="lazy">
+            <figcaption class="route-caption"><strong>Dikilitaş Detayı</strong><span>Kabartma ve soyut temsil dili · <a href="https://commons.wikimedia.org/wiki/File:G%C3%B6bekli_Tepe_Pillar.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container intro-grid">
+        <div class="reveal">
+          <div class="section-label">Alan Portresi</div>
+          <h2 class="section-title">Taşlara işlenmiş Neolitik hafıza</h2>
+          <p class="lead">Göbeklitepe, Şanlıurfa yakınlarında yükselen bir tepe üzerinde yer alan ve avcı-toplayıcı toplulukların anıtsal ölçekte yapılar kurabildiğini gösteren olağanüstü bir arkeolojik alandır. Dairesel ve dikdörtgen planlı yapılar, sembolik dünyası güçlü bir toplumsal örgütlenmeye işaret eder.</p>
+        </div>
+        <aside class="note-panel reveal" aria-label="Kısa not">
+          <h2>Neden önemli?</h2>
+          <p>Göbeklitepe, anıtsal mimarinin yalnızca tarım ve büyük yerleşimlerden sonra ortaya çıktığı yönündeki basit anlatıları sorgulatır. Bu alan, ritüel, topluluk hafızası ve sembolik üretimin Neolitik dönüşümde ne kadar güçlü olabileceğini gösterir.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-block" id="tarihce">
+      <div class="container two-column">
+        <div class="reveal">
+          <div class="section-label">Tarihçe</div>
+          <h2 class="section-title">Yerleşiklikten önce anıtsal düşünce</h2>
+        </div>
+        <div class="copy reveal">
+          <p>Göbeklitepe, Çanak Çömleksiz Neolitik döneme tarihlenen anıtsal yapılarıyla bilinir. Alanın en dikkat çekici öğeleri, merkezde çiftler halinde konumlanan ve çevrede daha küçük örneklerle kuşatılan T biçimli dikilitaşlardır.</p>
+          <p>Yapıların üzerindeki hayvan kabartmaları, soyut işaretler ve insanı çağrıştıran biçimler, burada yalnızca pratik bir yaşam alanından fazlasının bulunduğunu düşündürür. Alan; tören, buluşma, hafıza ve kimlik üretimiyle ilişkili olabilecek karmaşık bir sembolik dünya sunar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="dikilitaslar">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Anıtsal Mimari</div>
+          <h2 class="section-title">Dairesel yapılar ve T biçimli dikilitaşlar</h2>
+          <p class="lead">Göbeklitepe'yi gezerken bakılması gereken asıl şey, tek tek taşların büyüklüğünden çok bu taşların kurduğu düzen ve simgesel ilişkidir. Her yapı, merkezdeki dikilitaş çiftleri ve çevresindeki düzenlemelerle ayrı bir sahne gibi okunabilir.</p>
+        </div>
+        <div class="feature-strip">
+          <article class="feature-card reveal">
+            <strong>T Biçimli Taşlar</strong>
+            <span>İnsan bedenini çağrıştıran soyut formlar, alanın en tanınan görsel kimliğini oluşturur.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Hayvan Kabartmaları</strong>
+            <span>Yaban domuzu, tilki, kuş ve yılan gibi figürler, Neolitik sembol dünyasına dair güçlü ipuçları verir.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Dairesel Plan</strong>
+            <span>Anıtsal çevre duvarları ve merkezdeki taş çiftleri, toplulukların ortak ritüel alanlarını düşündürür.</span>
+          </article>
+          <article class="feature-card reveal">
+            <strong>Taş Tepeler Bağlamı</strong>
+            <span>Şanlıurfa çevresindeki çağdaş Neolitik alanlarla birlikte düşünüldüğünde, bölgesel bir kültürel ağ görünür hale gelir.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="donemler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Neolitik Bağlam</div>
+          <h2 class="section-title">Göbeklitepe hangi katmanları anlatır?</h2>
+        </div>
+        <div class="reveal">
+          <table class="era-table" aria-label="Göbeklitepe dönemleri ve anlamları">
+            <thead>
+              <tr>
+                <th>Başlık</th>
+                <th>Bağlam</th>
+                <th>Öne çıkan anlam</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Çanak Çömleksiz Neolitik</strong></td>
+                <td>Erken Neolitik topluluklar</td>
+                <td>Anıtsal yapılar, sembolik düzen ve ortak iş gücü</td>
+              </tr>
+              <tr>
+                <td><strong>Avcı-toplayıcı dünya</strong></td>
+                <td>Yerleşikliğe geçiş süreci</td>
+                <td>Ritüel ve toplumsal buluşma alanlarının önemi</td>
+              </tr>
+              <tr>
+                <td><strong>Sembolik üretim</strong></td>
+                <td>Kabartmalar ve soyut işaretler</td>
+                <td>Hayvan figürleriyle kurulan zengin görsel anlatım</td>
+              </tr>
+              <tr>
+                <td><strong>Bölgesel ağ</strong></td>
+                <td>Yukarı Mezopotamya ve Şanlıurfa çevresi</td>
+                <td>Çağdaş Neolitik alanlarla paylaşılan mimari ve ikonografi</td>
+              </tr>
+              <tr>
+                <td><strong>Modern keşif</strong></td>
+                <td>20. yüzyıl sonu kazıları ve koruma çalışmaları</td>
+                <td>İnsanlık tarihini yorumlama biçiminde güçlü bir kırılma</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="semboller">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Semboller ve Hikayeler</div>
+          <h2 class="section-title">Yazıdan önce anlatı kurmak</h2>
+          <p class="lead">Göbeklitepe'de yazılı metin yoktur; buna rağmen taşlar, kabartmalar ve düzenlemeler bir anlatı duygusu üretir. Bu nedenle alanı gezerken kesin cevaplardan çok, sembollerin açtığı sorulara odaklanmak gerekir.</p>
+        </div>
+        <div class="story-grid">
+          <article class="story-card reveal">
+            <h3>İnsan Biçimli Taşlar</h3>
+            <p>T biçimli dikilitaşlar, kollar ve kemer benzeri öğelerle insanı çağrıştırır. Bu soyutluk, alanın ritüel ve temsil gücünü artırır.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Vahşi Hayvanlar</h3>
+            <p>Kabartmalardaki yırtıcı ve yabani hayvanlar, Neolitik insanın çevresiyle kurduğu sembolik ilişkinin izleri olarak okunabilir.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Ortak Emek</h3>
+            <p>Büyük taşların çıkarılması, taşınması ve dikilmesi; küçük grupların ötesinde örgütlenme, planlama ve iş birliği gerektirir.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Bilinçli Gömülme</h3>
+            <p>Yapıların zamanla doldurulmuş olması, alanın kullanım sonu ve hafıza yönetimi hakkında önemli sorular doğurur.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="gorulecekler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görülmesi Gerekenler</div>
+          <h2 class="section-title">Göbeklitepe rotasının ana durakları</h2>
+        </div>
+        <div class="places-grid">
+          <article class="place-card reveal">
+            <div class="place-number">1</div>
+            <h3>Anıtsal Yapı Alanları</h3>
+            <p>Dairesel planlı ana yapılar, Göbeklitepe'nin neden dünya çapında önemli olduğunu en iyi gösteren bölümlerdir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">2</div>
+            <h3>Merkez Dikilitaşlar</h3>
+            <p>Her anıtsal düzenlemenin merkezindeki büyük taş çiftleri, alanın simgesel kompozisyonunu anlamak için dikkatle izlenmelidir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">3</div>
+            <h3>Hayvan Kabartmaları</h3>
+            <p>Taşların üzerindeki figürler, Neolitik sembol dünyasının en etkileyici görsel kayıtları arasında yer alır.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">4</div>
+            <h3>Ziyaretçi Yürüyüş Rotası</h3>
+            <p>Koruma çatısı altındaki alanı çevreleyen rota, yapıları hem yakından hem de bütün olarak okumaya yardımcı olur.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">5</div>
+            <h3>Şanlıurfa Arkeoloji Müzesi</h3>
+            <p>Göbeklitepe ve bölgedeki Neolitik dünyayı daha geniş bağlamda anlamak için müze ziyareti rotaya eklenmelidir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">6</div>
+            <h3>Taş Tepeler Perspektifi</h3>
+            <p>Karahan Tepe gibi çevre alanlarla birlikte düşünüldüğünde, Göbeklitepe tekil bir mucizeden çok bölgesel bir dönüşümün parçası olur.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit-section" aria-label="Ziyaret notları">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Ziyaret Notları</div>
+          <h2 class="section-title">Göbeklitepe'yi gezerken nasıl okumalı?</h2>
+          <p class="lead">Göbeklitepe, büyük bir antik kentten çok arkeolojik bir düşünme alanıdır. En iyi deneyim, alanı Şanlıurfa Arkeoloji Müzesi ve bölgedeki diğer Neolitik noktalarla birlikte değerlendirdiğinizde ortaya çıkar.</p>
+        </div>
+        <div class="visit-grid">
+          <article class="visit-card reveal">
+            <h3>En iyi zaman</h3>
+            <p>Yaz aylarında sıcaklık yüksek olabilir; sabah erken saatler veya gün batımına yakın zamanlar daha rahat bir gezi sağlar.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Okuma ipucu</h3>
+            <p>Taşları yalnızca tek tek heykeller gibi değil, dairesel yapılar içindeki ilişkileriyle birlikte düşünmek gerekir.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Yakın çevre</h3>
+            <p>Şanlıurfa merkezi, müzeler ve Taş Tepeler rotası, Göbeklitepe ziyaretini çok daha anlamlı hale getirir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container page-actions reveal">
+        <a class="button" href="troya.html">← Önceki kent: Troya</a>
+        <a class="button" href="index.html#kentler">Tüm kentlere dön</a>
+        <a class="button primary" href="hattusa.html">Sonraki kent: Hattuşa →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), index * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
