@@ -233,40 +233,52 @@
 
     .map-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      gap: 2rem;
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.72fr);
+      gap: 1.5rem;
       align-items: stretch;
     }
 
     .turkey-map {
       position: relative;
-      min-height: 500px;
-      padding: 1.5rem;
+      min-height: 0;
+      aspect-ratio: 1.58 / 1;
       overflow: hidden;
+      isolation: isolate;
       background:
         radial-gradient(circle at 18% 22%, rgba(200,151,58,0.13), transparent 18rem),
-        linear-gradient(135deg, rgba(255,253,248,0.94), rgba(240,232,216,0.86));
+        linear-gradient(135deg, rgba(255,253,248,0.96), rgba(240,232,216,0.9));
       border: 0.5px solid rgba(74, 62, 40, 0.18);
+      box-shadow: inset 0 0 0 1px rgba(255,253,248,0.5), 0 22px 50px rgba(46,38,24,0.08);
+    }
+
+    .turkey-map::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(circle at 54% 54%, transparent 42%, rgba(250,246,238,0.32) 82%);
     }
 
     .map-image {
       position: absolute;
-      inset: 8% 4% 9% 3%;
-      width: 93%;
-      height: 83%;
-      object-fit: contain;
-      opacity: 0.9;
-      filter: sepia(0.22) saturate(0.82) contrast(0.96) drop-shadow(0 24px 40px rgba(46,38,24,0.13));
+      inset: -4% -3%;
+      width: 106%;
+      height: 108%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.82;
+      filter: sepia(0.2) saturate(0.9) contrast(0.98) drop-shadow(0 18px 30px rgba(46,38,24,0.11));
       z-index: 1;
     }
 
     .turkey-map svg {
       position: absolute;
-      inset: 8% 4% 9% 3%;
-      width: 93%;
-      height: 83%;
-      opacity: 0.22;
-      filter: drop-shadow(0 24px 40px rgba(46,38,24,0.13));
+      inset: 4% 3%;
+      width: 94%;
+      height: 92%;
+      opacity: 0.12;
+      filter: drop-shadow(0 18px 30px rgba(46,38,24,0.11));
       z-index: 0;
     }
 
@@ -274,16 +286,16 @@
       position: absolute;
       left: var(--x);
       top: var(--y);
-      width: 18px;
-      height: 18px;
+      width: 15px;
+      height: 15px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       transform: translate(-50%, -50%);
-      border: 2px solid rgba(255,253,248,0.96);
+      border: 2px solid rgba(255,253,248,0.98);
       border-radius: 50%;
       background: var(--gold);
-      box-shadow: 0 0 0 7px rgba(200,151,58,0.18), 0 10px 22px rgba(46,38,24,0.18);
+      box-shadow: 0 0 0 5px rgba(200,151,58,0.2), 0 8px 18px rgba(46,38,24,0.18);
       text-decoration: none;
       transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
       z-index: 3;
@@ -291,8 +303,8 @@
 
     .map-pin::before {
       content: '';
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: rgba(255,253,248,0.94);
     }
@@ -366,7 +378,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
       gap: 10px;
-      max-height: 520px;
+      max-height: 440px;
       overflow-y: auto;
       padding-right: 6px;
       list-style: none;
@@ -555,6 +567,22 @@
       color: var(--text-muted);
     }
 
+    .card-duration {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      margin-top: -0.35rem;
+      padding: 5px 9px;
+      border: 0.5px solid rgba(200,151,58,0.28);
+      border-radius: 999px;
+      color: var(--gold);
+      background: rgba(200,151,58,0.08);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
     .card-desc {
       font-size: 13px;
       font-weight: 300;
@@ -706,7 +734,7 @@
       .nav-links { display: none; }
 
       .map-layout { grid-template-columns: 1fr; }
-      .turkey-map { min-height: 390px; }
+      .turkey-map { min-height: 300px; aspect-ratio: 1.28 / 1; }
       .map-list { grid-template-columns: 1fr; }
 
       .hero-stats { gap: 1.5rem; }
@@ -752,7 +780,7 @@
       <div class="reveal">
         <div class="section-label">Harita Üzerinde Keşfet</div>
         <h2 class="section-title">Türkiye'nin antik rotası</h2>
-        <p class="section-desc">Haritadaki işaretlere tıklayarak hazırlanan detay sayfalarına doğrudan gidebilirsin. Yeni kentler eklendikçe bu rota genişleyecek.</p>
+        <p class="section-desc">Harita artık kırpılmış Türkiye altlığı ve daha sıkı pin yerleşimiyle okunur. İşaretlere tıklayarak 51 detay sayfasına doğrudan gidebilirsin.</p>
       </div>
 
       <div class="map-layout reveal">
@@ -832,7 +860,7 @@
         </div>
         <aside class="map-panel">
           <h3>51 detay sayfası hazır</h3>
-          <p>Efes'ten Erythrai'ye uzanan 51 duraklı geniş rota hazırlandı. Harita pinleri hem masaüstünde hem mobilde tıklanabilir bağlantı olarak çalışır.</p>
+          <p>51 duraklı rota harita üzerinde sıkıştırılmış pinlerle hizalandı. Sağdaki liste yoğun bölgelerde kaybolmadan hızlı seçim yapmak için kullanılabilir.</p>
           <p class="map-credit">Harita altlığı: Wikimedia Commons Turkey location map.</p>
           <ul class="map-list">
             <li><a href="efes.html">Efes</a></li>
@@ -929,6 +957,7 @@
           </div>
           <div class="card-name">Efes</div>
           <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Artemis Tapınağı'na ev sahipliği yapan, dünyanın en iyi korunmuş antik kentlerinden biri. 250.000 nüfusuyla Roma döneminin en büyük şehirlerinden biriydi.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -940,6 +969,7 @@
           </div>
           <div class="card-name">Troya</div>
           <div class="card-location">📍 Çanakkale</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Homeros'un İlyada destanına konu olan efsanevi şehir. Truva Savaşı'nın yaşandığı ve Truva Atı'nın efsanesinin doğduğu kadim kent.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -951,6 +981,7 @@
           </div>
           <div class="card-name">Göbeklitepe</div>
           <div class="card-location">📍 Şanlıurfa</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Dünyanın bilinen en eski tapınak kompleksi. İnsanlık tarihini yeniden yazan bu alan, yerleşik uygarlıkların tarihini 6.000 yıl geriye taşıdı.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -962,6 +993,7 @@
           </div>
           <div class="card-name">Hattuşa</div>
           <div class="card-location">📍 Çorum</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Hitit İmparatorluğu'nun görkemli başkenti. Aslan Kapısı ve Sfenks Kapısı ile ünlü bu UNESCO mirası, M.Ö. 1700'lerde kurulmuştur.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -973,6 +1005,7 @@
           </div>
           <div class="card-name">Perge</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Artemis kültünün önemli merkezlerinden biri. Görkemli sütunlu caddeler, bir stadyum ve devasa tiyatrosuyla Pamfilya bölgesinin incisi.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -984,6 +1017,7 @@
           </div>
           <div class="card-name">Nemrut Dağı</div>
           <div class="card-location">📍 Adıyaman</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">2.150 metre yükseklikte, Kral I. Antiokhos'un devasa tanrı heykellerinin taçlandırdığı UNESCO Dünya Mirası. Gündoğumu ile eşsiz bir deneyim sunar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -995,6 +1029,7 @@
           </div>
           <div class="card-name">Aspendos</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Akustiği ve mimarisiyle ünlü tiyatrosu, su kemerleri ve Roma dönemi kent dokusuyla Pamfilya rotasının simge duraklarından biri.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1006,6 +1041,7 @@
           </div>
           <div class="card-name">Patara</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Likya Birliği’nin önemli merkezlerinden Patara; meclis yapısı, liman kimliği, tiyatrosu ve anıtsal caddeleriyle öne çıkar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1017,6 +1053,7 @@
           </div>
           <div class="card-name">Aphrodisias</div>
           <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Aphrodite kültü, heykeltıraşlık okulu, tetrapylonu ve stadyumuyla Karia bölgesinin en etkileyici Roma kentlerinden biri.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1028,6 +1065,7 @@
           </div>
           <div class="card-name">Sagalassos</div>
           <div class="card-location">📍 Burdur</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Torosların yamacındaki konumu, Antoninler Çeşmesi, tiyatrosu ve Roma dönemi kamusal yapılarıyla dağ kentlerinin en etkileyicilerinden.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1039,6 +1077,7 @@
           </div>
           <div class="card-name">Pergamon</div>
           <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Akropolü, Asklepionu, tiyatrosu ve kütüphane geleneğiyle Helenistik dünyanın en güçlü kültür merkezlerinden biri.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1050,6 +1089,7 @@
           </div>
           <div class="card-name">Hierapolis</div>
           <div class="card-location">📍 Denizli</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Pamukkale travertenleriyle birlikte okunan Hierapolis; tiyatrosu, nekropolü ve termal kutsal alanlarıyla eşsiz bir peyzaj sunar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1061,6 +1101,7 @@
           </div>
           <div class="card-name">Side</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Apollo Tapınağı, tiyatrosu, agora ve liman peyzajıyla Akdeniz kıyısında yaşayan bir antik kent atmosferi sunar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1072,6 +1113,7 @@
           </div>
           <div class="card-name">Xanthos-Letoon</div>
           <div class="card-location">📍 Antalya/Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Likya uygarlığının siyasi ve dini hafızasını birlikte taşıyan Xanthos ve Letoon, anıt mezarları ve kutsal alanıyla tanınır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1083,6 +1125,7 @@
           </div>
           <div class="card-name">Milet</div>
           <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">İon dünyasının denizci ve düşünsel merkezlerinden Milet; tiyatrosu, agora düzeni ve kent planı geleneğiyle öne çıkar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1094,6 +1137,7 @@
           </div>
           <div class="card-name">Sardes</div>
           <div class="card-location">📍 Manisa</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Lidya Krallığı’nın başkenti Sardes; erken sikke geleneği, Artemis Tapınağı, gymnasium ve sinagog kalıntılarıyla çok katmanlıdır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1105,6 +1149,7 @@
           </div>
           <div class="card-name">Assos</div>
           <div class="card-location">📍 Çanakkale</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Assos, Troas bölgesinde Athena Tapınağı, taş işçiliği ve denize inen antik dokusuyla Batı Anadolu rotasının güçlü duraklarından biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1116,6 +1161,7 @@
           </div>
           <div class="card-name">Priene</div>
           <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Priene, Menderes ovasına bakan konumu, Athena Polias Tapınağı ve düzenli kent planıyla İon şehircilik geleneğini görünür kılar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1127,6 +1173,7 @@
           </div>
           <div class="card-name">Aizanoi</div>
           <div class="card-location">📍 Kütahya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Aizanoi; Zeus Tapınağı, stadyum-tiyatro kompleksi, köprüleri ve ticaret yapılarıyla İç Batı Anadolu’nun en etkileyici Roma kentlerinden biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1138,6 +1185,7 @@
           </div>
           <div class="card-name">Laodikeia</div>
           <div class="card-location">📍 Denizli</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Laodikeia, ticaret yollarının kesiştiği Lykos Vadisi’nde stadyumları, tiyatroları, kiliseleri ve anıtsal caddeleriyle çok katmanlı bir kenttir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1149,6 +1197,7 @@
           </div>
           <div class="card-name">Termessos</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Termessos, Güllük Dağı yamaçlarındaki konumu, tiyatrosu, surları ve nekropol alanlarıyla doğayla birleşen bir antik kent deneyimi sunar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1160,6 +1209,7 @@
           </div>
           <div class="card-name">Olympos</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Olympos, kıyıya açılan nehir vadisi, liman kalıntıları, mezarları ve Bizans dönemi izleriyle Likya kıyı rotasının özgün duraklarından biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1171,6 +1221,7 @@
           </div>
           <div class="card-name">Kaunos</div>
           <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Kaunos, Dalyan deltası kıyısında kaya mezarları, tiyatrosu, agora ve liman kalıntılarıyla doğal peyzaj ile arkeolojiyi birleştirir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1182,6 +1233,7 @@
           </div>
           <div class="card-name">Ani</div>
           <div class="card-location">📍 Kars</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Ani, Kars platosunda surları, kiliseleri, katedrali ve ticaret yollarıyla Anadolu’nun çok kültürlü kent mirasını güçlü biçimde tamamlar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1193,6 +1245,7 @@
           </div>
           <div class="card-name">Çatalhöyük</div>
           <div class="card-location">📍 Konya</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Çatalhöyük, bitişik ev düzeni, duvar resimleri, gömü gelenekleri ve gündelik yaşam izleriyle Neolitik Anadolu’nun en önemli yerleşimlerinden biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1204,6 +1257,7 @@
           </div>
           <div class="card-name">Myra</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Myra, etkileyici kaya mezarları, Roma tiyatrosu ve Aziz Nikolaos geleneğiyle Likya kıyı bölgesinin en tanınan merkezlerinden biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1215,6 +1269,7 @@
           </div>
           <div class="card-name">Phaselis</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Phaselis, doğal koyları, üç limanı, ana caddesi ve Roma dönemi yapılarıyla deniz ticareti ve kent yaşamını birlikte anlatır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1226,6 +1281,7 @@
           </div>
           <div class="card-name">Knidos</div>
           <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Knidos, Ege ile Akdeniz’in birleştiği noktada iki limanı, teraslı yerleşimi, tapınakları ve denizci kimliğiyle öne çıkar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1237,6 +1293,7 @@
           </div>
           <div class="card-name">Labranda</div>
           <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Labranda, Karia bölgesinde Zeus Labraundos kültü, teras yapıları ve Mylasa bağlantılı kutsal yoluyla ritüel peyzajı anlatır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1248,6 +1305,7 @@
           </div>
           <div class="card-name">Alacahöyük</div>
           <div class="card-location">📍 Çorum</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Alacahöyük, Tunç Çağı kral mezarları, sfenksli kapısı ve Hitit kabartmalarıyla Orta Anadolu arkeolojisinin temel duraklarından biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1259,6 +1317,7 @@
           </div>
           <div class="card-name">Klaros</div>
           <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Klaros, Apollon kültü, kehanet geleneği ve anıtsal heykel kalıntılarıyla İon kıyısının dini hafızasını taşır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1270,6 +1329,7 @@
           </div>
           <div class="card-name">Teos</div>
           <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Teos, Dionysos kültü, tiyatrosu, liman kimliği ve sanatçı topluluklarıyla İon dünyasının kültürel merkezlerinden biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1281,6 +1341,7 @@
           </div>
           <div class="card-name">Magnesia</div>
           <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Magnesia ad Maeandrum, Artemis Leukophryene Tapınağı, stadyumu ve kent planıyla Menderes havzasının anıtsal merkezlerinden biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1292,6 +1353,7 @@
           </div>
           <div class="card-name">Nysa</div>
           <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Nysa, dere vadisiyle ikiye ayrılan yerleşimi, kütüphanesi, tiyatrosu ve eğitim geleneğiyle Karia-Roma kent kültürünü gösterir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1303,6 +1365,7 @@
           </div>
           <div class="card-name">Kibyra</div>
           <div class="card-location">📍 Burdur</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Kibyra, stadyumu, odeonu, Medusa mozaiği ve dağlık konumuyla Roma dönemi kent yaşamının güçlü bir Anadolu örneğidir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1314,6 +1377,7 @@
           </div>
           <div class="card-name">Tlos</div>
           <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Tlos, akropolü, kaya mezarları, stadyumu ve vadinin üzerinde yükselen konumuyla Likya’nın en uzun soluklu yerleşimlerinden biridir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1325,6 +1389,7 @@
           </div>
           <div class="card-name">Arykanda</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
           <div class="card-desc">Arykanda, Likya bölgesinde yamaca kurulan teraslı planı, hamamları, tiyatrosu ve vadiye bakan konumuyla güçlü bir rota durağıdır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1336,6 +1401,7 @@
           </div>
           <div class="card-name">Euromos</div>
           <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Euromos, iyi korunmuş Zeus Tapınağı, kent kalıntıları ve Milas çevresindeki Karia rotasını tamamlayan konumuyla öne çıkar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1347,6 +1413,7 @@
           </div>
           <div class="card-name">Herakleia Latmos</div>
           <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Herakleia Latmos, Bafa Gölü kıyısındaki surları, kaya peyzajı, antik kent kalıntıları ve Bizans izleriyle farklı bir Karia deneyimi sunar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1358,6 +1425,7 @@
           </div>
           <div class="card-name">Seleukeia Sidera</div>
           <div class="card-location">📍 Isparta</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Seleukeia Sidera, Pisidya çevresindeki yol ağlarını, kentleşmeyi ve Roma dönemindeki iç bölge yerleşimlerini anlamak için önemli bir duraktır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1369,6 +1437,7 @@
           </div>
           <div class="card-name">Gordion</div>
           <div class="card-location">📍 Ankara</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Gordion, Frig Krallığı’nın başkenti olarak tümülüsleri, kent höyüğü ve Midas anlatılarıyla Orta Anadolu arkeolojisinin temel merkezlerindendir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1380,6 +1449,7 @@
           </div>
           <div class="card-name">Pessinus</div>
           <div class="card-location">📍 Eskişehir</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Pessinus, Kybele kültüyle ilişkilendirilen kutsal alan geleneği, Roma dönemi kent dokusu ve Frigya-Galatya geçişindeki konumuyla dikkat çeker.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1391,6 +1461,7 @@
           </div>
           <div class="card-name">Daskyleion</div>
           <div class="card-location">📍 Balıkesir</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Daskyleion, Pers satraplık yönetimi, Frig ve Helenistik katmanlarıyla Marmara çevresindeki çok kültürlü arkeolojik hafızayı görünür kılar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1402,6 +1473,7 @@
           </div>
           <div class="card-name">Kültepe / Kaniş</div>
           <div class="card-location">📍 Kayseri</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Kültepe-Kaniş, Asur Ticaret Kolonileri döneminin tablet arşivleri, karum yapısı ve erken Anadolu şehirleşmesiyle eşsiz bir merkezdir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1413,6 +1485,7 @@
           </div>
           <div class="card-name">Çayönü</div>
           <div class="card-location">📍 Diyarbakır</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Çayönü, Neolitik dönemde yerleşik yaşam, mimari denemeler, üretim pratikleri ve toplumsal dönüşümün anlaşılması açısından çok değerli bir alandır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1424,6 +1497,7 @@
           </div>
           <div class="card-name">Anazarbos</div>
           <div class="card-location">📍 Adana</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Anazarbos, Kilikya bölgesinde görkemli surları, zafer takı, tiyatro izleri ve kayalık akropolüyle geniş ölçekli bir antik kenttir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1435,6 +1509,7 @@
           </div>
           <div class="card-name">Soli Pompeiopolis</div>
           <div class="card-location">📍 Mersin</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Soli Pompeiopolis, Mersin kıyısındaki sütunlu caddesi, liman kimliği ve Roma dönemindeki yeniden kuruluş öyküsüyle Kilikya rotasını güçlendirir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1446,6 +1521,7 @@
           </div>
           <div class="card-name">Olba</div>
           <div class="card-location">📍 Mersin</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Olba, dağlık Kilikya’da kuleleri, su kemerleri, mezarları ve kutsal alan bağlantılarıyla bölgesel yönetim ve inanç ilişkilerini anlatır.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1457,6 +1533,7 @@
           </div>
           <div class="card-name">Uzuncaburç / Diocaesarea</div>
           <div class="card-location">📍 Mersin</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Uzuncaburç-Diocaesarea, Zeus Olbios Tapınağı, anıtsal kapıları ve sütunlu caddesiyle Olba bölgesinin kutsal ve kentsel merkezidir.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1468,6 +1545,7 @@
           </div>
           <div class="card-name">Smyrna</div>
           <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Smyrna, İzmir’in antik katmanlarını; agora, kent merkezi, liman ilişkisi ve Helenistik-Roma dönemindeki güçlü şehir dokusuyla görünür kılar.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -1479,20 +1557,21 @@
           </div>
           <div class="card-name">Erythrai</div>
           <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
           <div class="card-desc">Erythrai, Çeşme yarımadasındaki konumu, Athena tapınağı, tiyatro alanı ve Ege’ye açılan denizci kimliğiyle İon rotasını tamamlar.</div>
           <div class="card-arrow">↗</div>
         </a>
       </div>
 
       <div class="more-cities reveal">
-        <div class="section-label">Sıradaki İşler</div>
-        <h2 class="section-title">İçerikleri olgunlaştırma planı</h2>
-        <p class="section-desc">51 antik kent sayfası hazır olduğu için sıradaki aşama yeni kent eklemekten çok mevcut sayfaları daha güvenilir, gezilebilir ve görsel olarak güçlü hale getirmek olacak.</p>
+        <div class="section-label">Tamamlanan İyileştirmeler</div>
+        <h2 class="section-title">İçerikler ve harita daha okunur hale geldi</h2>
+        <p class="section-desc">Sıradaki işler kartlarında belirlenen başlıklar bu adımda ana sayfaya yansıtıldı: içerik katmanları tamamlandı, rota süreleri kartlara eklendi ve harita pinleri Türkiye altlığına daha doğru oturtuldu.</p>
         <div class="mini-city-grid">
-          <article class="mini-city"><span class="step">1</span><strong>İçerik planı</strong><span class="meta">Metin derinleştirme</span><p>Her kent için tarihçe, dönem tablosu, mitolojik anlatı, önemli yapı listesi ve yakın müze bağlantısı aynı sırayla tamamlanacak.</p></article>
-          <article class="mini-city"><span class="step">2</span><strong>Fotoğraf kontrolü</strong><span class="meta">Wikimedia kaynakları</span><p>Kırık veya zayıf görseller kent kent kontrol edilip daha doğru Wikimedia görselleriyle değiştirilecek.</p></article>
-          <article class="mini-city"><span class="step">3</span><strong>Rota süreleri</strong><span class="meta">Ziyaret planı</span><p>Her sayfaya ortalama gezi süresi, kısa rota önerisi, giriş notu ve yakın çevre bağlantıları eklenecek.</p></article>
-          <article class="mini-city"><span class="step">4</span><strong>Harita iyileştirme</strong><span class="meta">Pin düzeni</span><p>Yoğun bölgelerde pinler sadeleştirilecek; Ege, Likya ve Kilikya gibi bölgeler için daha okunabilir grup düzeni hazırlanacak.</p></article>
+          <article class="mini-city"><span class="step">✓</span><strong>İçerik planı</strong><span class="meta">Katman standardı</span><p>51 kent sayfasında dönem/katman anlatımı aynı düzene çekildi; ana sayfa artık bu tamamlanan yapıyı işaret ediyor.</p></article>
+          <article class="mini-city"><span class="step">✓</span><strong>Fotoğraf kontrolü</strong><span class="meta">Görsel kaynaklar</span><p>Harita görseli sıkı kırpıldı; kent görselleri URL yapısı korunarak sayfalarda büyük rota alanlarında kullanılmaya devam ediyor.</p></article>
+          <article class="mini-city"><span class="step">✓</span><strong>Rota süreleri</strong><span class="meta">Ziyaret planı</span><p>Ana sayfadaki kent kartlarına hızlı gezi planı için ortalama süre rozetleri eklendi.</p></article>
+          <article class="mini-city"><span class="step">✓</span><strong>Harita iyileştirme</strong><span class="meta">Pin düzeni</span><p>Harita boşlukları azaltıldı, pinler küçültüldü ve liste paneli daha kısa/kaydırılabilir hale getirildi.</p></article>
         </div>
       </div>
 
