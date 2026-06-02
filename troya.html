@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Troya Antik Kenti — Antik Türkiye</title>
+  <meta name="description" content="Troya Antik Kenti'nin arkeolojik katmanları, İlyada bağlantısı, medeniyetleri ve ziyaret rotası.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bronze: #B46A32;
+      --bronze-light: #E0A15E;
+      --bronze-pale: #F2D1A3;
+      --midnight: #17130F;
+      --midnight-soft: #241B15;
+      --clay: #5A3322;
+      --sand: #FBF3E7;
+      --sand-dark: #EFE0CA;
+      --paper: #FFFDF8;
+      --ink: #2C2018;
+      --ink-muted: #7B6251;
+      --line: rgba(90, 51, 34, 0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 82% 12%, rgba(180,106,50,0.12), transparent 30rem),
+        radial-gradient(circle at 10% 38%, rgba(90,51,34,0.08), transparent 26rem),
+        linear-gradient(180deg, var(--sand) 0%, var(--sand-dark) 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image:
+        repeating-linear-gradient(32deg, rgba(90,51,34,0.06), rgba(90,51,34,0.06) 1px, transparent 1px, transparent 24px),
+        repeating-linear-gradient(122deg, rgba(180,106,50,0.05), rgba(180,106,50,0.05) 1px, transparent 1px, transparent 30px);
+    }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 1rem;
+      z-index: 200;
+      padding: 10px 14px;
+      color: var(--midnight);
+      background: var(--bronze-pale);
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus { top: 1rem; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(23, 19, 15, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid rgba(224, 161, 94, 0.22);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--bronze-pale);
+      text-decoration: none;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(242, 209, 163, 0.66);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus { color: var(--bronze-pale); }
+
+    .hero {
+      min-height: 78vh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      padding: 9rem 2rem 5rem;
+      color: var(--bronze-pale);
+      background:
+        linear-gradient(115deg, rgba(23,19,15,0.96), rgba(44,32,24,0.78)),
+        radial-gradient(circle at 72% 22%, rgba(180,106,50,0.24), transparent 28rem),
+        var(--midnight);
+    }
+
+    .hero::before {
+      content: 'TROIA';
+      position: absolute;
+      right: -0.04em;
+      bottom: -0.2em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(110px, 24vw, 310px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(242, 209, 163, 0.045);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 150px;
+      background: linear-gradient(to bottom, transparent, var(--sand));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      color: rgba(242,209,163,0.6);
+      font-size: 12px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .breadcrumb:hover { color: var(--bronze-pale); }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 6px 18px;
+      border: 0.5px solid rgba(224,161,94,0.46);
+      color: var(--bronze-light);
+      font-size: 11px;
+      letter-spacing: 3.6px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 860px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(54px, 9vw, 112px);
+      font-weight: 700;
+      line-height: 0.92;
+      color: var(--bronze-pale);
+    }
+
+    .hero h1 em {
+      display: block;
+      color: #FFF3DD;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-summary {
+      max-width: 660px;
+      margin-top: 1.5rem;
+      color: rgba(242,209,163,0.75);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    main { position: relative; z-index: 1; }
+    section { padding: 5rem 2rem; }
+    .container { width: min(1120px, 100%); margin: 0 auto; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: -2.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .fact-card {
+      min-height: 138px;
+      padding: 1.5rem;
+      background: rgba(255,253,248,0.84);
+    }
+
+    .fact-label {
+      margin-bottom: 0.7rem;
+      color: var(--bronze);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .fact-value {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: 27px;
+      font-weight: 600;
+      line-height: 1.06;
+    }
+
+    .intro-grid,
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.6fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .section-label {
+      margin-bottom: 1rem;
+      color: var(--bronze);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.02;
+    }
+
+    .lead,
+    .copy p {
+      color: var(--ink-muted);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    .lead { font-size: 17px; }
+    .copy p { margin-bottom: 1.2rem; }
+
+    .note-panel {
+      position: sticky;
+      top: 6rem;
+      padding: 1.75rem;
+      border: 0.5px solid rgba(180,106,50,0.34);
+      background:
+        linear-gradient(180deg, rgba(23,19,15,0.95), rgba(44,32,24,0.95)),
+        var(--midnight);
+      color: rgba(242,209,163,0.75);
+    }
+
+    .note-panel h2 {
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--bronze-pale);
+      font-size: 30px;
+      line-height: 1.08;
+    }
+
+    .note-panel p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .content-block {
+      border-top: 0.5px solid var(--line);
+      background: rgba(255,253,248,0.34);
+    }
+
+    .layer-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .layer-card {
+      min-height: 160px;
+      padding: 1.4rem;
+      background: var(--paper);
+    }
+
+    .layer-card strong {
+      display: block;
+      margin-bottom: 0.65rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: 25px;
+      line-height: 1.05;
+    }
+
+    .layer-card span {
+      color: var(--ink-muted);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    .era-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--paper);
+      border: 0.5px solid var(--line);
+    }
+
+    .era-table th,
+    .era-table td {
+      padding: 1rem;
+      border-bottom: 0.5px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .era-table th {
+      color: var(--bronze);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(239,224,202,0.7);
+    }
+
+    .era-table td {
+      color: var(--ink-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .era-table strong { color: var(--ink); }
+
+    .story-grid,
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .story-card,
+    .place-card {
+      min-height: 225px;
+      padding: 1.7rem;
+      background: var(--paper);
+    }
+
+    .story-card h3,
+    .place-card h3 {
+      margin-bottom: 0.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--ink);
+      font-size: 27px;
+      line-height: 1.08;
+    }
+
+    .story-card p,
+    .place-card p {
+      color: var(--ink-muted);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .place-number {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+      border: 0.5px solid rgba(180,106,50,0.46);
+      color: var(--bronze);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .visit-section {
+      background: var(--midnight);
+      color: var(--bronze-pale);
+    }
+
+    .visit-section .section-title { color: var(--bronze-pale); }
+    .visit-section .lead { color: rgba(242,209,163,0.56); }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: rgba(224,161,94,0.14);
+      border: 0.5px solid rgba(224,161,94,0.14);
+    }
+
+    .visit-card {
+      padding: 1.6rem;
+      background: var(--midnight);
+      border-bottom: 2px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .visit-card:hover {
+      background: var(--midnight-soft);
+      border-color: var(--bronze-light);
+    }
+
+    .visit-card h3 {
+      margin-bottom: 0.7rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--bronze-pale);
+      font-size: 25px;
+    }
+
+    .visit-card p {
+      color: rgba(242,209,163,0.5);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .page-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2.5rem;
+      border-top: 0.5px solid var(--line);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 1.4rem;
+      border: 0.5px solid rgba(90,51,34,0.25);
+      color: var(--ink);
+      background: transparent;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s, color 0.2s;
+    }
+
+    .button.primary {
+      color: var(--sand);
+      background: var(--midnight);
+      border-color: var(--midnight);
+    }
+
+    .button:hover,
+    .button:focus {
+      transform: translateY(-1px);
+      background: var(--sand-dark);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus {
+      color: var(--bronze-pale);
+      background: var(--clay);
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: var(--midnight);
+      border-top: 0.5px solid rgba(224,161,94,0.16);
+    }
+
+    footer p {
+      color: rgba(224,161,94,0.36);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: rgba(224,161,94,0.58);
+      text-decoration: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+
+    .visual-route {
+      padding-top: 1rem;
+    }
+
+    .route-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5px;
+      margin-top: 1.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .route-shot {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .route-shot:first-child {
+      min-height: 430px;
+      grid-row: span 2;
+    }
+
+    .route-shot img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.04);
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .route-shot:hover img {
+      transform: scale(1.035);
+      filter: saturate(1.04) contrast(1.08);
+    }
+
+    .route-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem;
+      color: var(--paper);
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+    }
+
+    .route-caption strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .route-caption span,
+    .route-caption a {
+      color: rgba(255,253,248,0.72);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .route-caption a:hover { color: var(--accent-pale, var(--gold-light, #F0D5A8)); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .facts,
+      .intro-grid,
+      .two-column,
+      .visit-grid { grid-template-columns: 1fr; }
+      .layer-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .note-panel { position: static; }
+      .hero { min-height: 70vh; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7.5rem 1rem 4rem; }
+      section { padding: 4rem 1rem; }
+      .route-gallery,
+      .story-grid,
+      .places-grid,
+      .layer-strip { grid-template-columns: 1fr; }
+      .fact-card { min-height: auto; }
+      .page-actions { align-items: stretch; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+  <nav aria-label="Ana menü">
+    <a href="index.html" class="nav-logo">Antik Türkiye</a>
+    <ul class="nav-links">
+      <li><a href="index.html#kentler">Kentler</a></li>
+      <li><a href="index.html#donemler">Dönemler</a></li>
+      <li><a href="#katmanlar">Katmanlar</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner reveal">
+      <a class="breadcrumb" href="index.html">← Ana sayfaya dön</a>
+      <div class="hero-kicker">Çanakkale · Hisarlık</div>
+      <h1>Troya <em>Antik Kenti</em></h1>
+      <p class="hero-summary">Homeros'un İlyada destanıyla hafızalara kazınan Troya, yalnızca efsanevi bir savaşın sahnesi değil; üst üste kurulmuş kent katmanlarıyla arkeolojinin en güçlü anlatılarından biridir.</p>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <section aria-label="Troya hızlı bilgiler">
+      <div class="container">
+        <div class="facts reveal">
+          <article class="fact-card">
+            <div class="fact-label">Konum</div>
+            <div class="fact-value">Çanakkale<br>Hisarlık</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Ana dönem</div>
+            <div class="fact-value">Tunç Çağı<br>Helen</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Öne çıkan tema</div>
+            <div class="fact-value">İlyada<br>Destanı</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Miras değeri</div>
+            <div class="fact-value">UNESCO<br>Alanı</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="visual-route" aria-label="Görsel rota">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görsel Rota</div>
+          <h2 class="section-title">Öne çıkan durakları gör</h2>
+          <p class="lead">Bu sayfadaki ana rota noktaları, görsellerle desteklendi. Görseller, yapıları ve peyzajı metinle birlikte okumayı kolaylaştırır.</p>
+        </div>
+        <div class="route-gallery">
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hisarl%C4%B1k%20%28Troy%29.jpg" alt="Hisarlık Höyüğü" loading="lazy">
+            <figcaption class="route-caption"><strong>Hisarlık Höyüğü</strong><span>Troya’nın katmanlı arkeolojik peyzajı · <a href="https://commons.wikimedia.org/wiki/File:Hisarl%C4%B1k_%28Troy%29.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Walls%20of%20Troy%20%282%29.jpg" alt="Troya Surları" loading="lazy">
+            <figcaption class="route-caption"><strong>Troya Surları</strong><span>Tunç Çağı savunma izleri · <a href="https://commons.wikimedia.org/wiki/File:Walls_of_Troy_%282%29.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Troy%20archeological%20site%20%288709562600%29.jpg" alt="Arkeolojik Alan" loading="lazy">
+            <figcaption class="route-caption"><strong>Arkeolojik Alan</strong><span>Kazı alanında rota okuması · <a href="https://commons.wikimedia.org/wiki/File:Troy_archeological_site_%288709562600%29.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container intro-grid">
+        <div class="reveal">
+          <div class="section-label">Kent Portresi</div>
+          <h2 class="section-title">Efsane ile arkeolojinin buluştuğu höyük</h2>
+          <p class="lead">Troya, Çanakkale'de Hisarlık Tepesi üzerinde yer alan çok katmanlı bir yerleşimdir. Kentin önemi, Homeros anlatılarıyla kurduğu güçlü kültürel bağ kadar, yaklaşık binlerce yıllık yerleşim sürekliliğini gözler önüne seren arkeolojik tabakalarından gelir.</p>
+        </div>
+        <aside class="note-panel reveal" aria-label="Kısa not">
+          <h2>Neden önemli?</h2>
+          <p>Troya, modern arkeolojinin kamuoyunda tanınmasında büyük rol oynayan kazıların merkezindedir. Burada görülen katmanlar, tek bir kentin değil; farklı çağlarda tekrar tekrar kurulan, yıkılan ve yeniden yorumlanan bir hafızanın izleridir.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-block" id="tarihce">
+      <div class="container two-column">
+        <div class="reveal">
+          <div class="section-label">Tarihçe</div>
+          <h2 class="section-title">Bir höyükte üst üste kurulan kentler</h2>
+        </div>
+        <div class="copy reveal">
+          <p>Troya'nın arkeolojik alanı, farklı çağlara ait yerleşim katmanlarının üst üste birikmesiyle oluşmuş bir höyüktür. Bu nedenle Troya'yı gezerken tek bir dönemden değil, Tunç Çağı'ndan Roma dönemine kadar değişen uzun bir zaman çizgisinden söz etmek gerekir.</p>
+          <p>19. yüzyıldaki kazılarla dünya çapında tanınan Troya, zamanla yalnızca Homeros'un anlattığı savaşla değil, arkeolojik yöntemlerin gelişimiyle de anılır oldu. Bugün alan, hem mitolojik anlatıları hem de bilimsel kazı tarihini birlikte okumaya olanak verir.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="katmanlar">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Arkeolojik Katmanlar</div>
+          <h2 class="section-title">Troya I’den Troya IX’a uzanan izler</h2>
+          <p class="lead">Troya'nın en ayırt edici yönü, yerleşimin farklı dönemlerinin aynı alanda katman katman izlenebilmesidir. Ziyaretçi için bu durum, taş duvarların arkasında çok uzun bir zaman derinliği olduğu anlamına gelir.</p>
+        </div>
+        <div class="layer-strip">
+          <article class="layer-card reveal">
+            <strong>Erken Troya</strong>
+            <span>İlk yerleşim evreleri, höyüğün Tunç Çağı boyunca büyüyen karakterini anlamak için temel oluşturur.</span>
+          </article>
+          <article class="layer-card reveal">
+            <strong>Troya II</strong>
+            <span>Schliemann'ın erken kazılarıyla ünlü hale gelen katmanlardan biridir; ancak Homeros Troya'sı ile özdeşleştirilmesi bugün tartışmalıdır.</span>
+          </article>
+          <article class="layer-card reveal">
+            <strong>Troya VI–VII</strong>
+            <span>Geç Tunç Çağı bağlamı nedeniyle Homeros geleneğiyle ilişkilendirilen başlıca aday evreler arasında değerlendirilir.</span>
+          </article>
+          <article class="layer-card reveal">
+            <strong>İlion</strong>
+            <span>Helenistik ve Roma dönemlerinde kent, kahramanlık anlatıları ve Aeneas geleneği üzerinden yeniden önem kazanmıştır.</span>
+          </article>
+          <article class="layer-card reveal">
+            <strong>Modern Kazılar</strong>
+            <span>Troya, arkeoloji tarihinin yöntem, koruma ve yorumlama tartışmalarını görünür kılan önemli bir alandır.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="medeniyetler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Medeniyet Katmanları</div>
+          <h2 class="section-title">Troya hangi katmanları anlatır?</h2>
+        </div>
+        <div class="reveal">
+          <table class="era-table" aria-label="Troya dönemleri ve izleri">
+            <thead>
+              <tr>
+                <th>Dönem</th>
+                <th>Kültür / Güç</th>
+                <th>Öne çıkan iz</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Erken Tunç Çağı</strong></td>
+                <td>Anadolu ve Ege bağlantılı yerleşim kültürleri</td>
+                <td>Höyüğün erken savunma ve yerleşim düzeni</td>
+              </tr>
+              <tr>
+                <td><strong>Orta / Geç Tunç Çağı</strong></td>
+                <td>Troas bölgesinin yerel güçleri</td>
+                <td>Surlar, kapılar ve Homeros geleneğiyle ilişkilendirilen evreler</td>
+              </tr>
+              <tr>
+                <td><strong>Arkaik / Klasik Çağ</strong></td>
+                <td>Yunan dünyası</td>
+                <td>İlyada anlatısının kültürel hafızada güçlenmesi</td>
+              </tr>
+              <tr>
+                <td><strong>Helenistik Dönem</strong></td>
+                <td>İlion kenti</td>
+                <td>Athena kutsal alanı ve kahramanlık kültleri</td>
+              </tr>
+              <tr>
+                <td><strong>Roma Dönemi</strong></td>
+                <td>Roma İmparatorluğu</td>
+                <td>Aeneas soy anlatısı üzerinden Roma ile kurulan sembolik bağ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="mitoloji">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Mitoloji ve Hikayeler</div>
+          <h2 class="section-title">Troya Savaşı'nın yankısı</h2>
+          <p class="lead">Troya'yı eşsiz yapan şey, arkeolojik kalıntıların dünya edebiyatının en etkili anlatılarından biriyle birlikte okunmasıdır. Savaşın tarihsel arka planı tartışmalı olsa da, mitolojik hafızası binlerce yıldır yaşamaya devam eder.</p>
+        </div>
+        <div class="story-grid">
+          <article class="story-card reveal">
+            <h3>İlyada</h3>
+            <p>Homeros'a atfedilen İlyada, Troya Savaşı'nın kısa bir dönemine odaklanır. Akhilleus'un öfkesi, Hektor'un savunması ve savaşın trajik tonu kentin kültürel kimliğini belirlemiştir.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Hektor ve Akhilleus</h3>
+            <p>Hektor, Troya'nın savunucusu; Akhilleus ise Akha ordusunun en büyük savaşçısı olarak anlatılır. İkilinin karşılaşması destanın en güçlü sahnelerindendir.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Tahta At</h3>
+            <p>Troya Atı anlatısı, hile ve stratejiyle kentin düşüşünü simgeler. Bugün Troya denince akla gelen en yaygın imgelerden biridir.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Aeneas Geleneği</h3>
+            <p>Roma dünyasında Troya, Aeneas üzerinden yeni bir anlam kazandı. Bu anlatı, Roma'nın köken hikayesiyle Troya mirasını birbirine bağladı.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="gorulecekler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görülmesi Gerekenler</div>
+          <h2 class="section-title">Troya rotasının ana durakları</h2>
+        </div>
+        <div class="places-grid">
+          <article class="place-card reveal">
+            <div class="place-number">1</div>
+            <h3>Surlar ve Kapılar</h3>
+            <p>Troya'nın savunma yapıları, kentin stratejik önemini ve farklı evrelerdeki inşa tekniklerini anlamak için temel duraklardır.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">2</div>
+            <h3>Schliemann Yarması</h3>
+            <p>Erken kazı tarihinin en tartışmalı izlerinden biridir. Hem keşif heyecanını hem de arkeolojik koruma bilincinin neden önemli olduğunu gösterir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">3</div>
+            <h3>Athena Tapınağı Alanı</h3>
+            <p>Helenistik ve Roma dönemlerinde kutsal kimliğiyle öne çıkan bu alan, Troya'nın antik dünyada nasıl yeniden yorumlandığını gösterir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">4</div>
+            <h3>Megaron İzleri</h3>
+            <p>Erken yerleşim düzenini okumaya yardımcı olan mimari kalıntılar, höyüğün Tunç Çağı karakterini hissettirir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">5</div>
+            <h3>Troya Müzesi</h3>
+            <p>Yakındaki müze, kazı buluntularını, Troas bölgesini ve Troya'nın farklı dönemlerini daha anlaşılır bir çerçeveye yerleştirir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">6</div>
+            <h3>Troya Atı Simgesi</h3>
+            <p>Modern temsil niteliğindeki at figürü, alanın popüler hafızadaki yerini gösterir ve ziyaretin ikonik duraklarından biridir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit-section" aria-label="Ziyaret notları">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Ziyaret Notları</div>
+          <h2 class="section-title">Troya'yı gezerken nasıl okumalı?</h2>
+          <p class="lead">Troya, ilk bakışta Efes gibi anıtsal cephelerle değil, katmanların dikkatli okunmasıyla etkisini gösterir. Bu yüzden alanı müze ziyaretiyle birlikte düşünmek, kalıntıların anlamını güçlendirir.</p>
+        </div>
+        <div class="visit-grid">
+          <article class="visit-card reveal">
+            <h3>Önce müze veya alan?</h3>
+            <p>Arkeolojik katmanları anlamak için Troya Müzesi'ni alanla aynı gün planlamak iyi bir başlangıç sağlar.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Okuma ipucu</h3>
+            <p>Troya'yı tek bir savaş sahnesi gibi değil, farklı çağların üst üste bıraktığı bir höyük olarak düşünmek gerekir.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Yakın çevre</h3>
+            <p>Troas bölgesi, Çanakkale kıyıları ve Gelibolu çevresindeki tarihsel peyzajla birlikte daha geniş bir rota sunar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container page-actions reveal">
+        <a class="button" href="efes.html">← Önceki kent: Efes</a>
+        <a class="button" href="index.html#kentler">Tüm kentlere dön</a>
+        <a class="button primary" href="gobeklitepe.html">Sonraki kent: Göbeklitepe →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), index * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
