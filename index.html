@@ -256,8 +256,8 @@
       z-index: 2;
       pointer-events: none;
       background:
-        linear-gradient(90deg, transparent 0 64%, rgba(250,246,238,0.58) 78%, rgba(250,246,238,0.82) 100%),
-        radial-gradient(circle at 52% 52%, transparent 48%, rgba(250,246,238,0.2) 88%);
+        linear-gradient(90deg, transparent 0 70%, rgba(250,246,238,0.28) 84%, rgba(250,246,238,0.44) 100%),
+        radial-gradient(circle at 52% 52%, transparent 52%, rgba(250,246,238,0.16) 92%);
     }
 
     .map-image {
@@ -265,7 +265,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: fill;
       object-position: center;
       opacity: 0.86;
       filter: sepia(0.16) saturate(0.92) contrast(0.98) drop-shadow(0 18px 30px rgba(46,38,24,0.11));
@@ -347,15 +347,17 @@
 
     .map-panel {
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
+      top: clamp(1rem, 2vw, 2rem);
+      right: clamp(1rem, 2vw, 2rem);
+      bottom: clamp(1rem, 2vw, 2rem);
       z-index: 4;
-      width: min(360px, 38%);
-      padding: 2rem;
-      color: rgba(245,230,200,0.76);
-      background: linear-gradient(90deg, rgba(28,24,16,0.1), rgba(28,24,16,0.86) 30%, rgba(28,24,16,0.94));
-      border-left: 0.5px solid rgba(200,151,58,0.18);
+      width: min(340px, 34%);
+      padding: clamp(1.35rem, 2vw, 2rem);
+      color: rgba(245,230,200,0.82);
+      background: linear-gradient(90deg, rgba(28,24,16,0.62), rgba(28,24,16,0.86));
+      border: 0.5px solid rgba(200,151,58,0.22);
+      border-radius: 22px;
+      box-shadow: 0 26px 60px rgba(28,24,16,0.26);
       backdrop-filter: blur(2px);
     }
 
@@ -385,7 +387,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
       gap: 10px;
-      max-height: 330px;
+      max-height: min(330px, calc(100% - 190px));
       overflow-y: auto;
       padding-right: 6px;
       list-style: none;
@@ -788,7 +790,7 @@
       <div class="reveal">
         <div class="section-label">Harita Üzerinde Keşfet</div>
         <h2 class="section-title">Türkiye'nin antik rotası</h2>
-        <p class="section-desc">Harita, ancientcitiesturkey.com yaklaşımındaki gibi tam genişlikli Türkiye altlığı üzerine yerleştirildi. Pinler yaklaşık konumlara göre yeniden hizalandı; işaretlere tıklayarak 51 detay sayfasına gidebilirsin.</p>
+        <p class="section-desc">Harita, ancientcitiesturkey.com yaklaşımındaki gibi tam genişlikli Türkiye altlığı üzerinde korunuyor. Türkiye görseli kırpılmadan pinlerin arkasına oturtuldu; işaretlere tıklayarak 51 detay sayfasına gidebilirsin.</p>
       </div>
 
       <div class="map-layout reveal">
@@ -868,7 +870,7 @@
         </div>
         <aside class="map-panel">
           <h3>51 detay sayfası hazır</h3>
-          <p>51 duraklı rota Türkiye haritası üzerinde yaklaşık coğrafi konumlarına göre hizalandı. Sağdaki liste yoğun bölgelerde kaybolmadan hızlı seçim yapmak için kullanılabilir.</p>
+          <p>51 duraklı rota Türkiye haritası üzerinde yaklaşık coğrafi konumlarına göre hizalandı. Harita boyutu korunurken altlık görsel pinlerin arkasına daha doğru yerleşir.</p>
           <p class="map-credit">Harita altlığı: Wikimedia Commons Turkey location map.</p>
           <ul class="map-list">
             <li><a href="efes.html">Efes</a></li>
