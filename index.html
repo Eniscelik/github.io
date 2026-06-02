@@ -364,27 +364,39 @@
 
     .map-list {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+      gap: 10px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 6px;
       list-style: none;
+      scrollbar-color: rgba(200,151,58,0.55) rgba(255,253,248,0.06);
     }
 
     .map-list a {
-      display: block;
-      padding: 9px 10px;
-      border: 0.5px solid rgba(200,151,58,0.18);
-      color: rgba(232,194,122,0.72);
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      border: 0.5px solid rgba(200,151,58,0.24);
+      border-radius: 12px;
+      color: rgba(245,230,200,0.82);
+      background: rgba(255,253,248,0.045);
       font-size: 11px;
-      letter-spacing: 1.4px;
+      letter-spacing: 1.05px;
+      line-height: 1.2;
       text-transform: uppercase;
       text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
+      transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
     }
 
     .map-list a:hover,
     .map-list a:focus {
       border-color: var(--gold);
       color: var(--gold-light);
+      background: rgba(200,151,58,0.12);
+      transform: translateY(-1px);
+      outline: none;
     }
 
     .more-cities {
