@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Antik Türkiye uygulama ikonu">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#4a3e28"/>
+      <stop offset="55%" stop-color="#2e2618"/>
+      <stop offset="100%" stop-color="#1c1810"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f5dfaa"/>
+      <stop offset="45%" stop-color="#c8973a"/>
+      <stop offset="100%" stop-color="#8f6420"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="104" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="204" fill="none" stroke="#c8973a" stroke-width="14" opacity="0.55"/>
+  <path d="M142 358h228v36H142zM164 322h184v28H164zM180 188h152l34 42H146z" fill="url(#gold)"/>
+  <path d="M186 238h38v76h-38zm72 0h38v76h-38zm72 0h38v76h-38z" fill="#f5e6c8" opacity="0.94"/>
+  <path d="M256 92l28 58h64l-52 38 20 62-60-40-60 40 20-62-52-38h64z" fill="#e8c27a"/>
+  <path d="M120 422c62-28 112-28 160 0 40 24 78 24 112 0" fill="none" stroke="#e8c27a" stroke-width="12" stroke-linecap="round" opacity="0.75"/>
+</svg>

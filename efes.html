@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1C1810">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Antik Türkiye">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/antik-turkiye-icon.svg" type="image/svg+xml">
+  <script src="pwa.js" defer></script>
+  <title>Efes Antik Kenti — Antik Türkiye</title>
+  <meta name="description" content="Efes Antik Kenti'nin tarihi, medeniyetleri, mitolojik hikayeleri ve görülmesi gereken yapıları.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C8973A;
+      --gold-light: #E8C27A;
+      --gold-pale: #F5E6C8;
+      --stone: #1C1810;
+      --stone-mid: #2E2618;
+      --stone-light: #4A3E28;
+      --cream: #FAF6EE;
+      --cream-dark: #F0E8D8;
+      --paper: #FFFDF8;
+      --text: #2E2618;
+      --text-muted: #7A6A4A;
+      --line: rgba(74, 62, 40, 0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(200,151,58,0.08), transparent 28rem),
+        linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(46,38,24,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,38,24,0.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      z-index: -1;
+    }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 1rem;
+      z-index: 200;
+      padding: 10px 14px;
+      color: var(--stone);
+      background: var(--gold-light);
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus { top: 1rem; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(28, 24, 16, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid rgba(200, 151, 58, 0.2);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold-light);
+      text-decoration: none;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(232, 194, 122, 0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus { color: var(--gold-light); }
+
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      padding: 9rem 2rem 5rem;
+      color: var(--gold-pale);
+      background:
+        linear-gradient(115deg, rgba(28,24,16,0.94), rgba(28,24,16,0.74)),
+        radial-gradient(circle at 78% 26%, rgba(200,151,58,0.18), transparent 30rem),
+        var(--stone);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: 'EPHESOS';
+      position: absolute;
+      right: -0.08em;
+      bottom: -0.22em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(90px, 20vw, 270px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(232, 194, 122, 0.045);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0;
+      height: 150px;
+      background: linear-gradient(to bottom, transparent, var(--cream));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      color: rgba(232,194,122,0.58);
+      font-size: 12px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .breadcrumb:hover { color: var(--gold-light); }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 6px 18px;
+      border: 0.5px solid rgba(200,151,58,0.42);
+      color: var(--gold-light);
+      font-size: 11px;
+      letter-spacing: 3.6px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 880px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(54px, 9vw, 112px);
+      font-weight: 700;
+      line-height: 0.92;
+      color: var(--gold-light);
+    }
+
+    .hero h1 em {
+      display: block;
+      color: var(--gold-pale);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-summary {
+      max-width: 640px;
+      margin-top: 1.5rem;
+      color: rgba(245, 230, 200, 0.72);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    main { position: relative; z-index: 1; }
+
+    section { padding: 5rem 2rem; }
+
+    .container {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: -2.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .fact-card {
+      min-height: 138px;
+      padding: 1.5rem;
+      background: rgba(255,253,248,0.82);
+    }
+
+    .fact-label {
+      margin-bottom: 0.7rem;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .fact-value {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text);
+      font-size: 27px;
+      font-weight: 600;
+      line-height: 1.06;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.55fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .section-label {
+      margin-bottom: 1rem;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.02;
+    }
+
+    .lead {
+      color: var(--text-muted);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    .note-panel {
+      position: sticky;
+      top: 6rem;
+      padding: 1.75rem;
+      border: 0.5px solid rgba(200,151,58,0.32);
+      background:
+        linear-gradient(180deg, rgba(28,24,16,0.94), rgba(46,38,24,0.94)),
+        var(--stone);
+      color: rgba(245,230,200,0.75);
+    }
+
+    .note-panel h2 {
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold-light);
+      font-size: 30px;
+      line-height: 1.08;
+    }
+
+    .note-panel p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .content-block {
+      border-top: 0.5px solid var(--line);
+      background: rgba(255,253,248,0.32);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .copy p {
+      margin-bottom: 1.2rem;
+      color: var(--text-muted);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    .era-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      background: var(--paper);
+      border: 0.5px solid var(--line);
+    }
+
+    .era-table th,
+    .era-table td {
+      padding: 1rem;
+      border-bottom: 0.5px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .era-table th {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(240,232,216,0.65);
+    }
+
+    .era-table td {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .era-table strong { color: var(--text); }
+
+    .story-grid,
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .story-card,
+    .place-card {
+      min-height: 230px;
+      padding: 1.7rem;
+      background: var(--paper);
+    }
+
+    .story-card h3,
+    .place-card h3 {
+      margin-bottom: 0.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text);
+      font-size: 27px;
+      line-height: 1.08;
+    }
+
+    .story-card p,
+    .place-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .place-number {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+      border: 0.5px solid rgba(200,151,58,0.45);
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .visit-section {
+      background: var(--stone);
+      color: var(--gold-pale);
+    }
+
+    .visit-section .section-title { color: var(--gold-light); }
+    .visit-section .lead { color: rgba(232,194,122,0.55); }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 2rem;
+      background: rgba(200,151,58,0.12);
+      border: 0.5px solid rgba(200,151,58,0.12);
+    }
+
+    .visit-card {
+      padding: 1.6rem;
+      background: var(--stone);
+      border-bottom: 2px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .visit-card:hover {
+      background: var(--stone-mid);
+      border-color: var(--gold);
+    }
+
+    .visit-card h3 {
+      margin-bottom: 0.7rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold-light);
+      font-size: 25px;
+    }
+
+    .visit-card p {
+      color: rgba(232,194,122,0.48);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .page-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2.5rem;
+      border-top: 0.5px solid var(--line);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 1.4rem;
+      border: 0.5px solid rgba(74,62,40,0.25);
+      color: var(--text);
+      background: transparent;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s, color 0.2s;
+    }
+
+    .button.primary {
+      color: var(--cream);
+      background: var(--stone);
+      border-color: var(--stone);
+    }
+
+    .button:hover,
+    .button:focus {
+      transform: translateY(-1px);
+      background: var(--cream-dark);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus {
+      color: var(--gold-light);
+      background: var(--stone-light);
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: var(--stone);
+      border-top: 0.5px solid rgba(200,151,58,0.15);
+    }
+
+    footer p {
+      color: rgba(200,151,58,0.34);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: rgba(200,151,58,0.56);
+      text-decoration: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+
+    .visual-route {
+      padding-top: 1rem;
+    }
+
+    .route-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5px;
+      margin-top: 1.5rem;
+      background: var(--line);
+      border: 0.5px solid var(--line);
+    }
+
+    .route-shot {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .route-shot:first-child {
+      min-height: 430px;
+      grid-row: span 2;
+    }
+
+    .route-shot img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.04);
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    .route-shot:hover img {
+      transform: scale(1.035);
+      filter: saturate(1.04) contrast(1.08);
+    }
+
+    .route-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem;
+      color: var(--paper);
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+    }
+
+    .route-caption strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .route-caption span,
+    .route-caption a {
+      color: rgba(255,253,248,0.72);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .route-caption a:hover { color: var(--accent-pale, var(--gold-light, #F0D5A8)); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .facts,
+      .intro-grid,
+      .two-column,
+      .visit-grid { grid-template-columns: 1fr; }
+
+      .note-panel { position: static; }
+      .hero { min-height: 70vh; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7.5rem 1rem 4rem; }
+      section { padding: 4rem 1rem; }
+      .route-gallery,
+      .story-grid,
+      .places-grid { grid-template-columns: 1fr; }
+      .fact-card { min-height: auto; }
+      .page-actions { align-items: stretch; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+  <nav aria-label="Ana menü">
+    <a href="index.html" class="nav-logo">Antik Türkiye</a>
+    <ul class="nav-links">
+      <li><a href="index.html#kentler">Kentler</a></li>
+      <li><a href="index.html#donemler">Dönemler</a></li>
+      <li><a href="#gorulecekler">Görülecekler</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner reveal">
+      <a class="breadcrumb" href="index.html">← Ana sayfaya dön</a>
+      <div class="hero-kicker">İzmir · Selçuk</div>
+      <h1>Efes <em>Antik Kenti</em></h1>
+      <p class="hero-summary">Artemis kültü, mermer caddeleri, görkemli tiyatrosu ve Celsus Kütüphanesi ile Efes; Anadolu'nun en etkileyici antik kentlerinden biridir.</p>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <section aria-label="Efes hızlı bilgiler">
+      <div class="container">
+        <div class="facts reveal">
+          <article class="fact-card">
+            <div class="fact-label">Konum</div>
+            <div class="fact-value">İzmir<br>Selçuk</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Ana dönemler</div>
+            <div class="fact-value">Helenistik<br>Roma</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Öne çıkan yapı</div>
+            <div class="fact-value">Celsus<br>Kütüphanesi</div>
+          </article>
+          <article class="fact-card">
+            <div class="fact-label">Kültürel tema</div>
+            <div class="fact-value">Artemis<br>Kültü</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="visual-route" aria-label="Görsel rota">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görsel Rota</div>
+          <h2 class="section-title">Öne çıkan durakları gör</h2>
+          <p class="lead">Bu sayfadaki ana rota noktaları, görsellerle desteklendi. Görseller, yapıları ve peyzajı metinle birlikte okumayı kolaylaştırır.</p>
+        </div>
+        <div class="route-gallery">
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ephesus%20Celsus%20Library%20Fa%C3%A7ade.jpg" alt="Celsus Kütüphanesi" loading="lazy">
+            <figcaption class="route-caption"><strong>Celsus Kütüphanesi</strong><span>Efes rotasının en ikonik cephesi · <a href="https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ephesus%20Theatre.jpg" alt="Büyük Tiyatro" loading="lazy">
+            <figcaption class="route-caption"><strong>Büyük Tiyatro</strong><span>Kentin kamusal gösteri hafızası · <a href="https://commons.wikimedia.org/wiki/File:Ephesus_Theatre.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+          <figure class="route-shot reveal">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Library%20of%20Celsus%20-%20Ancient%20City%20of%20Ephesus%2C%20Sel%C3%A7uk%2C%20Turkey.jpg" alt="Mermer Cadde" loading="lazy">
+            <figcaption class="route-caption"><strong>Mermer Cadde</strong><span>Kütüphane ve agora aksı · <a href="https://commons.wikimedia.org/wiki/File:Library_of_Celsus_-_Ancient_City_of_Ephesus%2C_Sel%C3%A7uk%2C_Turkey.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container intro-grid">
+        <div class="reveal">
+          <div class="section-label">Kent Portresi</div>
+          <h2 class="section-title">Ege'nin taşlara kazınmış hafızası</h2>
+          <p class="lead">Efes, Küçük Menderes havzasında liman, ticaret, din ve kültür ekseninde büyüyen çok katmanlı bir antik kenttir. Bugün görülen kalıntıların büyük bölümü Roma döneminin görkemini yansıtır; ancak kentin hikayesi çok daha eski yerleşim izlerine, İon dünyasına ve Artemis tapınımına kadar uzanır.</p>
+        </div>
+        <aside class="note-panel reveal" aria-label="Kısa not">
+          <h2>Neden önemli?</h2>
+          <p>Efes, yalnızca anıtsal yapılarıyla değil, Anadolu'nun farklı medeniyetlerinin aynı coğrafyada bıraktığı izleri birlikte gösterebilmesiyle de değerlidir. Bir kentte ticaret, mitoloji, felsefe ve erken Hristiyanlık mirası yan yana okunabilir.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-block" id="tarihce">
+      <div class="container two-column">
+        <div class="reveal">
+          <div class="section-label">Tarihçe</div>
+          <h2 class="section-title">Liman kentinden dünya sahnesine</h2>
+        </div>
+        <div class="copy reveal">
+          <p>Efes'in çevresi tarih boyunca bereketli ova, kutsal alan ve deniz ticareti bağlantıları sayesinde cazibe merkezi oldu. Kent, İon yerleşimleriyle Ege dünyasının parçası haline geldi; Lidya, Pers ve Helenistik dönemlerden sonra Roma egemenliğinde en parlak çağlarından birini yaşadı.</p>
+          <p>Roma döneminde geniş caddeler, hamamlar, agora, tiyatro ve kütüphane gibi kamusal yapılar kentin refahını gösteriyordu. Zamanla limanın dolması ve ticaret yollarının değişmesiyle Efes'in merkezi ağırlığı azaldı; fakat bıraktığı mimari ve kültürel miras Anadolu tarihinin en güçlü anlatılarından biri olarak yaşamaya devam etti.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="medeniyetler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Medeniyet Katmanları</div>
+          <h2 class="section-title">Efes hangi katmanları anlatır?</h2>
+        </div>
+        <div class="reveal">
+          <table class="era-table" aria-label="Efes medeniyet dönemleri">
+            <thead>
+              <tr>
+                <th>Dönem</th>
+                <th>Medeniyet / Güç</th>
+                <th>Öne çıkan iz</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Erken yerleşimler</strong></td>
+                <td>Anadolu toplulukları</td>
+                <td>Bölgedeki eski yerleşim ve kutsal alan geleneği</td>
+              </tr>
+              <tr>
+                <td><strong>İon dönemi</strong></td>
+                <td>İon şehir kültürü</td>
+                <td>Artemis kültünün güçlenmesi ve Ege bağlantıları</td>
+              </tr>
+              <tr>
+                <td><strong>Lidya / Pers</strong></td>
+                <td>Batı Anadolu krallıkları ve imparatorluk etkileri</td>
+                <td>Ticaret yolları ve bölgesel güç mücadeleleri</td>
+              </tr>
+              <tr>
+                <td><strong>Helenistik</strong></td>
+                <td>Makedonya ve ardıl krallıklar</td>
+                <td>Kentin planlanması ve bölgesel merkez kimliği</td>
+              </tr>
+              <tr>
+                <td><strong>Roma</strong></td>
+                <td>Roma İmparatorluğu</td>
+                <td>Celsus Kütüphanesi, Büyük Tiyatro ve anıtsal kent dokusu</td>
+              </tr>
+              <tr>
+                <td><strong>Bizans</strong></td>
+                <td>Doğu Roma / Bizans</td>
+                <td>Hristiyanlık mirası, Aziz Yuhanna geleneği ve çevre kutsal alanları</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="mitoloji">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Mitoloji ve Hikayeler</div>
+          <h2 class="section-title">Tanrıçalar, kahinler ve filozoflar</h2>
+          <p class="lead">Efes'i özel yapan şeylerden biri, taş yapıların arkasındaki anlatı zenginliğidir. Kentin hafızasında Artemis, Androklos, Herakleitos ve erken Hristiyanlık gelenekleri yan yana durur.</p>
+        </div>
+        <div class="story-grid">
+          <article class="story-card reveal">
+            <h3>Artemis Kültü</h3>
+            <p>Efes, Artemis tapınımının en güçlü merkezlerinden biri olarak tanındı. Artemis Tapınağı, antik dünyanın en ünlü kutsal yapılarından biri kabul edilir ve kentin dini kimliğini yüzyıllar boyunca belirledi.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Androklos Efsanesi</h3>
+            <p>Kuruluş anlatılarında Atina kralı Kodros'un oğlu Androklos öne çıkar. Efsaneye göre balık ve yaban domuzu işareti, yeni kentin kurulacağı yeri göstermiştir.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Herakleitos</h3>
+            <p>Efesli filozof Herakleitos, değişim ve akış düşüncesiyle Batı felsefesinin temel figürlerinden biri oldu. Kent, bu yönüyle yalnızca mimari değil düşünsel bir miras da taşır.</p>
+          </article>
+          <article class="story-card reveal">
+            <h3>Aziz Yuhanna ve Meryem Ana</h3>
+            <p>Efes çevresi, Hristiyan gelenekte Aziz Yuhanna ve Meryem Ana anlatılarıyla anılır. Bu katman, kentin geç antik dönem ve inanç tarihi açısından önemini artırır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gorulecekler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görülmesi Gerekenler</div>
+          <h2 class="section-title">Efes rotasının ana durakları</h2>
+        </div>
+        <div class="places-grid">
+          <article class="place-card reveal">
+            <div class="place-number">1</div>
+            <h3>Celsus Kütüphanesi</h3>
+            <p>Efes'in en tanınan simgelerinden biridir. Cephe düzeni, heykel nişleri ve anıtsal oranlarıyla Roma dönemi kent estetiğini güçlü biçimde yansıtır.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">2</div>
+            <h3>Büyük Tiyatro</h3>
+            <p>Kentin sosyal ve kamusal yaşamını anlamak için en etkileyici yapılardan biridir. Sahne yapısı ve oturma sıraları, Efes'in kalabalık kent hayatını hissettirir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">3</div>
+            <h3>Artemis Tapınağı</h3>
+            <p>Bugün büyük ölçüde kalıntı düzeyinde görülse de, Efes'in kutsal kimliğinin merkezinde yer alır. Antik dünyanın yedi harikası arasında anılmıştır.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">4</div>
+            <h3>Yamaç Evler</h3>
+            <p>Mozaikler, freskler ve konut düzeni sayesinde varlıklı Efeslilerin gündelik yaşamına dair nadir ipuçları sunar.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">5</div>
+            <h3>Mermer Cadde</h3>
+            <p>Kentin anıtsal akslarından biridir. Yürüyüş rotası boyunca kamu yapıları, ticaret alanları ve tören hissi veren bir kent dokusu izlenir.</p>
+          </article>
+          <article class="place-card reveal">
+            <div class="place-number">6</div>
+            <h3>Hadrian Tapınağı</h3>
+            <p>İşlemeli cephe öğeleri ve zarif oranlarıyla Efes içindeki en fotojenik yapılardan biridir; Roma döneminin dini ve mimari dilini taşır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit-section" aria-label="Ziyaret notları">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Ziyaret Notları</div>
+          <h2 class="section-title">Gezerken nelere dikkat etmeli?</h2>
+          <p class="lead">Efes geniş bir alana yayılır. Rahat ayakkabı, su ve güneşten korunma özellikle yaz aylarında önemlidir. Kenti anlamak için yalnızca ana caddeden yürümek yerine yan yapılara da zaman ayırmak gerekir.</p>
+        </div>
+        <div class="visit-grid">
+          <article class="visit-card reveal">
+            <h3>En iyi zaman</h3>
+            <p>Sabah erken saatler veya gün batımına yakın zamanlar hem ışık hem de kalabalık açısından daha keyifli olabilir.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Rota önerisi</h3>
+            <p>Üst kapıdan başlayıp ana cadde, tiyatro ve kütüphane aksını izlemek kentin ölçeğini daha iyi kavratır.</p>
+          </article>
+          <article class="visit-card reveal">
+            <h3>Yakın çevre</h3>
+            <p>Selçuk çevresindeki Artemis Tapınağı alanı, Ayasuluk Tepesi ve Meryem Ana Evi gibi noktalar geziyi zenginleştirir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container page-actions reveal">
+        <a class="button" href="index.html#kentler">← Önceki kent: Tüm kentler</a>
+        <a class="button" href="index.html#kentler">Tüm kentlere dön</a>
+        <a class="button primary" href="troya.html">Sonraki kent: Troya →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), index * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>

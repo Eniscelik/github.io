@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1C1810">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Antik Türkiye">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/antik-turkiye-icon.svg" type="image/svg+xml">
+  <script src="pwa.js" defer></script>
   <title>Antik Türkiye — Antik Kentleri Keşfet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
@@ -224,6 +232,263 @@
       margin-bottom: 3rem;
     }
 
+
+    /* INTERACTIVE MAP */
+    .map-section {
+      background: linear-gradient(180deg, var(--cream), var(--cream-dark));
+      padding-top: 5rem;
+    }
+
+    .map-layout {
+      position: relative;
+      display: block;
+    }
+
+    .turkey-map {
+      position: relative;
+      min-height: 0;
+      aspect-ratio: 1.72 / 1;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(200,151,58,0.13), transparent 18rem),
+        linear-gradient(135deg, rgba(255,253,248,0.96), rgba(240,232,216,0.9));
+      border: 0.5px solid rgba(74, 62, 40, 0.18);
+      box-shadow: inset 0 0 0 1px rgba(255,253,248,0.5), 0 22px 50px rgba(46,38,24,0.08);
+    }
+
+    .turkey-map::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, transparent 0 70%, rgba(250,246,238,0.28) 84%, rgba(250,246,238,0.44) 100%),
+        radial-gradient(circle at 52% 52%, transparent 52%, rgba(250,246,238,0.16) 92%);
+    }
+
+    .map-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      object-position: center;
+      opacity: 0.86;
+      filter: sepia(0.16) saturate(0.92) contrast(0.98) drop-shadow(0 18px 30px rgba(46,38,24,0.11));
+      z-index: 1;
+    }
+
+    .turkey-map svg {
+      position: absolute;
+      inset: 3% 2%;
+      width: 96%;
+      height: 94%;
+      opacity: 0.08;
+      filter: drop-shadow(0 18px 30px rgba(46,38,24,0.11));
+      z-index: 0;
+    }
+
+    .map-pin {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: 15px;
+      height: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(255,253,248,0.98);
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 5px rgba(200,151,58,0.2), 0 8px 18px rgba(46,38,24,0.18);
+      text-decoration: none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      z-index: 3;
+    }
+
+    .map-pin::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,253,248,0.94);
+    }
+
+    .map-pin span {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 12px);
+      transform: translateX(-50%);
+      padding: 7px 10px;
+      border: 0.5px solid rgba(200,151,58,0.48);
+      border-radius: 999px;
+      color: var(--stone);
+      background: rgba(255,253,248,0.97);
+      box-shadow: 0 12px 26px rgba(46,38,24,0.16);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .map-pin:hover,
+    .map-pin:focus {
+      transform: translate(-50%, -62%) scale(1.12);
+      background: var(--stone);
+      box-shadow: 0 0 0 8px rgba(200,151,58,0.24), 0 18px 34px rgba(46,38,24,0.24);
+      outline: none;
+      z-index: 5;
+    }
+
+    .map-pin:hover span,
+    .map-pin:focus span {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    .map-panel {
+      position: absolute;
+      top: clamp(1rem, 2vw, 2rem);
+      right: clamp(1rem, 2vw, 2rem);
+      bottom: clamp(1rem, 2vw, 2rem);
+      z-index: 4;
+      width: min(340px, 34%);
+      padding: clamp(1.35rem, 2vw, 2rem);
+      color: rgba(245,230,200,0.82);
+      background: linear-gradient(90deg, rgba(28,24,16,0.62), rgba(28,24,16,0.86));
+      border: 0.5px solid rgba(200,151,58,0.22);
+      border-radius: 22px;
+      box-shadow: 0 26px 60px rgba(28,24,16,0.26);
+      backdrop-filter: blur(2px);
+    }
+
+    .map-panel h3 {
+      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold-light);
+      font-size: 34px;
+      line-height: 1.05;
+    }
+
+    .map-panel p {
+      margin-bottom: 1.25rem;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .map-credit {
+      margin-top: -0.5rem;
+      color: rgba(232,194,122,0.36);
+      font-size: 11px !important;
+      letter-spacing: 0.5px;
+    }
+
+    .map-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+      gap: 10px;
+      max-height: min(330px, calc(100% - 190px));
+      overflow-y: auto;
+      padding-right: 6px;
+      list-style: none;
+      scrollbar-color: rgba(200,151,58,0.55) rgba(255,253,248,0.06);
+    }
+
+    .map-list a {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      border: 0.5px solid rgba(200,151,58,0.24);
+      border-radius: 12px;
+      color: rgba(245,230,200,0.82);
+      background: rgba(255,253,248,0.045);
+      font-size: 11px;
+      letter-spacing: 1.05px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+    }
+
+    .map-list a:hover,
+    .map-list a:focus {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(200,151,58,0.12);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .more-cities {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 0.5px solid rgba(74,62,40,0.14);
+    }
+
+    .mini-city-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5px;
+      background: rgba(74,62,40,0.14);
+      border: 0.5px solid rgba(74,62,40,0.14);
+    }
+
+    .mini-city {
+      min-height: 170px;
+      padding: 1.35rem;
+      background: rgba(255,253,248,0.72);
+    }
+
+    .mini-city .step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 1rem;
+      border: 0.5px solid rgba(200,151,58,0.46);
+      border-radius: 50%;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .mini-city strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text);
+      font-size: 23px;
+      line-height: 1.08;
+    }
+
+    .mini-city .meta {
+      display: block;
+      margin-bottom: 0.7rem;
+      color: var(--gold);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .mini-city p {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
     /* FILTERS */
     .filters {
       display: flex;
@@ -317,6 +582,22 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--text-muted);
+    }
+
+    .card-duration {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      margin-top: -0.35rem;
+      padding: 5px 9px;
+      border: 0.5px solid rgba(200,151,58,0.28);
+      border-radius: 999px;
+      color: var(--gold);
+      background: rgba(200,151,58,0.08);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .card-desc {
@@ -468,6 +749,12 @@
     @media (max-width: 640px) {
       nav { padding: 1rem; }
       .nav-links { display: none; }
+
+      .map-layout { display: grid; grid-template-columns: 1fr; }
+      .turkey-map { min-height: 300px; aspect-ratio: 1.28 / 1; }
+      .map-panel { position: static; width: 100%; margin-top: 1rem; background: var(--stone); }
+      .map-list { grid-template-columns: 1fr; max-height: 300px; }
+
       .hero-stats { gap: 1.5rem; }
       .hero-stat .n { font-size: 28px; }
       section { padding: 4rem 1rem; }
@@ -479,6 +766,7 @@
   <nav>
     <a href="#" class="nav-logo">Antik Türkiye</a>
     <ul class="nav-links">
+      <li><a href="#harita">Harita</a></li>
       <li><a href="#kentler">Kentler</a></li>
       <li><a href="#donemler">Dönemler</a></li>
       <li><a href="#hakkinda">Hakkında</a></li>
@@ -503,6 +791,153 @@
     </div>
   </section>
 
+
+  <!-- HARİTA -->
+  <section class="map-section" id="harita">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Harita Üzerinde Keşfet</div>
+        <h2 class="section-title">Türkiye'nin antik rotası</h2>
+        <p class="section-desc">Harita, ancientcitiesturkey.com yaklaşımındaki gibi tam genişlikli Türkiye altlığı üzerinde korunuyor. Türkiye görseli kırpılmadan pinlerin arkasına oturtuldu; işaretlere tıklayarak 51 detay sayfasına gidebilirsin.</p>
+      </div>
+
+      <div class="map-layout reveal">
+        <div class="turkey-map" aria-label="Türkiye haritası üzerinde antik kent bağlantıları">
+          <img class="map-image" src="https://commons.wikimedia.org/wiki/Special:FilePath/Turkey%20location%20map.svg" alt="Türkiye haritası" loading="lazy">
+          <svg viewBox="0 0 1000 520" role="img" aria-label="Sadeleştirilmiş Türkiye haritası">
+            <defs>
+              <linearGradient id="mapLand" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="rgba(245,230,200,0.95)"/>
+                <stop offset="1" stop-color="rgba(200,151,58,0.18)"/>
+              </linearGradient>
+              <linearGradient id="mapCoast" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="rgba(122,106,74,0.54)"/>
+                <stop offset="1" stop-color="rgba(74,62,40,0.44)"/>
+              </linearGradient>
+            </defs>
+            <path d="M62 238 L92 190 L151 170 L206 157 L263 132 L344 139 L414 117 L500 136 L585 116 L665 143 L748 134 L823 154 L902 145 L958 188 L935 229 L867 256 L806 296 L725 287 L648 318 L565 305 L489 334 L405 318 L330 348 L260 314 L193 326 L132 292 L78 294 Z" fill="url(#mapLand)" stroke="url(#mapCoast)" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M94 193 C150 178 205 178 263 154 C315 132 367 151 416 126 C468 103 520 147 584 121 C636 101 669 142 744 136 C809 131 856 153 902 148" fill="none" stroke="rgba(74,62,40,0.20)" stroke-width="8" stroke-linecap="round"/>
+            <path d="M82 266 C160 242 254 238 349 252 C455 268 551 248 653 232 C753 216 845 204 935 188" fill="none" stroke="rgba(200,151,58,0.22)" stroke-width="13" stroke-linecap="round"/>
+            <path d="M120 303 C205 312 239 358 318 341 C383 327 420 292 492 315 C552 335 585 342 650 314" fill="none" stroke="rgba(74,62,40,0.16)" stroke-width="7" stroke-linecap="round"/>
+            <text x="130" y="112" fill="rgba(122,106,74,0.42)" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">MARMARA</text>
+            <text x="130" y="405" fill="rgba(122,106,74,0.36)" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">EGE</text>
+            <text x="425" y="438" fill="rgba(122,106,74,0.36)" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">AKDENİZ</text>
+            <text x="702" y="98" fill="rgba(122,106,74,0.34)" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">KARADENİZ</text>
+          </svg>
+          <a class="map-pin" style="--x: 12.5%; --y: 65.1%;" href="efes.html"><span>Efes</span></a>
+          <a class="map-pin" style="--x: 7.3%; --y: 37.6%;" href="troya.html"><span>Troya</span></a>
+          <a class="map-pin" style="--x: 67.7%; --y: 75.0%;" href="gobeklitepe.html"><span>Göbeklitepe</span></a>
+          <a class="map-pin" style="--x: 47.2%; --y: 36.8%;" href="hattusa.html"><span>Hattuşa</span></a>
+          <a class="map-pin" style="--x: 29.3%; --y: 78.5%;" href="perge.html"><span>Perge</span></a>
+          <a class="map-pin" style="--x: 66.9%; --y: 64.6%;" href="nemrut.html"><span>Nemrut</span></a>
+          <a class="map-pin" style="--x: 30.8%; --y: 78.8%;" href="aspendos.html"><span>Aspendos</span></a>
+          <a class="map-pin" style="--x: 22.0%; --y: 88.0%;" href="patara.html"><span>Patara</span></a>
+          <a class="map-pin" style="--x: 19.1%; --y: 68.3%;" href="aphrodisias.html"><span>Aphrodisias</span></a>
+          <a class="map-pin" style="--x: 27.7%; --y: 68.7%;" href="sagalassos.html"><span>Sagalassos</span></a>
+          <a class="map-pin" style="--x: 11.8%; --y: 48.9%;" href="pergamon.html"><span>Pergamon</span></a>
+          <a class="map-pin" style="--x: 21.0%; --y: 65.4%;" href="hierapolis.html"><span>Hierapolis</span></a>
+          <a class="map-pin" style="--x: 31.8%; --y: 81.1%;" href="side.html"><span>Side</span></a>
+          <a class="map-pin" style="--x: 22.0%; --y: 86.7%;" href="xanthos.html"><span>Xanthos-Letoon</span></a>
+          <a class="map-pin" style="--x: 12.2%; --y: 70.7%;" href="milet.html"><span>Milet</span></a>
+          <a class="map-pin" style="--x: 15.9%; --y: 57.8%;" href="sardes.html"><span>Sardes</span></a>
+          <a class="map-pin" style="--x: 7.8%; --y: 44.0%;" href="assos.html"><span>Assos</span></a>
+          <a class="map-pin" style="--x: 12.3%; --y: 69.0%;" href="priene.html"><span>Priene</span></a>
+          <a class="map-pin" style="--x: 23.4%; --y: 48.0%;" href="aizanoi.html"><span>Aizanoi</span></a>
+          <a class="map-pin" style="--x: 21.0%; --y: 66.5%;" href="laodikeia.html"><span>Laodikeia</span></a>
+          <a class="map-pin" style="--x: 27.5%; --y: 77.8%;" href="termessos.html"><span>Termessos</span></a>
+          <a class="map-pin" style="--x: 27.5%; --y: 86.1%;" href="olympos.html"><span>Olympos</span></a>
+          <a class="map-pin" style="--x: 18.7%; --y: 80.3%;" href="kaunos.html"><span>Kaunos</span></a>
+          <a class="map-pin" style="--x: 89.9%; --y: 30.1%;" href="ani.html"><span>Ani</span></a>
+          <a class="map-pin" style="--x: 38.7%; --y: 68.8%;" href="catalhoyuk.html"><span>Çatalhöyük</span></a>
+          <a class="map-pin" style="--x: 25.2%; --y: 88.0%;" href="myra.html"><span>Myra</span></a>
+          <a class="map-pin" style="--x: 27.8%; --y: 84.4%;" href="phaselis.html"><span>Phaselis</span></a>
+          <a class="map-pin" style="--x: 12.7%; --y: 82.2%;" href="knidos.html"><span>Knidos</span></a>
+          <a class="map-pin" style="--x: 14.9%; --y: 72.2%;" href="labranda.html"><span>Labranda</span></a>
+          <a class="map-pin" style="--x: 47.6%; --y: 33.9%;" href="alacahoyuk.html"><span>Alacahöyük</span></a>
+          <a class="map-pin" style="--x: 11.9%; --y: 64.3%;" href="klaros.html"><span>Klaros</span></a>
+          <a class="map-pin" style="--x: 9.9%; --y: 61.9%;" href="teos.html"><span>Teos</span></a>
+          <a class="map-pin" style="--x: 13.4%; --y: 66.4%;" href="magnesia.html"><span>Magnesia</span></a>
+          <a class="map-pin" style="--x: 16.4%; --y: 65.5%;" href="nysa.html"><span>Nysa</span></a>
+          <a class="map-pin" style="--x: 22.8%; --y: 75.9%;" href="kibyra.html"><span>Kibyra</span></a>
+          <a class="map-pin" style="--x: 22.4%; --y: 84.1%;" href="tlos.html"><span>Tlos</span></a>
+          <a class="map-pin" style="--x: 25.5%; --y: 84.2%;" href="arykanda.html"><span>Arykanda</span></a>
+          <a class="map-pin" style="--x: 14.2%; --y: 73.3%;" href="euromos.html"><span>Euromos</span></a>
+          <a class="map-pin" style="--x: 13.4%; --y: 71.1%;" href="herakleia-latmos.html"><span>Herakleia Latmos</span></a>
+          <a class="map-pin" style="--x: 28.5%; --y: 67.6%;" href="seleukeia-sidera.html"><span>Seleukeia Sidera</span></a>
+          <a class="map-pin" style="--x: 34.7%; --y: 41.8%;" href="gordion.html"><span>Gordion</span></a>
+          <a class="map-pin" style="--x: 30.9%; --y: 48.0%;" href="pessinus.html"><span>Pessinus</span></a>
+          <a class="map-pin" style="--x: 15.9%; --y: 35.7%;" href="daskyleion.html"><span>Daskyleion</span></a>
+          <a class="map-pin" style="--x: 52.0%; --y: 52.7%;" href="kultepe.html"><span>Kültepe / Kaniş</span></a>
+          <a class="map-pin" style="--x: 71.5%; --y: 61.3%;" href="cayonu.html"><span>Çayönü</span></a>
+          <a class="map-pin" style="--x: 53.3%; --y: 74.5%;" href="anazarbos.html"><span>Anazarbos</span></a>
+          <a class="map-pin" style="--x: 46.9%; --y: 81.4%;" href="soli-pompeiopolis.html"><span>Soli Pompeiopolis</span></a>
+          <a class="map-pin" style="--x: 43.9%; --y: 83.7%;" href="olba.html"><span>Olba</span></a>
+          <a class="map-pin" style="--x: 43.9%; --y: 83.5%;" href="uzuncaburc.html"><span>Uzuncaburç / Diocaesarea</span></a>
+          <a class="map-pin" style="--x: 11.6%; --y: 58.6%;" href="smyrna.html"><span>Smyrna</span></a>
+          <a class="map-pin" style="--x: 8.4%; --y: 59.1%;" href="erythrai.html"><span>Erythrai</span></a>
+        </div>
+        <aside class="map-panel">
+          <h3>51 detay sayfası hazır</h3>
+          <p>51 duraklı rota Türkiye haritası üzerinde yaklaşık coğrafi konumlarına göre hizalandı. Harita boyutu korunurken altlık görsel pinlerin arkasına daha doğru yerleşir.</p>
+          <p class="map-credit">Harita altlığı: Wikimedia Commons Turkey location map.</p>
+          <ul class="map-list">
+            <li><a href="efes.html">Efes</a></li>
+            <li><a href="troya.html">Troya</a></li>
+            <li><a href="gobeklitepe.html">Göbeklitepe</a></li>
+            <li><a href="hattusa.html">Hattuşa</a></li>
+            <li><a href="perge.html">Perge</a></li>
+            <li><a href="nemrut.html">Nemrut Dağı</a></li>
+            <li><a href="aspendos.html">Aspendos</a></li>
+            <li><a href="patara.html">Patara</a></li>
+            <li><a href="aphrodisias.html">Aphrodisias</a></li>
+            <li><a href="sagalassos.html">Sagalassos</a></li>
+            <li><a href="pergamon.html">Pergamon</a></li>
+            <li><a href="hierapolis.html">Hierapolis</a></li>
+            <li><a href="side.html">Side</a></li>
+            <li><a href="xanthos.html">Xanthos-Letoon</a></li>
+            <li><a href="milet.html">Milet</a></li>
+            <li><a href="sardes.html">Sardes</a></li>
+            <li><a href="assos.html">Assos</a></li>
+            <li><a href="priene.html">Priene</a></li>
+            <li><a href="aizanoi.html">Aizanoi</a></li>
+            <li><a href="laodikeia.html">Laodikeia</a></li>
+            <li><a href="termessos.html">Termessos</a></li>
+            <li><a href="olympos.html">Olympos</a></li>
+            <li><a href="kaunos.html">Kaunos</a></li>
+            <li><a href="ani.html">Ani</a></li>
+            <li><a href="catalhoyuk.html">Çatalhöyük</a></li>
+            <li><a href="myra.html">Myra</a></li>
+            <li><a href="phaselis.html">Phaselis</a></li>
+            <li><a href="knidos.html">Knidos</a></li>
+            <li><a href="labranda.html">Labranda</a></li>
+            <li><a href="alacahoyuk.html">Alacahöyük</a></li>
+            <li><a href="klaros.html">Klaros</a></li>
+            <li><a href="teos.html">Teos</a></li>
+            <li><a href="magnesia.html">Magnesia</a></li>
+            <li><a href="nysa.html">Nysa</a></li>
+            <li><a href="kibyra.html">Kibyra</a></li>
+            <li><a href="tlos.html">Tlos</a></li>
+            <li><a href="arykanda.html">Arykanda</a></li>
+            <li><a href="euromos.html">Euromos</a></li>
+            <li><a href="herakleia-latmos.html">Herakleia Latmos</a></li>
+            <li><a href="seleukeia-sidera.html">Seleukeia Sidera</a></li>
+            <li><a href="gordion.html">Gordion</a></li>
+            <li><a href="pessinus.html">Pessinus</a></li>
+            <li><a href="daskyleion.html">Daskyleion</a></li>
+            <li><a href="kultepe.html">Kültepe / Kaniş</a></li>
+            <li><a href="cayonu.html">Çayönü</a></li>
+            <li><a href="anazarbos.html">Anazarbos</a></li>
+            <li><a href="soli-pompeiopolis.html">Soli Pompeiopolis</a></li>
+            <li><a href="olba.html">Olba</a></li>
+            <li><a href="uzuncaburc.html">Uzuncaburç / Diocaesarea</a></li>
+            <li><a href="smyrna.html">Smyrna</a></li>
+            <li><a href="erythrai.html">Erythrai</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <!-- KENTLER -->
   <section id="kentler">
     <div class="container">
@@ -514,11 +949,22 @@
 
       <div class="filters reveal">
         <button class="filter-btn active" data-filter="all">Tümü</button>
+        <button class="filter-btn" data-filter="neolitik">Neolitik</button>
         <button class="filter-btn" data-filter="hitit">Hitit</button>
         <button class="filter-btn" data-filter="helen">Helen</button>
         <button class="filter-btn" data-filter="roma">Roma</button>
-        <button class="filter-btn" data-filter="bizans">Bizans</button>
         <button class="filter-btn" data-filter="likya">Likya</button>
+        <button class="filter-btn" data-filter="pamfilya">Pamfilya</button>
+        <button class="filter-btn" data-filter="pisidya">Pisidya</button>
+        <button class="filter-btn" data-filter="lidya">Lidya</button>
+        <button class="filter-btn" data-filter="kommagene">Kommagene</button>
+        <button class="filter-btn" data-filter="frig">Frig</button>
+        <button class="filter-btn" data-filter="karia">Karia</button>
+        <button class="filter-btn" data-filter="ion">İon</button>
+        <button class="filter-btn" data-filter="orta-cag">Orta Çağ</button>
+        <button class="filter-btn" data-filter="kilikya">Kilikya</button>
+        <button class="filter-btn" data-filter="pers">Pers</button>
+        <button class="filter-btn" data-filter="asur">Asur</button>
       </div>
 
       <div class="cards-grid reveal" id="cardsGrid">
@@ -529,6 +975,7 @@
           </div>
           <div class="card-name">Efes</div>
           <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Artemis Tapınağı'na ev sahipliği yapan, dünyanın en iyi korunmuş antik kentlerinden biri. 250.000 nüfusuyla Roma döneminin en büyük şehirlerinden biriydi.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -540,17 +987,19 @@
           </div>
           <div class="card-name">Troya</div>
           <div class="card-location">📍 Çanakkale</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Homeros'un İlyada destanına konu olan efsanevi şehir. Truva Savaşı'nın yaşandığı ve Truva Atı'nın efsanesinin doğduğu kadim kent.</div>
           <div class="card-arrow">↗</div>
         </a>
 
-        <a class="kent-card" href="gobeklitepe.html" data-era="">
+        <a class="kent-card" href="gobeklitepe.html" data-era="neolitik">
           <div class="card-top">
             <div class="card-icon">🗿</div>
             <div class="card-era-badge">Neolitik · M.Ö. 10.000</div>
           </div>
           <div class="card-name">Göbeklitepe</div>
           <div class="card-location">📍 Şanlıurfa</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Dünyanın bilinen en eski tapınak kompleksi. İnsanlık tarihini yeniden yazan bu alan, yerleşik uygarlıkların tarihini 6.000 yıl geriye taşıdı.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -562,6 +1011,7 @@
           </div>
           <div class="card-name">Hattuşa</div>
           <div class="card-location">📍 Çorum</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Hitit İmparatorluğu'nun görkemli başkenti. Aslan Kapısı ve Sfenks Kapısı ile ünlü bu UNESCO mirası, M.Ö. 1700'lerde kurulmuştur.</div>
           <div class="card-arrow">↗</div>
         </a>
@@ -573,21 +1023,576 @@
           </div>
           <div class="card-name">Perge</div>
           <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">Artemis kültünün önemli merkezlerinden biri. Görkemli sütunlu caddeler, bir stadyum ve devasa tiyatrosuyla Pamfilya bölgesinin incisi.</div>
           <div class="card-arrow">↗</div>
         </a>
 
-        <a class="kent-card" href="nemrut.html" data-era="">
+        <a class="kent-card" href="nemrut.html" data-era="kommagene helen roma">
           <div class="card-top">
             <div class="card-icon">👑</div>
             <div class="card-era-badge">Kommagene</div>
           </div>
           <div class="card-name">Nemrut Dağı</div>
           <div class="card-location">📍 Adıyaman</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
           <div class="card-desc">2.150 metre yükseklikte, Kral I. Antiokhos'un devasa tanrı heykellerinin taçlandırdığı UNESCO Dünya Mirası. Gündoğumu ile eşsiz bir deneyim sunar.</div>
           <div class="card-arrow">↗</div>
         </a>
+
+        <a class="kent-card" href="aspendos.html" data-era="pamfilya roma">
+          <div class="card-top">
+            <div class="card-icon">🎭</div>
+            <div class="card-era-badge">Pamfilya · Roma</div>
+          </div>
+          <div class="card-name">Aspendos</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Akustiği ve mimarisiyle ünlü tiyatrosu, su kemerleri ve Roma dönemi kent dokusuyla Pamfilya rotasının simge duraklarından biri.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="patara.html" data-era="likya roma">
+          <div class="card-top">
+            <div class="card-icon">🌊</div>
+            <div class="card-era-badge">Likya · Roma</div>
+          </div>
+          <div class="card-name">Patara</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Likya Birliği’nin önemli merkezlerinden Patara; meclis yapısı, liman kimliği, tiyatrosu ve anıtsal caddeleriyle öne çıkar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="aphrodisias.html" data-era="karia roma">
+          <div class="card-top">
+            <div class="card-icon">🗿</div>
+            <div class="card-era-badge">Karia · Roma</div>
+          </div>
+          <div class="card-name">Aphrodisias</div>
+          <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Aphrodite kültü, heykeltıraşlık okulu, tetrapylonu ve stadyumuyla Karia bölgesinin en etkileyici Roma kentlerinden biri.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="sagalassos.html" data-era="pisidya roma">
+          <div class="card-top">
+            <div class="card-icon">⛲</div>
+            <div class="card-era-badge">Pisidya · Roma</div>
+          </div>
+          <div class="card-name">Sagalassos</div>
+          <div class="card-location">📍 Burdur</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Torosların yamacındaki konumu, Antoninler Çeşmesi, tiyatrosu ve Roma dönemi kamusal yapılarıyla dağ kentlerinin en etkileyicilerinden.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="pergamon.html" data-era="helen roma">
+          <div class="card-top">
+            <div class="card-icon">📜</div>
+            <div class="card-era-badge">Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Pergamon</div>
+          <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Akropolü, Asklepionu, tiyatrosu ve kütüphane geleneğiyle Helenistik dünyanın en güçlü kültür merkezlerinden biri.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="hierapolis.html" data-era="roma bizans">
+          <div class="card-top">
+            <div class="card-icon">♨️</div>
+            <div class="card-era-badge">Roma · Bizans</div>
+          </div>
+          <div class="card-name">Hierapolis</div>
+          <div class="card-location">📍 Denizli</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Pamukkale travertenleriyle birlikte okunan Hierapolis; tiyatrosu, nekropolü ve termal kutsal alanlarıyla eşsiz bir peyzaj sunar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="side.html" data-era="pamfilya roma">
+          <div class="card-top">
+            <div class="card-icon">🌅</div>
+            <div class="card-era-badge">Pamfilya · Roma</div>
+          </div>
+          <div class="card-name">Side</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Apollo Tapınağı, tiyatrosu, agora ve liman peyzajıyla Akdeniz kıyısında yaşayan bir antik kent atmosferi sunar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="xanthos.html" data-era="likya roma">
+          <div class="card-top">
+            <div class="card-icon">🪦</div>
+            <div class="card-era-badge">Likya · Roma</div>
+          </div>
+          <div class="card-name">Xanthos-Letoon</div>
+          <div class="card-location">📍 Antalya/Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Likya uygarlığının siyasi ve dini hafızasını birlikte taşıyan Xanthos ve Letoon, anıt mezarları ve kutsal alanıyla tanınır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="milet.html" data-era="ion helen roma">
+          <div class="card-top">
+            <div class="card-icon">🧭</div>
+            <div class="card-era-badge">İon · Roma</div>
+          </div>
+          <div class="card-name">Milet</div>
+          <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">İon dünyasının denizci ve düşünsel merkezlerinden Milet; tiyatrosu, agora düzeni ve kent planı geleneğiyle öne çıkar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="sardes.html" data-era="lidya pers roma">
+          <div class="card-top">
+            <div class="card-icon">🪙</div>
+            <div class="card-era-badge">Lidya · Roma</div>
+          </div>
+          <div class="card-name">Sardes</div>
+          <div class="card-location">📍 Manisa</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Lidya Krallığı’nın başkenti Sardes; erken sikke geleneği, Artemis Tapınağı, gymnasium ve sinagog kalıntılarıyla çok katmanlıdır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="assos.html" data-era="helen roma">
+          <div class="card-top">
+            <div class="card-icon">🏛️</div>
+            <div class="card-era-badge">Helen · Roma</div>
+          </div>
+          <div class="card-name">Assos</div>
+          <div class="card-location">📍 Çanakkale</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Assos, Troas bölgesinde Athena Tapınağı, taş işçiliği ve denize inen antik dokusuyla Batı Anadolu rotasının güçlü duraklarından biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="priene.html" data-era="ion helen roma">
+          <div class="card-top">
+            <div class="card-icon">📐</div>
+            <div class="card-era-badge">İon · Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Priene</div>
+          <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Priene, Menderes ovasına bakan konumu, Athena Polias Tapınağı ve düzenli kent planıyla İon şehircilik geleneğini görünür kılar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="aizanoi.html" data-era="frig roma">
+          <div class="card-top">
+            <div class="card-icon">⚡</div>
+            <div class="card-era-badge">Frig · Roma</div>
+          </div>
+          <div class="card-name">Aizanoi</div>
+          <div class="card-location">📍 Kütahya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Aizanoi; Zeus Tapınağı, stadyum-tiyatro kompleksi, köprüleri ve ticaret yapılarıyla İç Batı Anadolu’nun en etkileyici Roma kentlerinden biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="laodikeia.html" data-era="frig roma bizans">
+          <div class="card-top">
+            <div class="card-icon">✝️</div>
+            <div class="card-era-badge">Roma · Bizans</div>
+          </div>
+          <div class="card-name">Laodikeia</div>
+          <div class="card-location">📍 Denizli</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Laodikeia, ticaret yollarının kesiştiği Lykos Vadisi’nde stadyumları, tiyatroları, kiliseleri ve anıtsal caddeleriyle çok katmanlı bir kenttir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="termessos.html" data-era="pisidya helen roma">
+          <div class="card-top">
+            <div class="card-icon">⛰️</div>
+            <div class="card-era-badge">Pisidya · Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Termessos</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Termessos, Güllük Dağı yamaçlarındaki konumu, tiyatrosu, surları ve nekropol alanlarıyla doğayla birleşen bir antik kent deneyimi sunar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="olympos.html" data-era="likya roma bizans">
+          <div class="card-top">
+            <div class="card-icon">🌿</div>
+            <div class="card-era-badge">Likya · Roma · Bizans</div>
+          </div>
+          <div class="card-name">Olympos</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Olympos, kıyıya açılan nehir vadisi, liman kalıntıları, mezarları ve Bizans dönemi izleriyle Likya kıyı rotasının özgün duraklarından biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="kaunos.html" data-era="karia likya roma">
+          <div class="card-top">
+            <div class="card-icon">🪨</div>
+            <div class="card-era-badge">Karia · Likya · Roma</div>
+          </div>
+          <div class="card-name">Kaunos</div>
+          <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Kaunos, Dalyan deltası kıyısında kaya mezarları, tiyatrosu, agora ve liman kalıntılarıyla doğal peyzaj ile arkeolojiyi birleştirir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="ani.html" data-era="orta-cag">
+          <div class="card-top">
+            <div class="card-icon">🏰</div>
+            <div class="card-era-badge">Orta Çağ</div>
+          </div>
+          <div class="card-name">Ani</div>
+          <div class="card-location">📍 Kars</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
+          <div class="card-desc">Ani, Kars platosunda surları, kiliseleri, katedrali ve ticaret yollarıyla Anadolu’nun çok kültürlü kent mirasını güçlü biçimde tamamlar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="catalhoyuk.html" data-era="neolitik">
+          <div class="card-top">
+            <div class="card-icon">🧱</div>
+            <div class="card-era-badge">Neolitik</div>
+          </div>
+          <div class="card-name">Çatalhöyük</div>
+          <div class="card-location">📍 Konya</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
+          <div class="card-desc">Çatalhöyük, bitişik ev düzeni, duvar resimleri, gömü gelenekleri ve gündelik yaşam izleriyle Neolitik Anadolu’nun en önemli yerleşimlerinden biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="myra.html" data-era="likya roma bizans">
+          <div class="card-top">
+            <div class="card-icon">🎭</div>
+            <div class="card-era-badge">Likya · Roma · Bizans</div>
+          </div>
+          <div class="card-name">Myra</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Myra, etkileyici kaya mezarları, Roma tiyatrosu ve Aziz Nikolaos geleneğiyle Likya kıyı bölgesinin en tanınan merkezlerinden biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="phaselis.html" data-era="likya roma">
+          <div class="card-top">
+            <div class="card-icon">⚓</div>
+            <div class="card-era-badge">Likya · Roma</div>
+          </div>
+          <div class="card-name">Phaselis</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Phaselis, doğal koyları, üç limanı, ana caddesi ve Roma dönemi yapılarıyla deniz ticareti ve kent yaşamını birlikte anlatır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="knidos.html" data-era="karia helen roma">
+          <div class="card-top">
+            <div class="card-icon">🌊</div>
+            <div class="card-era-badge">Karia · Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Knidos</div>
+          <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Knidos, Ege ile Akdeniz’in birleştiği noktada iki limanı, teraslı yerleşimi, tapınakları ve denizci kimliğiyle öne çıkar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="labranda.html" data-era="karia helen">
+          <div class="card-top">
+            <div class="card-icon">🪓</div>
+            <div class="card-era-badge">Karia · Helenistik</div>
+          </div>
+          <div class="card-name">Labranda</div>
+          <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Labranda, Karia bölgesinde Zeus Labraundos kültü, teras yapıları ve Mylasa bağlantılı kutsal yoluyla ritüel peyzajı anlatır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="alacahoyuk.html" data-era="hitit">
+          <div class="card-top">
+            <div class="card-icon">☀️</div>
+            <div class="card-era-badge">Hitit · Tunç Çağı</div>
+          </div>
+          <div class="card-name">Alacahöyük</div>
+          <div class="card-location">📍 Çorum</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Alacahöyük, Tunç Çağı kral mezarları, sfenksli kapısı ve Hitit kabartmalarıyla Orta Anadolu arkeolojisinin temel duraklarından biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="klaros.html" data-era="ion helen roma">
+          <div class="card-top">
+            <div class="card-icon">🔮</div>
+            <div class="card-era-badge">İon · Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Klaros</div>
+          <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Klaros, Apollon kültü, kehanet geleneği ve anıtsal heykel kalıntılarıyla İon kıyısının dini hafızasını taşır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="teos.html" data-era="ion helen roma">
+          <div class="card-top">
+            <div class="card-icon">🍇</div>
+            <div class="card-era-badge">İon · Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Teos</div>
+          <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Teos, Dionysos kültü, tiyatrosu, liman kimliği ve sanatçı topluluklarıyla İon dünyasının kültürel merkezlerinden biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="magnesia.html" data-era="ion karia helen roma">
+          <div class="card-top">
+            <div class="card-icon">🏟️</div>
+            <div class="card-era-badge">İon · Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Magnesia</div>
+          <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Magnesia ad Maeandrum, Artemis Leukophryene Tapınağı, stadyumu ve kent planıyla Menderes havzasının anıtsal merkezlerinden biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="nysa.html" data-era="karia roma">
+          <div class="card-top">
+            <div class="card-icon">📚</div>
+            <div class="card-era-badge">Karia · Roma</div>
+          </div>
+          <div class="card-name">Nysa</div>
+          <div class="card-location">📍 Aydın</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Nysa, dere vadisiyle ikiye ayrılan yerleşimi, kütüphanesi, tiyatrosu ve eğitim geleneğiyle Karia-Roma kent kültürünü gösterir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="kibyra.html" data-era="pisidya roma">
+          <div class="card-top">
+            <div class="card-icon">🛡️</div>
+            <div class="card-era-badge">Pisidya · Roma</div>
+          </div>
+          <div class="card-name">Kibyra</div>
+          <div class="card-location">📍 Burdur</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Kibyra, stadyumu, odeonu, Medusa mozaiği ve dağlık konumuyla Roma dönemi kent yaşamının güçlü bir Anadolu örneğidir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="tlos.html" data-era="likya roma">
+          <div class="card-top">
+            <div class="card-icon">🦅</div>
+            <div class="card-era-badge">Likya · Roma</div>
+          </div>
+          <div class="card-name">Tlos</div>
+          <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Tlos, akropolü, kaya mezarları, stadyumu ve vadinin üzerinde yükselen konumuyla Likya’nın en uzun soluklu yerleşimlerinden biridir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="arykanda.html" data-era="likya roma">
+          <div class="card-top">
+            <div class="card-icon">🏔️</div>
+            <div class="card-era-badge">Likya · Roma</div>
+          </div>
+          <div class="card-name">Arykanda</div>
+          <div class="card-location">📍 Antalya</div>
+          <div class="card-duration">⏱ 2-3 saat</div>
+          <div class="card-desc">Arykanda, Likya bölgesinde yamaca kurulan teraslı planı, hamamları, tiyatrosu ve vadiye bakan konumuyla güçlü bir rota durağıdır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="euromos.html" data-era="karia roma">
+          <div class="card-top">
+            <div class="card-icon">🏛️</div>
+            <div class="card-era-badge">Karia · Roma</div>
+          </div>
+          <div class="card-name">Euromos</div>
+          <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Euromos, iyi korunmuş Zeus Tapınağı, kent kalıntıları ve Milas çevresindeki Karia rotasını tamamlayan konumuyla öne çıkar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="herakleia-latmos.html" data-era="karia helen bizans">
+          <div class="card-top">
+            <div class="card-icon">🌄</div>
+            <div class="card-era-badge">Karia · Helenistik · Bizans</div>
+          </div>
+          <div class="card-name">Herakleia Latmos</div>
+          <div class="card-location">📍 Muğla</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Herakleia Latmos, Bafa Gölü kıyısındaki surları, kaya peyzajı, antik kent kalıntıları ve Bizans izleriyle farklı bir Karia deneyimi sunar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="seleukeia-sidera.html" data-era="pisidya helen roma">
+          <div class="card-top">
+            <div class="card-icon">🛤️</div>
+            <div class="card-era-badge">Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Seleukeia Sidera</div>
+          <div class="card-location">📍 Isparta</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Seleukeia Sidera, Pisidya çevresindeki yol ağlarını, kentleşmeyi ve Roma dönemindeki iç bölge yerleşimlerini anlamak için önemli bir duraktır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="gordion.html" data-era="frig pers roma">
+          <div class="card-top">
+            <div class="card-icon">🪢</div>
+            <div class="card-era-badge">Frig · Pers · Roma</div>
+          </div>
+          <div class="card-name">Gordion</div>
+          <div class="card-location">📍 Ankara</div>
+          <div class="card-duration">⏱ 3-4 saat</div>
+          <div class="card-desc">Gordion, Frig Krallığı’nın başkenti olarak tümülüsleri, kent höyüğü ve Midas anlatılarıyla Orta Anadolu arkeolojisinin temel merkezlerindendir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="pessinus.html" data-era="frig roma">
+          <div class="card-top">
+            <div class="card-icon">🪨</div>
+            <div class="card-era-badge">Frig · Galat · Roma</div>
+          </div>
+          <div class="card-name">Pessinus</div>
+          <div class="card-location">📍 Eskişehir</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Pessinus, Kybele kültüyle ilişkilendirilen kutsal alan geleneği, Roma dönemi kent dokusu ve Frigya-Galatya geçişindeki konumuyla dikkat çeker.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="daskyleion.html" data-era="frig pers helen">
+          <div class="card-top">
+            <div class="card-icon">🏺</div>
+            <div class="card-era-badge">Frig · Pers · Helenistik</div>
+          </div>
+          <div class="card-name">Daskyleion</div>
+          <div class="card-location">📍 Balıkesir</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Daskyleion, Pers satraplık yönetimi, Frig ve Helenistik katmanlarıyla Marmara çevresindeki çok kültürlü arkeolojik hafızayı görünür kılar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="kultepe.html" data-era="hitit asur">
+          <div class="card-top">
+            <div class="card-icon">📜</div>
+            <div class="card-era-badge">Asur Ticaret Kolonileri · Hitit</div>
+          </div>
+          <div class="card-name">Kültepe / Kaniş</div>
+          <div class="card-location">📍 Kayseri</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Kültepe-Kaniş, Asur Ticaret Kolonileri döneminin tablet arşivleri, karum yapısı ve erken Anadolu şehirleşmesiyle eşsiz bir merkezdir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="cayonu.html" data-era="neolitik">
+          <div class="card-top">
+            <div class="card-icon">🌾</div>
+            <div class="card-era-badge">Neolitik</div>
+          </div>
+          <div class="card-name">Çayönü</div>
+          <div class="card-location">📍 Diyarbakır</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Çayönü, Neolitik dönemde yerleşik yaşam, mimari denemeler, üretim pratikleri ve toplumsal dönüşümün anlaşılması açısından çok değerli bir alandır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="anazarbos.html" data-era="kilikya helen roma bizans">
+          <div class="card-top">
+            <div class="card-icon">🏰</div>
+            <div class="card-era-badge">Helenistik · Roma · Bizans</div>
+          </div>
+          <div class="card-name">Anazarbos</div>
+          <div class="card-location">📍 Adana</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Anazarbos, Kilikya bölgesinde görkemli surları, zafer takı, tiyatro izleri ve kayalık akropolüyle geniş ölçekli bir antik kenttir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="soli-pompeiopolis.html" data-era="kilikya helen roma">
+          <div class="card-top">
+            <div class="card-icon">⚓</div>
+            <div class="card-era-badge">Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Soli Pompeiopolis</div>
+          <div class="card-location">📍 Mersin</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Soli Pompeiopolis, Mersin kıyısındaki sütunlu caddesi, liman kimliği ve Roma dönemindeki yeniden kuruluş öyküsüyle Kilikya rotasını güçlendirir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="olba.html" data-era="kilikya helen roma">
+          <div class="card-top">
+            <div class="card-icon">🗻</div>
+            <div class="card-era-badge">Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Olba</div>
+          <div class="card-location">📍 Mersin</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Olba, dağlık Kilikya’da kuleleri, su kemerleri, mezarları ve kutsal alan bağlantılarıyla bölgesel yönetim ve inanç ilişkilerini anlatır.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="uzuncaburc.html" data-era="kilikya helen roma">
+          <div class="card-top">
+            <div class="card-icon">🕍</div>
+            <div class="card-era-badge">Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Uzuncaburç / Diocaesarea</div>
+          <div class="card-location">📍 Mersin</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Uzuncaburç-Diocaesarea, Zeus Olbios Tapınağı, anıtsal kapıları ve sütunlu caddesiyle Olba bölgesinin kutsal ve kentsel merkezidir.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="smyrna.html" data-era="ion helen roma">
+          <div class="card-top">
+            <div class="card-icon">🏙️</div>
+            <div class="card-era-badge">İon · Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Smyrna</div>
+          <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Smyrna, İzmir’in antik katmanlarını; agora, kent merkezi, liman ilişkisi ve Helenistik-Roma dönemindeki güçlü şehir dokusuyla görünür kılar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
+
+        <a class="kent-card" href="erythrai.html" data-era="ion helen roma">
+          <div class="card-top">
+            <div class="card-icon">🌬️</div>
+            <div class="card-era-badge">İon · Helenistik · Roma</div>
+          </div>
+          <div class="card-name">Erythrai</div>
+          <div class="card-location">📍 İzmir</div>
+          <div class="card-duration">⏱ 1-2 saat</div>
+          <div class="card-desc">Erythrai, Çeşme yarımadasındaki konumu, Athena tapınağı, tiyatro alanı ve Ege’ye açılan denizci kimliğiyle İon rotasını tamamlar.</div>
+          <div class="card-arrow">↗</div>
+        </a>
       </div>
+
+      <div class="more-cities reveal">
+        <div class="section-label">Tamamlanan İyileştirmeler</div>
+        <h2 class="section-title">İçerikler ve harita daha okunur hale geldi</h2>
+        <p class="section-desc">Sıradaki işler kartlarında belirlenen başlıklar bu adımda ana sayfaya yansıtıldı: içerik katmanları tamamlandı, rota süreleri kartlara eklendi ve harita pinleri Türkiye altlığına daha doğru oturtuldu.</p>
+        <div class="mini-city-grid">
+          <article class="mini-city"><span class="step">✓</span><strong>İçerik planı</strong><span class="meta">Katman standardı</span><p>51 kent sayfasında dönem/katman anlatımı aynı düzene çekildi; ana sayfa artık bu tamamlanan yapıyı işaret ediyor.</p></article>
+          <article class="mini-city"><span class="step">✓</span><strong>Fotoğraf kontrolü</strong><span class="meta">Görsel kaynaklar</span><p>Harita görseli sıkı kırpıldı; kent görselleri URL yapısı korunarak sayfalarda büyük rota alanlarında kullanılmaya devam ediyor.</p></article>
+          <article class="mini-city"><span class="step">✓</span><strong>Rota süreleri</strong><span class="meta">Ziyaret planı</span><p>Ana sayfadaki kent kartlarına hızlı gezi planı için ortalama süre rozetleri eklendi.</p></article>
+          <article class="mini-city"><span class="step">✓</span><strong>Harita iyileştirme</strong><span class="meta">Pin düzeni</span><p>Harita boşlukları azaltıldı, pinler küçültüldü ve liste paneli daha kısa/kaydırılabilir hale getirildi.</p></article>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -645,7 +1650,7 @@
   </section>
 
   <footer>
-    <p>© 2025 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</p>
+    <p>© 2026 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</p>
   </footer>
 
   <script>

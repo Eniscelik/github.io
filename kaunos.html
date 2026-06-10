@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1C1810">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Antik Türkiye">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/antik-turkiye-icon.svg" type="image/svg+xml">
+  <script src="pwa.js" defer></script>
+  <title>Kaunos — Antik Türkiye</title>
+  <meta name="description" content="Kaunos için uyumlu tema, büyük görsel rota, önemli yapılar ve kısa ziyaret notları.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --accent:#9A5B2E; --accent-light:#D89156; --accent-pale:#F0C79A; --dark:#17120F; --dark-soft:#271A13; --deep:#5B341F; --base:#FBF0E2; --base-dark:#EAD6BC; --paper:#FFFDF8; --ink:#2E2419; --ink-muted:#75614B; --line:rgba(74,58,38,.17); }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Outfit',sans-serif; color:var(--ink); background:radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 28rem), linear-gradient(180deg,var(--base),var(--base-dark)); overflow-x:hidden; }
+    body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.14; background-image:linear-gradient(rgba(46,33,25,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(46,33,25,.045) 1px,transparent 1px); background-size:48px 48px; }
+    a { color:inherit; } .skip-link { position:absolute; top:-48px; left:1rem; z-index:200; padding:10px 14px; color:var(--dark); background:var(--accent-pale); text-decoration:none; } .skip-link:focus { top:1rem; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 2rem; background:rgba(23,18,15,.92); backdrop-filter:blur(8px); border-bottom:.5px solid rgba(230,170,100,.22); }
+    .nav-logo { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; color:var(--accent-pale); text-decoration:none; letter-spacing:1px; white-space:nowrap; } .nav-links { display:flex; gap:1.5rem; list-style:none; } .nav-links a { font-size:12px; font-weight:300; letter-spacing:1.4px; text-transform:uppercase; color:rgba(245,215,180,.66); text-decoration:none; } .nav-links a:hover,.nav-links a:focus { color:var(--accent-pale); }
+    .hero { min-height:74vh; position:relative; display:grid; align-items:end; overflow:hidden; padding:9rem 2rem 5rem; color:var(--accent-pale); background:linear-gradient(115deg,rgba(23,18,15,.96),rgba(42,33,24,.80)),radial-gradient(circle at 74% 24%, color-mix(in srgb, var(--accent-light) 26%, transparent), transparent 28rem),var(--dark); }
+    .hero::before { content:'KAUNOS'; position:absolute; right:-.05em; bottom:-.2em; font-family:'Cormorant Garamond',serif; font-size:clamp(82px,18vw,240px); font-weight:700; letter-spacing:.08em; color:rgba(245,215,180,.046); } .hero::after { content:''; position:absolute; left:0; right:0; bottom:0; height:150px; background:linear-gradient(to bottom,transparent,var(--base)); }
+    .hero-inner,.container { width:min(1120px,100%); margin:0 auto; } .hero-inner { position:relative; z-index:1; } .breadcrumb { display:inline-flex; margin-bottom:2rem; color:rgba(245,215,180,.6); font-size:12px; letter-spacing:1.6px; text-transform:uppercase; text-decoration:none; } .hero-kicker { display:inline-block; margin-bottom:1rem; padding:6px 18px; border:.5px solid rgba(230,170,100,.46); color:var(--accent-light); font-size:11px; letter-spacing:3.6px; text-transform:uppercase; } .hero h1 { max-width:900px; font-family:'Cormorant Garamond',serif; font-size:clamp(54px,9vw,112px); font-weight:700; line-height:.92; color:var(--accent-pale); } .hero h1 em { display:block; color:#FFF4E4; font-style:italic; font-weight:400; } .hero-summary { max-width:700px; margin-top:1.5rem; color:rgba(245,215,180,.75); font-size:17px; font-weight:300; line-height:1.8; }
+    section { padding:5rem 2rem; } .facts { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.5px; margin-top:-2.5rem; background:var(--line); border:.5px solid var(--line); } .fact-card { min-height:138px; padding:1.5rem; background:rgba(255,253,248,.84); } .fact-label { margin-bottom:.7rem; color:var(--accent); font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; } .fact-value { font-family:'Cormorant Garamond',serif; color:var(--ink); font-size:27px; font-weight:600; line-height:1.06; }
+    .intro-grid,.two-column { display:grid; grid-template-columns:minmax(0,.9fr) minmax(280px,.6fr); gap:3rem; align-items:start; } .section-label { margin-bottom:1rem; color:var(--accent); font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; } .section-title { max-width:780px; margin-bottom:1rem; font-family:'Cormorant Garamond',serif; color:var(--ink); font-size:clamp(36px,5vw,60px); font-weight:700; line-height:1.02; } .lead,.copy p { color:var(--ink-muted); font-size:16px; font-weight:300; line-height:1.9; } .lead { font-size:17px; } .copy p { margin-bottom:1.2rem; } .note-panel { position:sticky; top:6rem; padding:1.75rem; background:linear-gradient(180deg,rgba(23,18,15,.95),rgba(42,33,24,.95)); color:rgba(245,215,180,.75); border:.5px solid rgba(180,110,60,.34); } .note-panel h2 { margin-bottom:1rem; font-family:'Cormorant Garamond',serif; color:var(--accent-pale); font-size:30px; } .note-panel p { font-size:14px; font-weight:300; line-height:1.75; }
+    .content-block { border-top:.5px solid var(--line); background:rgba(255,253,248,.34); } .feature-strip,.story-grid,.places-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5px; margin-top:2rem; background:var(--line); border:.5px solid var(--line); } .feature-strip { grid-template-columns:repeat(4,minmax(0,1fr)); } .feature-card,.story-card,.place-card { min-height:210px; padding:1.7rem; background:var(--paper); } .feature-card strong,.story-card h3,.place-card h3 { display:block; margin-bottom:.8rem; font-family:'Cormorant Garamond',serif; color:var(--ink); font-size:27px; line-height:1.08; } .feature-card span,.story-card p,.place-card p { color:var(--ink-muted); font-size:14px; font-weight:300; line-height:1.75; } .place-number { display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; margin-bottom:1.1rem; border:.5px solid rgba(180,110,60,.46); color:var(--accent); font-family:'Cormorant Garamond',serif; font-size:21px; font-weight:700; }
+    .route-gallery { display:grid; grid-template-columns:1.25fr .75fr; gap:1.5px; margin-top:2rem; background:var(--line); border:.5px solid var(--line); } .route-shot { position:relative; min-height:360px; overflow:hidden; background:var(--paper); } .route-shot:first-child { min-height:560px; grid-row:span 2; } .route-shot img { width:100%; height:100%; min-height:inherit; display:block; object-fit:cover; filter:saturate(.94) contrast(1.04); transition:transform .45s ease; } .route-shot:hover img { transform:scale(1.035); } .route-caption { position:absolute; left:0; right:0; bottom:0; padding:1.35rem; color:var(--paper); background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.18),transparent); } .route-caption strong { display:block; margin-bottom:.25rem; font-family:'Cormorant Garamond',serif; font-size:24px; } .route-caption span,.route-caption a { color:rgba(255,253,248,.72); font-size:11px; letter-spacing:1.2px; text-transform:uppercase; text-decoration:none; }
+    .era-table { width:100%; border-collapse:collapse; background:var(--paper); border:.5px solid var(--line); } .era-table th,.era-table td { padding:1rem; border-bottom:.5px solid var(--line); text-align:left; vertical-align:top; } .era-table th { color:var(--accent); font-size:10px; letter-spacing:2px; text-transform:uppercase; background:rgba(238,221,197,.7); } .era-table td { color:var(--ink-muted); font-size:14px; line-height:1.55; } .era-table strong { color:var(--ink); }
+    .visit-section { background:var(--dark); color:var(--accent-pale); } .visit-section .section-title { color:var(--accent-pale); } .visit-section .lead { color:rgba(245,215,180,.56); } .visit-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5px; margin-top:2rem; background:rgba(230,170,100,.14); border:.5px solid rgba(230,170,100,.14); } .visit-card { padding:1.6rem; background:var(--dark); border-bottom:2px solid transparent; } .visit-card h3 { margin-bottom:.7rem; font-family:'Cormorant Garamond',serif; color:var(--accent-pale); font-size:25px; } .visit-card p { color:rgba(245,215,180,.5); font-size:13px; font-weight:300; line-height:1.7; }
+    .page-actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center; padding-top:2.5rem; border-top:.5px solid var(--line); } .button { display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:0 1.4rem; border:.5px solid rgba(61,51,43,.25); color:var(--ink); background:transparent; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; } .button.primary { color:var(--base); background:var(--dark); border-color:var(--dark); } footer { padding:2rem; text-align:center; background:var(--dark); color:rgba(230,170,100,.36); font-size:12px; letter-spacing:1px; } footer a { color:rgba(230,170,100,.58); text-decoration:none; } .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease,transform .7s ease; } .reveal.visible { opacity:1; transform:none; }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition-duration:.01ms!important; animation-duration:.01ms!important; } }
+    @media (max-width:960px) { .facts,.intro-grid,.two-column,.visit-grid { grid-template-columns:1fr; } .feature-strip { grid-template-columns:repeat(2,minmax(0,1fr)); } .note-panel { position:static; } }
+    @media (max-width:640px) { nav { padding:1rem; } .nav-links { display:none; } .hero { padding:7.5rem 1rem 4rem; } section { padding:4rem 1rem; } .route-gallery,.feature-strip,.story-grid,.places-grid { grid-template-columns:1fr; } .button { width:100%; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">İçeriğe geç</a>
+  <nav aria-label="Ana menü">
+    <a class="nav-logo" href="index.html">Antik Türkiye</a>
+    <ul class="nav-links">
+      <li><a href="index.html#harita">Harita</a></li>
+      <li><a href="index.html#kentler">Kentler</a></li>
+      <li><a href="#gorulecekler">Rota</a></li>
+    </ul>
+  </nav>
+  <header class="hero">
+    <div class="hero-inner">
+      <a class="breadcrumb" href="index.html#kentler">← Tüm antik kentler</a>
+      <div class="hero-kicker">Karia/Likya · Muğla</div>
+      <h1>Kaunos<em>Dalyan deltası, kaya mezarları ve liman kenti</em></h1>
+      <p class="hero-summary">Kaunos, Dalyan deltası kıyısında kaya mezarları, tiyatrosu, agora ve liman kalıntılarıyla doğal peyzaj ile arkeolojiyi birleştirir.</p>
+    </div>
+  </header>
+  <main id="icerik">
+    <section class="container facts" aria-label="Kaunos kısa bilgiler">
+      <article class="fact-card"><div class="fact-label">Bölge</div><div class="fact-value">Karia/Likya</div></article>
+      <article class="fact-card"><div class="fact-label">Konum</div><div class="fact-value">Muğla</div></article>
+      <article class="fact-card"><div class="fact-label">Dönem</div><div class="fact-value">Karia · Likya · Roma</div></article>
+      <article class="fact-card"><div class="fact-label">Odak</div><div class="fact-value">Kaya Mezarları</div></article>
+    </section>
+
+    <section>
+      <div class="container intro-grid">
+        <div class="copy reveal">
+          <div class="section-label">Genel Bakış</div>
+          <h2 class="section-title">Kaunos rotaya neden eklenmeli?</h2>
+          <p>Kaunos, Dalyan deltası kıyısında kaya mezarları, tiyatrosu, agora ve liman kalıntılarıyla doğal peyzaj ile arkeolojiyi birleştirir.</p>
+          <p>Bu sayfa, ana sayfadaki diğer antik kent sayfalarıyla aynı görsel dilde hazırlandı: önce genel bağlam, sonra büyük görsellerle rota, ardından görülecek yapılar ve kısa ziyaret notları gelir.</p>
+        </div>
+        <aside class="note-panel reveal">
+          <h2>Rota odağı</h2>
+          <p>Önce Kaya Mezarları çevresindeki ana dokuyu, ardından Antik Tiyatro ve Agora başlıklarını birlikte okumak geziyi daha anlaşılır kılar.</p>
+          <p><a href="https://commons.wikimedia.org/wiki/File:Kaunos_rock_tombs.jpg" target="_blank" rel="noopener">Wikimedia Commons görsel kaynağı</a></p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-block" id="tarihce">
+      <div class="container two-column">
+        <div class="reveal">
+          <div class="section-label">Tarihçe</div>
+          <h2 class="section-title">Dalyan deltası ile değişen liman kenti</h2>
+        </div>
+        <div class="copy reveal">
+          <p>Kaunos, Dalyan çevresinde Karia ile Likya arasında konumlanan önemli bir liman kentiydi. Antik çağda denize daha açık olan yerleşim, zamanla limanın alüvyonlarla dolmasıyla ekonomik ve mekânsal dönüşüm yaşadı.</p>
+          <p>Kaya mezarları, tiyatro, hamam, agora ve kutsal alanlar Kaunos’un hem yerel Anadolu geleneklerini hem de Hellenistik-Roma şehir yaşamını taşıdığını gösterir. Kentin hikayesi, coğrafyanın ve delta peyzajının bir antik limanın kaderini nasıl değiştirdiğini anlatır.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görsel Rota</div>
+          <h2 class="section-title">Öne çıkan duraklar</h2>
+          <p class="lead">Büyük görsel kartlar, kentte ilk bakılacak yapıları ve peyzajı daha rahat okumak için öne çıkarıldı.</p>
+        </div>
+        <div class="route-gallery">
+          <article class="route-shot reveal"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kaunos%20rock%20tombs.jpg" alt="Kaunos Kaya Mezarları görseli" loading="lazy"><div class="route-caption"><strong>Kaya Mezarları</strong><span>Kaunos rotası · Wikimedia Commons</span></div></article>
+          <article class="route-shot reveal"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kaunos%20rock%20tombs.jpg" alt="Kaunos Antik Tiyatro görseli" loading="lazy"><div class="route-caption"><strong>Antik Tiyatro</strong><span>Kaunos rotası · Wikimedia Commons</span></div></article>
+          <article class="route-shot reveal"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kaunos%20rock%20tombs.jpg" alt="Kaunos Agora görseli" loading="lazy"><div class="route-caption"><strong>Agora</strong><span>Kaunos rotası · Wikimedia Commons</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ana-duraklar">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Ana Duraklar</div>
+          <h2 class="section-title">Kaunos içinde rota kurgusu</h2>
+          <p class="lead">Aşağıdaki başlıklar, geziyi ana yapılardan çevre duraklarına doğru daha anlaşılır hale getirir.</p>
+        </div>
+        <div class="feature-strip">
+          <article class="feature-card reveal"><strong>Kaya Mezarları</strong><span>Kaya Mezarları, Kaunos rotasında kentin kimliğini anlamaya yardımcı olan ana duraklardan biridir.</span></article>
+          <article class="feature-card reveal"><strong>Antik Tiyatro</strong><span>Antik Tiyatro, Kaunos rotasında kentin kimliğini anlamaya yardımcı olan ana duraklardan biridir.</span></article>
+          <article class="feature-card reveal"><strong>Agora</strong><span>Agora, Kaunos rotasında kentin kimliğini anlamaya yardımcı olan ana duraklardan biridir.</span></article>
+          <article class="feature-card reveal"><strong>Liman Alanı</strong><span>Liman Alanı, Kaunos rotasında kentin kimliğini anlamaya yardımcı olan ana duraklardan biridir.</span></article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="content-block">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Dönemler</div>
+          <h2 class="section-title">Kaunos hangi katmanları anlatır?</h2>
+        </div>
+        <div class="reveal">
+          <table class="era-table">
+            <thead><tr><th>Başlık</th><th>Bağlam</th><th>Öne çıkan anlam</th></tr></thead>
+            <tbody><tr><td><strong>Karia/Likya Bağlamı</strong></td><td>Bölgesel kültür ve kentleşme</td><td>Kentin yerel kimliğini ve çevre rotalarla ilişkisini gösterir.</td></tr><tr><td><strong>Karia Katmanı</strong></td><td>Erken yerleşim ve siyasi/toplumsal arka plan</td><td>Alanı yalnızca tek bir anıtla değil, uzun süreli yerleşim hafızasıyla okumayı sağlar.</td></tr><tr><td><strong>Kaya Mezarları Odağı</strong></td><td>Mimari, ritüel veya kamusal yaşam</td><td>Ziyaret sırasında öne çıkan yapıların kent içindeki işlevini anlamaya yardımcı olur.</td></tr><tr><td><strong>Geç Kullanım ve Koruma</strong></td><td>Dönüşüm, yeniden kullanım ve bugünkü ziyaret rotası</td><td>Kentin farklı dönemlerde nasıl değiştiğini ve bugün nasıl gezildiğini açıklar.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="gorulecekler">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Görülmesi Gerekenler</div>
+          <h2 class="section-title">Kaunos rotasının ana durakları</h2>
+        </div>
+        <div class="places-grid">
+          <article class="place-card reveal"><div class="place-number">1</div><h3>Kaya Mezarları</h3><p>Kaya Mezarları, ziyaret sırasında hem mimari ayrıntıları hem de bölgesel tarih bağlantılarını birlikte okumak için iyi bir başlangıç noktasıdır.</p></article>
+          <article class="place-card reveal"><div class="place-number">2</div><h3>Antik Tiyatro</h3><p>Antik Tiyatro, ziyaret sırasında hem mimari ayrıntıları hem de bölgesel tarih bağlantılarını birlikte okumak için iyi bir başlangıç noktasıdır.</p></article>
+          <article class="place-card reveal"><div class="place-number">3</div><h3>Agora</h3><p>Agora, ziyaret sırasında hem mimari ayrıntıları hem de bölgesel tarih bağlantılarını birlikte okumak için iyi bir başlangıç noktasıdır.</p></article>
+          <article class="place-card reveal"><div class="place-number">4</div><h3>Liman Alanı</h3><p>Liman Alanı, ziyaret sırasında hem mimari ayrıntıları hem de bölgesel tarih bağlantılarını birlikte okumak için iyi bir başlangıç noktasıdır.</p></article>
+          <article class="place-card reveal"><div class="place-number">5</div><h3>Hamam</h3><p>Hamam, ziyaret sırasında hem mimari ayrıntıları hem de bölgesel tarih bağlantılarını birlikte okumak için iyi bir başlangıç noktasıdır.</p></article>
+          <article class="place-card reveal"><div class="place-number">6</div><h3>Akropol</h3><p>Akropol, ziyaret sırasında hem mimari ayrıntıları hem de bölgesel tarih bağlantılarını birlikte okumak için iyi bir başlangıç noktasıdır.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit-section">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Ziyaret Notları</div>
+          <h2 class="section-title">Kaunos gezerken nasıl okunmalı?</h2>
+          <p class="lead">Alanı tek bir yapıdan ibaret görmeden; dönem, işlev, kent planı ve çevre peyzajı ilişkisiyle birlikte değerlendirmek daha güçlü bir deneyim sağlar.</p>
+        </div>
+        <div class="visit-grid">
+          <article class="visit-card reveal"><h3>Rota önerisi</h3><p>Önce ana anıtsal yapıları, sonra kent merkezi ve nekropol/çevre duraklarını planla.</p></article>
+          <article class="visit-card reveal"><h3>Okuma ipucu</h3><p>Yapıları yalnızca isimleriyle değil, dönemleri ve kent içindeki konumlarıyla birlikte düşün.</p></article>
+          <article class="visit-card reveal"><h3>Yakın çevre</h3><p>Bölgedeki müzeler, komşu antik kentler ve doğal peyzaj durakları geziyi tamamlar.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container page-actions reveal">
+        <a class="button" href="olympos.html">← Önceki kent: Olympos</a>
+        <a class="button" href="index.html#kentler">Tüm kentlere dön</a>
+        <a class="button primary" href="ani.html">Sonraki kent: Ani →</a>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 Antik Türkiye · <a href="https://github.com/Eniscelik/github.io">GitHub</a> · Tüm içerikler açık kaynak</footer>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), index * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
